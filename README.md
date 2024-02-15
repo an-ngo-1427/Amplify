@@ -1,6 +1,6 @@
 # Amplify
 
-Amplify is a fullstack web application, inspired by [Spotify](https://open.spotify.com/?).
+Amplify is a digital platform for music, inspired by [Spotify](https://open.spotify.com/?).
 
-## Database Schema
-![](https://i.imgur.com/OspKqwS.png)
+## Database Schema Design
+![](./images//amplify-db-schema.png)
