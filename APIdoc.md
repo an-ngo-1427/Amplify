@@ -72,6 +72,7 @@
                         "title": required,
                         "audio":------
                     }
+                ```
         - **Successful Response** (code 201)
             ```json
                 {
@@ -81,17 +82,18 @@
                     "album_id":*,
                     "created_at":*,
                     "duration":*,
-                    "artists":--------,
                     "audio":-------,
                     "likes":------,
                     "image":------
                 }
+            ```
         - **Error Response** (code 401)
             ```json
                 {
                     "title":required,
                     "audio":required
                 }
+            ```
 - ## PUT /songs/:songId
     _Users should be able to update their uploaded songs._
     - Required Auth:True
@@ -105,6 +107,7 @@
                     "audio":-------,
                     "image":------,
                 }
+            ```
     - **Successful Response** (code 200)
         ```json
             {
@@ -115,28 +118,56 @@
                     "created_at":*,
                     "updated_at":*,
                     "duration":*,
-                    "artists":--------,
                     "audio":-------,
                     "likes":-----,
                     "image":------,
             }
+        ```
     - **Error Response**
         - User not authorized (code 403)
             ```json
                 {
                     "message": "Forbidden"
                 }
+            ```
         - Song couldnt be found (code 404)
             ```json
                 {
                     "Error": "Song could not be found"
                 }
+            ```
         - Missing info (code 401)
             ```json
                 {
                     "title": "Title Required",
                     "status": ------
                 }
+            ```
+- ## GET /songs/:songId
+    _User is able to get details of a song by specified ID_
+    - Required Auth: False
+    - **Request**
+        - Method: GET
+        - URL: /songs/:songId
+        - Body:none
+    - **Successful Response**
+        ```json
+            {
+                "id":*,
+                "title":*,
+                "user_id":*,
+                "album_id":*,
+                "song_url":*,
+                "image_url":*,
+                "likes":*
+            }
+        ```
+    - **Error Response**
+        ```json
+            {
+                "message":"song not found"
+            }
+        ```
 - ## DELETE /songs/:songId
     _Users should be able to delete their uploaded songs._
     - Required Auth: True
@@ -149,18 +180,20 @@
             {
                 "message": "Successfully deleted song"
             }
+        ```
     - **Error Response**
         - Song could not be found
         ```json
             {
                 "errors": "Song could not be found"
             }
+        ```
         - Unauthorized user
         ```json
             {
                 "message": "Forbidden"
             }
-
+        ```
 
 # ALBUMS
 - ## GET /albums
@@ -176,13 +209,14 @@
                 "albums":[
                     {
                         "title":*,
-                        "artist_id":*,
+                        "user_id":*,
                         "release_date":*,
                         "created_at":*,
                         "image":*,
                     }
                 ]
             }
+        ```
 - ## GET /albums/:albumId
     _Users should be able to get album details_
     - Required Auth: False
@@ -195,7 +229,7 @@
             {
                 "id":*,
                 "title":*,
-                "artist_id":*,
+                "user_id":*,
                 "release_date":*,
                 "created_at":*,
                 "duration":------,
@@ -207,7 +241,7 @@
                     }
                 ]
             }
-
+        ```
 - ## POST /albums/:albumId/songs
     _Users should be able to add songs to an album they created._
     - Required Auth: True
@@ -218,38 +252,212 @@
             ```json
                 {
                     "title":*,
-                    "album_id":*,
-                    "created_at":*,
                     "audio":-------,
                     "image":------
                 }
-
+            ```
+    - **Successful Response**
+        ```json
+            {
+                "id": *,
+                "title":*,
+                "user_id":*,
+                "album_id":*,
+                "created_at":*,
+                "duration":*,
+                "audio":-------,
+                "likes":------,
+                "image":------
+            }
+        ```
 - ## DELETE /albums/:albumId/songs/:songId
     _Users should be able to remove songs from their albums._
-
-
+    - Required Auth: True
+    - **Request**
+        - Method: DELETE
+        - URL: /albums/:albumId/songs/:songId
+        - Body: none
+    - **Successful Resposne**
+        ```json
+            {
+                "message": "Successfully Deleted song"
+            }
+        ```
+    - **Err Response**
+        - User not authorized
+         ```json
+            {
+                "message": "Forbidden"
+            }
+        ```
+        - Song not found
+        ```json
+            {
+                "errors": "Song could not be found"
+            }
+        ```
 - ## DELETE /albums/:albumId
     _Users should be able to delete their albums._
-
-
+    - Required Auth: True
+    - **Request**
+        - Method: DELETE
+        - URL: /albums/:albumId
+        - Body: none
+    - **Successful Response**
+        ```json
+            {
+                "message": "Successfully Deleted Album"
+            }
+        ```
+    - **Err Response**
+        - User not authorized
+        ```json
+            {
+                "message":"Forbidden"
+            }
+        ```
+        - Album not found
+        ```json
+            {
+                "error":"Album cound not be found"
+            }
+        ```
 # LIKES
 
 - ## GET /songs/:songId/likes
     _Users should be able to view the likes on a song._
+    - Required Auth: False
+    - **Request**
+        - Method: GET
+        - URL: /songs/:songId/likes
+        - Body: none
+    - **Successful Response**
+        ```json
+            {
 
-- ## POST /songs/:songId/like
+            }
+        ```
+- ## POST /songs/:songId/likes
     _Users should be able to like a song._
-
-- ## DELETE /songs/:songId/like
+    - Required Auth: True
+    - **Request**
+        - Method: POST
+        - URL: /songs/:songId/likes
+    - **Successful Response**
+        ```json
+            {
+                "message":"successfully liked song"
+            }
+        ```
+- ## DELETE /songs/:songId/likes/:likeId
     _Users should be able to unlike a song._
+    - Required Auth: True
+    - **Request**
+        - Method: DELETE
+        - URL: /songs/:songId/likes/:likeId
+        - Body: none
+    - **Successful Response**
+        ```json
+            {
+                "message":"Successfully unliked song"
+            }
+        ```
 
 # Playlists
 
 - ## GET /playlists
     _Users should be able to view all of their playlists._
+    - Required Auth:True
+    - **Request**
+        - Method: GET
+        - URL: /playlists
+        - body:none
+    - **Successfull Response**
+        ```json
+            {
+                "playlists":[
+                    {
+                        "id":*,
+                        "name":*,
+                        "image":-----
+                    }
+                ]
+            }
+        ```
+- ## GET /playlists/:playlistId
+    _User should be able to view details of their playlist by ID_
+    - Required Auth:True
+    - **Request**
+        - Method: GET
+        - URL: /playlists/:playlistId
+        - Body: none
+    - **Successfull Response**
+        ```json
+            {
+                "songs":[
+                    {
+                        "id":*,
+                        "title":*,
+                        "used_id":*,
+                        "album_id":*,
+                        "image_url":*,
+                        "created_at":*
+                    }
+                ]
 
-- ## POST /playlists/:playlistId/songs
+            }
+        ```
+    - **Error Response**
+        ```json
+            {
+                "errors":"playlist could not be found"
+            }
+        ```
+- ## POST /playlists/:playlistId/songs/:songId
     _Users should be able to add a song to one of their playlists._
-
+    - Required Auth: True
+    - **Request**
+        - Method: POST
+        - URL: /playlists/:playlistId/songs/:songId
+        - Body:
+            ```json
+                {
+                    "playlist_id":*,
+                    "song_id":*
+                }
+            ```
+    - **Successfull Response**
+        ```json
+            {
+                "message":"Successfully added song to playlist"
+            }
+        ```
+    - **Error Response**
+        ```json
+            {
+                "errors":"Playlist could not be found"
+            }
+        ```
+        ```json
+            {
+                "errors":"Song could not be found"
+            }
+        ```
 - ## DELETE /playlists/:playlistId/songs/:songId
     _Users should be able to remove a song from a playlist._
+    - Required Auth: True
+    - **Request**
+        - Method:DELETE
+        - URL: /playlists/:playlistId/songs/:songId
+        - Body: none
+    - **Successfull Response**
+        ```json
+            {
+                "message":"Successfully deleted song from playlist"
+            }
+        ```
+        ```json
+            {
+                "errors":"Song could not be found in playList"
+            }
+        ```
