@@ -1,0 +1,125 @@
+#amplify-signup-wrapper {
+    background-color: #121212; 
+    color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0; 
+}
+.page-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #121212; 
+}
+
+.amplify-navigation-bar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: black;
+    padding: 20px;
+}
+
+.amplify-home-link {
+    color: #f0f0f0;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.amplify-signup-container {
+    margin-top: 100px;
+    padding: 40px;
+    background-color: black; 
+    border-radius: 4px;
+    box-shadow: 0 4px 60px rgba(0,0,0,0.5); 
+    margin-top: 20px; 
+}
+
+#amplify-signup-box {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    width: 100%;
+}
+
+.amplify-signup-header {
+    color: #FFFFFF;
+    margin-bottom: 24px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.amplify-signup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.amplify-signup-labels {
+    margin-bottom: 8px;
+    color: #FFFFFF;
+}
+
+.amplify-signup-inputs {
+    background-color: #333; 
+    border: 2px solid #333; 
+    border-radius: 4px;
+    padding: 10px; 
+    color: #FFFFFF;
+    margin-bottom: 16px; 
+    width: calc(100% - 20px);
+    box-sizing: border-box; 
+}
+
+.amplify-signup-inputs:focus {
+    outline: none;
+    border-color: #1DB954; 
+}
+
+.amplify-signup-action-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#amplify-signup-submit {
+    background-color: #1DB954; 
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 48px;
+    border-radius: 500px; 
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#amplify-signup-submit:hover {
+    background-color: #1ed760; 
+}
+
+.amplify-error-message {
+    color: #f44336; 
+    margin-bottom: 12px;
+}
+
+.amplify-login-link-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px
+}
+
+.amplify-login-link {
+    color: #1DB954;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.amplify-login-link:hover {
+    text-decoration: underline;
+}
