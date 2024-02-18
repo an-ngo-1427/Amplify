@@ -1,0 +1,144 @@
+.navigation-bar {
+    padding: 20px;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.page-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #121212; 
+}
+
+.home-link h3 {
+    margin-left: 8px;
+    color: #f0f0f0;
+}
+
+.home-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #f0f0f0;
+    font-weight: 700;
+}
+
+#amplify-login-page {
+    padding-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #121212;
+}
+
+#auth-header {
+    color: #f0f0f0;
+    margin-bottom: 20px;
+    font-size: 36px;
+}
+
+.auth-labels {
+    color: #f0f0f0;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-container {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+#auth-box {
+    background-color: black;
+    border-radius: 8px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-form {
+    width: 100%;
+}
+
+.auth-inputs {
+    width: 92%;
+    padding: 10px;
+    margin: 5px 0 20px 0;
+    background-color: #404040;
+    color: #f0f0f0;
+    border: 1px solid #707070;
+    border-radius: 4px;
+}
+
+.auth-inputs:focus {
+    outline: none;
+    border-color: #a0a0a0;
+}
+
+.login-action-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#submit-login {
+    width: 100%;
+    padding: 12px 0;
+    background-color: #1DB954;
+    color: #202020;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#submit-login:hover {
+    background-color: #1DB954;
+}
+
+.demo-login {
+    margin-top: 15px;
+    color: #ccc;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.demo-login:hover {
+    color: #1DB954;
+}
+
+.register-link {
+    margin-top: 30px;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.amplify-signup-link {
+    color: #aaa;
+    font-weight: 600;
+}
+
+.amplify-signup-link:hover {
+    color: #1DB954;
+}
+
+.error-message {
+    color: #e74c3c;
+    margin-bottom: 15px;
+}
