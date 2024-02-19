@@ -1,1 +1,13 @@
 /* TODO: Add sitewide styles */
+
+* {
+    font-family: CircularSpTitle,CircularSpTitle-Tall,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,var(--fallback-fonts,sans-serif);
+}
+
+#root {
+    min-height: 100vh;
+}
+
+.dark-mode {
+    background: #121212;
+}
