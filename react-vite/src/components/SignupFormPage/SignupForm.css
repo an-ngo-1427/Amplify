@@ -115,13 +115,13 @@
 }
 
 .amplify-login-link {
-    color: #1DB954;
-    text-decoration: none;
+    color: white;
+    text-decoration: underline;
     font-weight: bold;
 }
 
 .amplify-login-link:hover {
-    text-decoration: underline;
+    color: #1DB954;
 }
 
 .signup-form-labels {
