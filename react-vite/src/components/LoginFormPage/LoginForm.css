@@ -1,36 +1,17 @@
 .navigation-bar {
-    padding: 20px;
+    padding: 32px 0px 32px 51px;
     background-color: black;
-    position: fixed;
-    top: 0;
+    display: block;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
 }
 .page-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #121212; 
-}
-
-.home-link h3 {
-    margin-left: 8px;
-    color: #f0f0f0;
-}
-
-.home-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #f0f0f0;
-    font-weight: 700;
+    position: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #121212;
 }
 
 #amplify-login-page {
-    padding-top: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,47 +21,64 @@
 
 #auth-header {
     color: #f0f0f0;
-    margin-bottom: 20px;
-    font-size: 36px;
+    margin-bottom: 48px 0px;
+    font-size: 3rem;
 }
 
 .auth-labels {
     color: #f0f0f0;
-    margin-bottom: 15px;
     display: flex;
     flex-direction: column;
 }
 
 .auth-container {
-    margin-top: 100px;
+    max-width: 734px;
+    width: 100%;
+    display: block;
+}
+
+.auth-section{
+    flex: 3 1 0%;
     display: flex;
     justify-content: center;
+    padding: 32px;
+    width: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0.1) 0%, rgb(0, 0, 0) 100%);
 }
 
 #auth-box {
-    background-color: black;
+    background-color: rgb(10, 10, 10);
+    color: white;
     border-radius: 8px;
-    padding: 40px;
+    padding: 32px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    width: 100%;
-    max-width: 400px;
+    max-width: 734px;
+
 }
 
 .auth-form {
-    width: 100%;
+    width: 324px;
+    margin: 0px auto;
 }
 
 .auth-inputs {
-    width: 92%;
-    padding: 10px;
-    margin: 5px 0 20px 0;
-    background-color: #404040;
-    color: #f0f0f0;
-    border: 1px solid #707070;
+    border: 0px;
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    inline-size: 100%;
+    box-sizing: border-box;
+    margin-block: 0px;
     border-radius: 4px;
+    padding-inline: 14px;
+    padding-block-start: 8px;
+    padding-block-end: 8px;
+    min-block-size: 48px;
+    background-color: black;
+    box-shadow: inset 0 0 0 1px #878787;
+    color: #000000;
 }
 
 .auth-inputs:focus {
@@ -88,21 +86,16 @@
     border-color: #a0a0a0;
 }
 
-.login-action-button {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
 #submit-login {
     width: 100%;
-    padding: 12px 0;
+    padding: 18px 0px;
     background-color: #1DB954;
     color: #202020;
     border: none;
-    border-radius: 4px;
+    border-radius: 500px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 700;
+    font-size: 1rem;
 }
 
 #submit-login:hover {
@@ -110,10 +103,21 @@
 }
 
 .demo-login {
-    margin-top: 15px;
-    color: #ccc;
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-weight: 700;
+    background-color: transparent;
+    border-radius: 500px;
+    padding-block: 7px;
+    padding-inline: 31px;
+    position: relative;
+    border: 1px solid #878787;
+    color: white;
+    min-block-size: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    text-decoration: underline;
 }
 
 .demo-login:hover {
@@ -130,8 +134,7 @@
 }
 
 .amplify-signup-link {
-    color: #aaa;
-    font-weight: 600;
+    color: white;
 }
 
 .amplify-signup-link:hover {
@@ -141,4 +144,24 @@
 .error-message {
     color: #e74c3c;
     margin-bottom: 15px;
+}
+
+.horizontal-line {
+    margin: 32px 100px;
+    border: 1px solid rgb(41, 41, 41);
+    width: 500px;
+}
+
+.amplify-logo {
+    height: 10%;
+    width: 10%;
+}
+
+.form-labels {
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+.login-action-button {
+    padding: 25px 0px;
 }
