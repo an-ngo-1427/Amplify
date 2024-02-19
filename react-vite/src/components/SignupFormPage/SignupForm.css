@@ -71,7 +71,7 @@
     min-block-size: 48px;
     background-color: black;
     box-shadow: inset 0 0 0 1px #878787;
-    color: #000000;
+    color: white;
 }
 
 .amplify-signup-inputs:focus {
