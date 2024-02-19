@@ -1,7 +1,7 @@
 
 from flask import Blueprint,request
 from .audio_upload import upload_file_to_s3,remove_file_from_s3
-from ..models.songs import Songs
+from ..models.song import Song
 song_routes = Blueprint('songs',__name__)
 
 # @songs_blueprint.route('/')
@@ -10,7 +10,7 @@ song_routes = Blueprint('songs',__name__)
 # getting all songs
 @song_routes.route('/')
 def getSongs():
-    songs = Songs.query().all()
+    songs = Song.query().all()
     response = [songs.to_dict() for song in songs]
     return response
 
