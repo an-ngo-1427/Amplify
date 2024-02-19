@@ -15,11 +15,13 @@ class Song(db.Model):
     image_url = db.Column(db.String(255))
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+    album_id = db.Column(db.Integer,db.ForeignKey('albums.id'))
 
-    user = db.relationship("User", back_populates="songs")
+    user = db.relationship("User", back_populates="user_songs")
+
     user_likes = db.relationship('User', secondary='likes', back_populates='liked_songs')
     album = db.relationship("Album", back_populates="songs")
-    playlists = db.relationship('Song', secondary=playlist_songs, back_populates='songs')
+    playlists = db.relationship('Playlist', secondary='playlist_songs', back_populates='songs')
 
     def to_dict(self):
         return {

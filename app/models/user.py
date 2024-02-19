@@ -5,8 +5,8 @@ from datetime import datetime
 
 likes = db.Table(
     'likes',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('song_id', db.Integer, db.ForeignKey('songs.id'), primary_key=True)
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+    db.Column('song_id', db.Integer, db.ForeignKey('songs.id')),
 )
 
 class User(db.Model, UserMixin):
@@ -23,10 +23,14 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+    # playlist_id = db.Column(db.Integer,db.ForeignKey('playlists.id'),nullable=True)
 
-    songs = db.relationship('Song', back_populates='user')
+
+    user_songs = db.relationship('Song', back_populates='user')
+
     albums = db.relationship('Album', back_populates='user')
     liked_songs = db.relationship('Song', secondary='likes', back_populates='user_likes')
+    playlists = db.relationship('Playlist',back_populates='user')
 
     @property
     def password(self):

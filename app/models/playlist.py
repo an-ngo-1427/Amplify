@@ -3,9 +3,8 @@ from datetime import datetime
 
 playlist_songs = db.Table(
     'playlist_songs',
-    db.Model.metadata,
-    db.Column('playlist_id', db.Integer, db.ForeignKey('playlists.id'), primary_key=True),
-    db.Column('song_id', db.Integer, db.ForeignKey('songs.id'), primary_key=True)
+    db.Column('playlist_id', db.Integer, db.ForeignKey('playlists.id')),
+    db.Column('song_id', db.Integer, db.ForeignKey('songs.id'))
 )
 
 class Playlist(db.Model):
@@ -20,8 +19,10 @@ class Playlist(db.Model):
     image_url = db.Column(db.String(255))
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)
 
-    songs = db.relationship('Playlist', secondary=playlist_songs, back_populates='playlists')
+
+    songs = db.relationship('Song', secondary = 'playlist_songs', back_populates='playlists')
     user = db.relationship("User", back_populates="playlists")
 
     def to_dict(self):

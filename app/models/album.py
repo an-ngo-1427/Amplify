@@ -9,7 +9,7 @@ class Album(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    song_id = db.Column(db.Integer, db.ForeignKey('songs.id'))
+    # song_id = db.Column(db.Integer, db.ForeignKey('songs.id'), nullable = False)
     title = db.Column(db.String(50), nullable=False)
     image_url = db.Column(db.String(255))
     created_at = db.Column(db.DateTime, default=datetime.now)
