@@ -1,38 +1,39 @@
-//creating song action creator
-const CREATE_SONG='/songs/CREATE_SONG'
 
-export const createSong = (data)=>(
-    {
-        type:CREATE_SONG,
-        data
-    }
-)
+// action creator
+
+// getting all songs
+const GET_SONGS = '/songs/GET_SONGS'
+export const getSongs = (Songs)=>({
+    type: GET_SONGS,
+    Songs
+})
 
 
-// THUNK ACTIONS
-export const createSongThunk = (data)=> async (dispatch)=>{
-    const response = await fetch('/api/songs/new',{
-        method:'POST',
-        headers:{'Content-Type':"multipart/form-data"},
-        body:data
+// Thunk actions
+export const getSongsThunk = ()=> async (dispatch)=>{
+    const response = await fetch('/api/songs',{
+        method:'GET'
     })
-
-
-        console.log(response)
-    dispatch(createSong(data))
+    const data = await response.json()
+    if(response.ok){
+        dispatch(getSongs(data.Songs))
+        return data
+    }
+    return data
 }
 
 
-const initialState = {}
-function songReducer(state=initialState,action){
-    switch(action.type){
-        case CREATE_SONG:{
+const initialState={}
+
+function getSongsReducer(state = initialState,action){
+    switch (action.type){
+        case GET_SONGS:{
             const newObj = {}
-            newObj[action.data] = action.data
+            action.Songs.forEach(song => {newObj[song.id] = song})
             return newObj
         }
     }
     return state
 }
 
-export default songReducer
+export default getSongsReducer

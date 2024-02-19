@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createSongThunk } from "../../redux/song";
+import { createSongThunk } from "../../redux/createSong";
 
 function SongForm(){
     const [audio,setAudio] = useState(null)
@@ -19,6 +19,13 @@ function SongForm(){
             <form
                 encType="multipart/form-data"
             >
+                <input placeholder="Song title"/>
+                <select>
+                    <option value="">Choose an album</option>
+                </select>
+
+
+
                 <input type='file' placeholder="song file"
                     accept=".mp3"
                     onChange={(e)=>{setAudio(e.target.files[0])}}
