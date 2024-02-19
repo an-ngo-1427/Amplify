@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { thunkLogin } from "../../redux/session";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate, NavLink} from "react-router-dom";
+import { Navigate, useNavigate, NavLink } from "react-router-dom";
 import "./LoginForm.css";
 import * as sessionActions from '../../redux/session';
+import AmplifyLogo from "../../../public/amplifylogo.jpeg";
 
 function LoginFormPage() {
   const navigate = useNavigate();
@@ -35,61 +36,65 @@ function LoginFormPage() {
   const demoUserLogin = async (e) => {
     e.preventDefault()
 
-    return await dispatch(sessionActions.thunkLogin({email: 'demo@aa.io', password: 'password'}))
-    .then(navigate('/'))
+    return await dispatch(sessionActions.thunkLogin({ email: 'demo@aa.io', password: 'password' }))
+      .then(navigate('/'))
   }
 
   return (
     <div className="page-background">
-    <div id="amplify-login-page">
-      <div className="navigation-bar">
-        <NavLink to='/' className='home-link'>
-          <h3>Amplify</h3>
-        </NavLink>
-      </div>
-      <div className="auth-container">
-        <div id="auth-box">
-          <h1 id="auth-header">Log in to Amplify</h1>
-          {errors.length > 0 &&
-            errors.map((message) => <p className='error-message' key={message}>{message}</p>)}
-          <form className="auth-form" onSubmit={handleSubmit}>
-            {errors.email && <p className='error-message'>{errors.email}</p>}
-            <label className="auth-labels">
-              Email
-              <input
-                className="auth-inputs"
-                placeholder="Email"
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                />
-            </label>
-            {errors.password && <p className='error-message'>{errors.password}</p>}
-            <label className="auth-labels">
-              Password
-              <input
-                className="auth-inputs"
-                placeholder="Password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                />
-            </label>
-            <div className='login-action-button'>
-              <button id="submit-login" type="submit">Log In</button>
+      <div id="amplify-login-page">
+        <div className="navigation-bar">
+          <NavLink to='/'>
+            <img className="amplify-logo" src={AmplifyLogo}/>
+          </NavLink>
+        </div>
+        <div className="auth-section">
+          <div className="auth-container">
+            <div id="auth-box">
+              <h1 id="auth-header">Log in to Amplify</h1>
+              <button className='demo-login' onClick={demoUserLogin}>Continue as Demo User</button>
+              <hr className="horizontal-line"></hr>
+              {errors.length > 0 &&
+                errors.map((message) => <p className='error-message' key={message}>{message}</p>)}
+              <form className="auth-form" onSubmit={handleSubmit}>
+                {errors.email && <p className='error-message'>{errors.email}</p>}
+                <label className="auth-labels">
+                <p className="form-labels">Email</p>
+                  <input
+                    className="auth-inputs"
+                    placeholder="Email"
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </label>
+                {errors.password && <p className='error-message'>{errors.password}</p>}
+                <label className="auth-labels">
+                  <p className="form-labels">Password</p>
+                  <input
+                    className="auth-inputs"
+                    placeholder="Password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </label>
+                <div className='login-action-button'>
+                  <button id="submit-login" type="submit">Log In</button>
+                </div>
+              </form>
+              <hr className="horizontal-line"></hr>
+              <div className="register-link">
+                <p>Don&apos;t have an account?</p>
+                <NavLink to='/signup' className='amplify-signup-link'>Sign up for Amplify.</NavLink>
+              </div>
             </div>
-          </form>
-          <span className='demo-login' onClick={demoUserLogin}>Demo User</span>
+          </div>
         </div>
       </div>
-      <div className="register-link">
-        <p>Don&apos;t have an account?</p>
-        <NavLink to='/signup' className='amplify-signup-link'>Sign up for Amplify.</NavLink>
-      </div>
     </div>
-    </div> 
   );
 }
 
