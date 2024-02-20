@@ -21,6 +21,7 @@ function SignupFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let newErrors = {};
 
     if (password !== confirmPassword) {
       return setErrors({
@@ -28,26 +29,37 @@ function SignupFormPage() {
       });
     }
 
-    if (String(password).length < 6) {
-      return setErrors({
-        password: "Password must be at least 6 characters.",
-      });
+    if (password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters.";
     }
 
-    const serverResponse = await dispatch(
-      thunkSignup({
+    if (firstName.length > 20) {
+      newErrors.firstName = "First Name must be less than 21 characters.";
+    }
+    if (lastName.length > 20) {
+      newErrors.lastName = "Last Name must be less than 21 characters.";
+    }
+
+    if (username.length > 40) {
+      newErrors.username = "Username must be less than 41 characters.";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+      const serverResponse = await dispatch(thunkSignup({
         email,
         firstName,
         lastName,
         username,
         password,
-      })
-    );
+      }));
 
-    if (serverResponse) {
-      setErrors(serverResponse);
-    } else {
-      navigate("/");
+      if (serverResponse) {
+        setErrors(serverResponse);
+      } else {
+        navigate("/");
+      }
     }
   };
 
@@ -88,6 +100,7 @@ function SignupFormPage() {
                     required
                   />
                 </label>
+                {errors.firstName && <p className="amplify-error-message">{errors.firstName}</p>} 
                 <label className="amplify-signup-labels">
                   <p className="signup-form-labels">Last Name</p>
                   <input
@@ -99,6 +112,7 @@ function SignupFormPage() {
                     required
                   />
                 </label>
+                {errors.lastName && <p className="amplify-error-message">{errors.lastName}</p>} 
                 <label className="amplify-signup-labels">
                   <p className="signup-form-labels">Username</p>
                   <input
