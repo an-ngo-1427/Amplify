@@ -22,7 +22,7 @@ def createSong():
     form = SongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     # form.data['audio'] = request.form['audio']
-    print(form.data['audio'])
+    print(request.files['file'])
 
     if form.validate_on_submit():
         audio = form.data["audio"]
