@@ -19,7 +19,7 @@ export const createSongThunk = (data)=> async (dispatch)=>{
     const newSong = await response.json()
     if(response.ok){
         dispatch(createSong(newSong))
-        return data
+        return newSong
     }
     return data
 

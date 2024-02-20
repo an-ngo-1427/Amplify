@@ -27,11 +27,11 @@ function SongForm(){
                 onSubmit={handleSubmit}
                 encType="multipart/form-data"
             >
-                <input placeholder="Song title"/>
+                {/* <input placeholder="Song title"/> */}
 
 
                 <input type='file' placeholder="song file"
-                    name='file'
+                    name='audio'
                     accept=".mp3"
                     onChange={(e)=>{setAudio(e.target.files[0]);console.log(e.target.files[0])}}
 
