@@ -1,33 +1,36 @@
 from flask import Blueprint,request
-from .audio_upload import upload_file_to_s3,remove_file_from_s3
+from flask_login import current_user, login_required
 from ..models.album import Album
 from ..models.db import db
 album_routes = Blueprint('albums',__name__)
 
 @album_routes.route('/')
-def getAlbums():
+def get_albums():
     albums = Album.query.all()
-    response = [album.to_dict() for album in albums]
-    return response
+    return [album.to_dict() for album in albums]
 
 @album_routes.route('/<int:id>')
-def getAlbumById(id):
-    album = Album.query.filter(Album.id == id).first()
+def get_album_by_id(id):
+    album = Album.query.get(id)
     return album.to_dict()
 
 @album_routes.route('/new', methods=['POST'])
-def newAlbum():
+@login_required
+def new_album():
     pass
 
 @album_routes.route('/<int:id>/delete')
-def deleteAlbum(id):
-    album = Album.query.filter(Album.id == id).first()
-    db.session.delete(album)
-    db.session.commit()
-    return 'Successfully Deleted Album'
+def delete_album(id):
+    try:
+        album = Album.query.get(id)
+        db.session.delete(album)
+        db.session.commit()
+        return { 'message': 'Successfully deleted' }
+    except Exception as e:
+        return { 'message': str(e) }
 
 @album_routes.route('/<int:id>/songs/<int:songId>')
-def removeSongFromAlbum(id, songId):
-    album = Album.query.filter(Album.id == id).first()
+def remove_song_from_album(id, songId):
+    album = Album.query.get(id)
     # song = album.songs
     pass

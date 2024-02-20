@@ -16,3 +16,13 @@ def get_playlist_by_id(id):
 @playlist_routes.route('/current')
 def get_current_user_playlists():
     pass
+
+@playlist_routes.route('/<int:id>/delete', methods=['DELETE'])
+def delete_playlist(id):
+    try:
+        playlist = Playlist.query.get(id)
+        db.session.delete(playlist)
+        db.session.commit()
+        return { 'message': 'Successfully deleted' }
+    except Exception as e:
+        return { 'message': str(e) }
