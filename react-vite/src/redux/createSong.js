@@ -13,7 +13,6 @@ export const createSong = (data)=>(
 export const createSongThunk = (data)=> async (dispatch)=>{
     const response = await fetch('/api/songs/new',{
         method:'POST',
-        headers:{'Content-Type':"multipart/form-data"},
         body:data
     })
     const newSong = await response.json()
