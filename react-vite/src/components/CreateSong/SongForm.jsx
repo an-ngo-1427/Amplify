@@ -12,30 +12,34 @@ function SongForm(){
     const dispatch = useDispatch()
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData();
+        if(Object.keys(errorObj).length) setFormError(true)
+        else{
+            e.preventDefault();
+            const formData = new FormData();
 
-        formData.append("audio", audio);
-        formData.append("title", title)
-        formData.append('album',album)
-        formData.append('image_url',image_url)
-        formData.append('submit',true)
-        // formData.append('fileName',audio.name)
-        // aws uploads can be a bit slow—displaying
-        // some sort of loading message is a good idea
+            formData.append("audio", audio);
+            formData.append("title", title)
+            formData.append('album',album)
+            formData.append('image_url',image_url)
+            formData.append('submit',true)
+            // formData.append('fileName',audio.name)
+            // aws uploads can be a bit slow—displaying
+            // some sort of loading message is a good idea
 
 
-        dispatch(createSongThunk(formData))
-        .then((response)=>{console.log(response)})
+            dispatch(createSongThunk(formData))
+            .then((response)=>{console.log(response)})
+
+        }
 
     }
 
     useEffect(()=>{
-        const errors = {}
+
+        let errors = {}
         if(!audio) errors.audio = 'Audio file is required'
         if(!title) errors.title = 'Song title is required'
 
-        if(Object.keys(errors).length) setFormError(true)
         setErrorObj(errors)
     },[audio,title])
     return(
@@ -51,7 +55,7 @@ function SongForm(){
                     placeholder="Title of the song"
                     onChange={(e)=>setTitle(e.target.value)}
                 />
-                {errorObj}
+                {formErr && <div style={{'color':'red'}}>{errorObj.title}</div>}
                 <select
                     name = "album"
                     value = ""
@@ -70,8 +74,10 @@ function SongForm(){
                     onChange={(e)=>setAudio(e.target.files[0])}
 
                 />
-
-                <button type='submit'>Submit</button>
+                {formErr && <div style={{'color':'red'}}>{errorObj.audio}</div>}
+                <button type='submit'
+                    disabled = {formErr? true:false}
+                >Submit</button>
             </form>
         </>
     )
