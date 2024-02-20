@@ -1,11 +1,14 @@
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA,add_prefix_for_prod
 from datetime import datetime
 
 playlist_songs = db.Table(
     'playlist_songs',
-    db.Column('playlist_id', db.Integer, db.ForeignKey('playlists.id')),
-    db.Column('song_id', db.Integer, db.ForeignKey('songs.id'))
+    db.Column('song_id', db.Integer, db.ForeignKey(add_prefix_for_prod('songs.id'))),
+    db.Column('playlist_id', db.Integer, db.ForeignKey(add_prefix_for_prod('playlists.id'))),
 )
+
+if environment == "production":
+    playlist_songs.schema = SCHEMA
 
 class Playlist(db.Model):
     __tablename__ = 'playlists'
@@ -19,7 +22,7 @@ class Playlist(db.Model):
     image_url = db.Column(db.String(255))
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
-    user_id = db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)
+    user_id = db.Column(db.Integer,db.ForeignKey(add_prefix_for_prod('users.id')),nullable=False)
 
 
     songs = db.relationship('Song', secondary = 'playlist_songs', back_populates='playlists')
@@ -32,5 +35,7 @@ class Playlist(db.Model):
             'description': self.description,
             'image_url': self.image_url,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            'user': self.user,
+            'songs': [song for song in self.songs]
         }

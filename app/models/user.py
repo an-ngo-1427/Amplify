@@ -3,12 +3,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
 
-likes = db.Table(
-    'likes',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
-    db.Column('song_id', db.Integer, db.ForeignKey('songs.id')),
-)
-
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
