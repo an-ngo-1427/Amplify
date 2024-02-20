@@ -54,12 +54,9 @@ function LoginFormPage() {
               <h1 id="auth-header">Log in to Amplify</h1>
               <button className='demo-login' onClick={demoUserLogin}>Continue as Demo User</button>
               <hr className="horizontal-line"></hr>
-              {errors.length > 0 &&
-                errors.map((message) => <p className='error-message' key={message}>{message}</p>)}
               <form className="auth-form" onSubmit={handleSubmit}>
-                {errors.email && <p className='error-message'>{errors.email}</p>}
                 <label className="auth-labels">
-                <p className="form-labels">Email</p>
+                  <p className="form-labels">Email</p>
                   <input
                     className="auth-inputs"
                     placeholder="Email"
@@ -68,8 +65,8 @@ function LoginFormPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                   />
+                  {errors.email && <p className='error-message'>{errors.email}</p>} 
                 </label>
-                {errors.password && <p className='error-message'>{errors.password}</p>}
                 <label className="auth-labels">
                   <p className="form-labels">Password</p>
                   <input
@@ -80,6 +77,7 @@ function LoginFormPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
+                  {errors.password && <p className='error-message'>{errors.password}</p>} 
                 </label>
                 <div className='login-action-button'>
                   <button id="submit-login" type="submit">Log In</button>

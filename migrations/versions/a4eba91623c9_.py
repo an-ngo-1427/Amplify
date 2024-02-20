@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: ed155a7f1e55
+Revision ID: a4eba91623c9
 Revises: 
-Create Date: 2024-02-20 13:35:19.859905
+Create Date: 2024-02-20 15:48:21.703080
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'ed155a7f1e55'
+revision = 'a4eba91623c9'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -81,7 +81,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['playlist_id'], ['playlists.id'], ),
     sa.ForeignKeyConstraint(['song_id'], ['songs.id'], )
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE albums SET SCHEMA {SCHEMA};")
@@ -89,7 +88,6 @@ def upgrade():
         op.execute(f"ALTER TABLE songs SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE playlist_songs SET SCHEMA {SCHEMA};")
-
     # ### end Alembic commands ###
 
 
