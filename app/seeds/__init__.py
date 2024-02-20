@@ -1,8 +1,11 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .songs import seed_songs, undo_songs
+from .albums import seed_albums, undo_albums
+from .playlists import seed_playlists, undo_playlists
 
 from app.models.db import db, environment, SCHEMA
+from app.models.playlist import Playlist
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -17,16 +20,22 @@ def seed():
         # command, which will  truncate all tables prefixed with
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
-        undo_users()
+        undo_playlists()
+        undo_albums()
         undo_songs()
+        undo_users()
     seed_users()
     seed_songs()
+    seed_albums()
+    seed_playlists()
     # Add other seed functions here
 
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
+    undo_playlists()
+    undo_albums()
+    undo_songs()
     undo_users()
-    # undo_songs()
     # Add other undo functions here
