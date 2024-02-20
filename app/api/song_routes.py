@@ -10,8 +10,8 @@ song_routes = Blueprint('songs',__name__)
 # getting all songs
 @song_routes.route('/')
 def getSongs():
-    songs = Song.query().all()
-    response = [songs.to_dict() for song in songs]
+    songs = Song.query.all()
+    response = [song.to_dict() for song in songs]
     return response
 
 # getting details of a song

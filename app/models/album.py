@@ -25,5 +25,6 @@ class Album(db.Model):
             'title': self.title,
             'image_url': self.image_url,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            'songs': [song for song in self.songs]
         }

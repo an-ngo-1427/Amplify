@@ -20,10 +20,10 @@ def seed_albums():
     db.session.add_all([album1,album2,album3,album4])
     db.session.commit()
 
-def undo_songs():
+def undo_albums():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.songs RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.albums RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM songs"))
+        db.session.execute(text("DELETE FROM albums"))
 
     db.session.commit()
