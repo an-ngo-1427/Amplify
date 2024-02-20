@@ -12,12 +12,13 @@ song_routes = Blueprint('songs',__name__)
 def getSongs():
     songs = Song.query.all()
     response = [song.to_dict() for song in songs]
-    return response
+    return {"songs": response}
 
 # getting details of a song
-@song_routes.route('/new')
+@song_routes.route('/new', methods=["POST"])
 def createSong():
     file = request.files['file']
-    print(file)
+    # print(file)
     # song_url = upload_file_to_s3(file)
     # print(song_url)
+    return "Song created successfully"
