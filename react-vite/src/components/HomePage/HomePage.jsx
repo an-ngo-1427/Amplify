@@ -1,6 +1,7 @@
 import { thunkLogout } from "../../redux/session";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import './HomePage.css';
 
 function HomePage() {
     const navigate = useNavigate();
@@ -13,9 +14,48 @@ function HomePage() {
         navigate('/')
     }
 
+    const login = async e => {
+        e.preventDefault()
+        navigate('/login')
+    }
+
+    const signup = async e => {
+        e.preventDefault()
+        navigate('/signup')
+    }
+
     return (
         <>
-            <div>HomePage</div>
+            <div className="main-homepage">
+                <div className="left-sidebar">
+                    <div className="left-sidebar-main">
+                        <div className="left-sidebar-top">
+                            <ul>
+                                <li className="list-label">
+                                    <NavLink className='link-home' to='/'>
+                                        <span className="link-label"><span className="home-icon"><i className="fa-solid fa-house" /></span> Home</span>
+                                    </NavLink>
+                                </li>
+                                <li className="list-label">
+                                    <span className="link-label"><span className="search-icon"><i className="fa-solid fa-magnifying-glass" /> </span>Search</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div className="main-view">
+                    <div className="main-header">
+                        <button onClick={signup} className="signup-button">
+                            Sign up
+                        </button>
+                        <button onClick={login} className="login-button">
+                            Login in
+                        </button>
+                    </div>
+                    <div className="main-content"></div>
+                </div>
+                <div className="now-playing-bar"></div>
+            </div>
             {sessionUser && (
                 <button onClick={logout}>Log Out</button>
             )}
