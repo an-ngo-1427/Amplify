@@ -2,6 +2,7 @@ from flask import Blueprint,request
 from flask_login import current_user, login_required
 from ..models.album import Album
 from ..models.db import db
+from app.forms import AlbumForm
 album_routes = Blueprint('albums',__name__)
 
 @album_routes.route('/')
@@ -17,7 +18,19 @@ def get_album_by_id(id):
 @album_routes.route('/new', methods=['POST'])
 @login_required
 def new_album():
-    pass
+    form = AlbumForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        params = {
+            'user_id': current_user.id,
+            'title': form.data['title'],
+            'image_url': form.data['image_url']
+        }
+        album = Album(**params)
+        db.session.add(album)
+        db.session.commit()
+        return album.to_dict()
+    
 
 @album_routes.route('/<int:id>/delete')
 def delete_album(id):
