@@ -23,30 +23,43 @@ function SignupFormPage() {
     e.preventDefault();
     let newErrors = {};
 
-    if (password !== confirmPassword) {
-      return setErrors({
-        confirmPassword: "Confirm Password field must be the same as the Password field.",
-      });
+    if (!email || email.trim() === "") {
+      newErrors.email = "Email is required.";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+      newErrors.email = "Invalid email address.";
     }
 
-    if (password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters.";
-    }
-
-    if (firstName.length > 20) {
+    if (!firstName || firstName.trim() === "") {
+      newErrors.firstName = "First Name is required.";
+    } else if (firstName.length > 20) {
       newErrors.firstName = "First Name must be less than 21 characters.";
     }
-    if (lastName.length > 20) {
+
+    if (!lastName || lastName.trim() === "") {
+      newErrors.lastName = "Last Name is required.";
+    } else if (lastName.length > 20) {
       newErrors.lastName = "Last Name must be less than 21 characters.";
     }
 
-    if (username.length > 40) {
+    if (!username || username.trim() === "") {
+      newErrors.username = "Username is required.";
+    } else if (username.length > 40) {
       newErrors.username = "Username must be less than 41 characters.";
+    }
+
+    if (!password || password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters.";
+    }
+
+    if (password !== confirmPassword) {
+      newErrors.confirmPassword = "Confirm Password field must be the same as the Password field.";
     }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
+      setErrors({}); 
+
       const serverResponse = await dispatch(thunkSignup({
         email,
         firstName,
@@ -55,8 +68,8 @@ function SignupFormPage() {
         password,
       }));
 
-      if (serverResponse) {
-        setErrors(serverResponse);
+      if (serverResponse && serverResponse.errors) {
+        setErrors(serverResponse.errors);
       } else {
         navigate("/");
       }
@@ -77,7 +90,6 @@ function SignupFormPage() {
               <h1 id="amplify-signup-header">Sign Up</h1>
               {errors.server && <p className="amplify-error-message">{errors.server}</p>}
               <form className="amplify-signup-form" onSubmit={handleSubmit}>
-                {errors.email && <p className="amplify-error-message">{errors.email}</p>}
                 <label className="amplify-signup-labels">
                   <p className="signup-form-labels">Email Address</p>
                   <input
@@ -87,7 +99,8 @@ function SignupFormPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                  />
+                    />
+                    {errors.email && <p className="amplify-error-message">{errors.email}</p>}
                 </label>
                 <label className="amplify-signup-labels">
                   <p className="signup-form-labels">First Name</p>
