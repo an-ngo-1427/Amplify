@@ -3,15 +3,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
 
-likes = db.Table(
-    'likes',
-    db.Column('user_id', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'))),
-    db.Column('song_id', db.Integer, db.ForeignKey(add_prefix_for_prod('songs.id'))),
-)
-
-if environment == "production":
-    likes.schema = SCHEMA
-
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
