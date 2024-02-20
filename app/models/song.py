@@ -1,4 +1,4 @@
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA,add_prefix_for_prod
 from datetime import datetime
 from .playlist import playlist_songs
 
@@ -10,12 +10,12 @@ class Song(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     song_url = db.Column(db.String(255), nullable=False)
     image_url = db.Column(db.String(255))
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
-    album_id = db.Column(db.Integer,db.ForeignKey('albums.id'))
+    album_id = db.Column(db.Integer,db.ForeignKey(add_prefix_for_prod('albums.id')))
 
     user = db.relationship("User", back_populates="user_songs")
 
