@@ -15,6 +15,7 @@ function SongForm(){
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
         // console.log(formData)
+
         await dispatch(createSongThunk(formData))
         // history.push("/images");
     }

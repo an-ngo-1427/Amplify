@@ -20,12 +20,18 @@ def getSongs():
 @song_routes.route('/new',methods=["POST"])
 def createSong():
     form = SongForm()
-    if form.validate_on_submit():
+    form['csrf_token'].data = request.cookies['csrf_token']
+    # form.data['audio'] = request.form['audio']
+    print(form.data['audio'])
 
-        print ('------entered')
+    if form.validate_on_submit():
         audio = form.data["audio"]
-        audio.filename = get_unique_filename(audio.filename)
-        upload = upload_file_to_s3(audio)
+
+        print ('------entered',audio)
+        # audio = request.form['audio']
+        # print (audio)
+        # audio.filename = get_unique_filename(audio.filename)
+        # upload = upload_file_to_s3(audio)
         # print(upload)
 
         # if "url" not in upload:
@@ -41,7 +47,7 @@ def createSong():
         # return redirect("/posts/all")
 
     if form.errors:
-        print(form.errors)
+        print('error',form.errors)
         # return render_template("post_form.html", form=form, errors=form.errors)
 
     # return render_template("post_form.html", form=form, errors=None)
