@@ -1,7 +1,6 @@
 from flask import Blueprint,request
 from flask_login import current_user, login_required
-from ..models.album import Album
-from ..models.db import db
+from app.models import db, Album
 from app.forms import AlbumForm
 album_routes = Blueprint('albums',__name__)
 
@@ -30,7 +29,8 @@ def new_album():
         db.session.add(album)
         db.session.commit()
         return album.to_dict()
-    
+    return 'Error'
+
 
 @album_routes.route('/<int:id>/delete')
 def delete_album(id):
