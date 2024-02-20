@@ -14,7 +14,7 @@ export const createSongThunk = (data)=> async (dispatch)=>{
     const response = await fetch('/api/songs/new',{
         method:'POST',
         headers:{'Content-Type':"multipart/form-data"},
-        body:JSON.stringify(data)
+        body:data
     })
     const newSong = await response.json()
     if(response.ok){
