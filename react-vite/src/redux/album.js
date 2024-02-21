@@ -11,12 +11,12 @@ export const createAlbum = (data) => (
     }
 )
 
-export const uploadAlbumImage = (img) => (
-    {
-        type: UPLOAD_ALBUM_IMAGE,
-        img
-    }
-)
+// export const uploadAlbumImage = (img) => (
+//     {
+//         type: UPLOAD_ALBUM_IMAGE,
+//         img
+//     }
+// )
 
 // THUNK ACTIONS
 export const thunkCreateAlbum = (data) => async (dispatch) => {
@@ -33,9 +33,9 @@ export const thunkCreateAlbum = (data) => async (dispatch) => {
     return newAlbum
 }
 
-export const thunkUploadImage = (img) => async (dispatch) => {
-    const response = await fetch ('/api/album')
-}
+// export const thunkUploadImage = (img) => async (dispatch) => {
+//     const response = await fetch ('/api/albums/')
+// }
 
 const initialState = {}
 function createAlbumReducer(state = initialState, action) {
