@@ -3,7 +3,7 @@ from flask import Blueprint,request,render_template,session
 from flask_login import login_required,current_user,login_manager
 from .audio_upload import upload_file_to_s3,remove_file_from_s3,get_unique_filename
 
-from ..models import Song,User,Album
+from ..models import Song,User,Album,likes
 from ..forms.song_form import SongForm
 from ..models.db import db
 song_routes = Blueprint('songs',__name__)
@@ -108,3 +108,46 @@ def deleteSong(songId):
 def getSong(songId):
     song = Song.query.get(songId)
     return song.to_dict()
+
+# liking a song
+@login_required
+@song_routes.route('/<int:songId>/likes',methods=['POST'])
+def likeSong(songId):
+    print('----entered')
+    user_id = int(session['_user_id'])
+
+    song = Song.query.get(songId)
+    user = User.query.get(user_id)
+
+    if not song:
+        return {'message':'Song could not be found'},404
+
+    if session['_user_id'] == song.user_id:
+        return {'error':"Forbidden"}
+    db.session.execute(likes.insert(),
+                    params={"song_id": song.id,
+                             "user_id": user.id})
+    # db.session.add(song)
+    db.session.commit()
+    return {'message':"Successfully liked song"},201
+
+@login_required
+@song_routes.route('/<int:songId>/likes',methods=['DELETE'])
+def unlikeSong(songId):
+
+    user_id = int(session['_user_id'])
+
+    song = Song.query.get(songId)
+    user = User.query.get(user_id)
+
+    if not song:
+        return {'message':'Song could not be found'},404
+
+    if session['_user_id'] == song.user_id:
+        return {'error':"Forbidden"}
+    db.session.execute(likes.delete(),
+                    params={"song_id": song.id,
+                             "user_id": user.id})
+    # db.session.add(song)
+    db.session.commit()
+    return {'message':"Successfully unliked song"},200
