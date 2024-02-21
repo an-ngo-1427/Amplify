@@ -1,6 +1,5 @@
 from flask import Blueprint,request
-from ..models.album import Playlist
-from ..models.db import db
+from app.models import db, Playlist
 playlist_routes = Blueprint('playlists',__name__)
 
 @playlist_routes.route('/')
