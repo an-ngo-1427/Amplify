@@ -3,16 +3,16 @@ import { useDispatch } from "react-redux";
 import { thunkCreateSong} from "../../redux/createSong";
 
 function SongForm(){
-    const [audio,setAudio] = useState()
-    const [title,setTitle] = useState()
-    const [album,setAlbum] = useState()
-    const [image_url,setImageUrl] = useState()
+    const [audio,setAudio] = useState(null)
+    const [title,setTitle] = useState(null)
+    const [album,setAlbum] = useState(null)
+    const [image_url,setImageUrl] = useState(null)
     const [errorObj,setErrorObj] = useState({})
     const [formErr,setFormError] = useState(false)
     const dispatch = useDispatch()
 
     const handleSubmit = async (e) => {
-        if(Object.keys(errorObj).length) setFormError(true)
+        if(Object.values(errorObj).length) setFormError(true)
         else{
             e.preventDefault();
             const formData = new FormData();
@@ -41,7 +41,7 @@ function SongForm(){
         if(!title) errors.title = 'Song title is required'
 
         setErrorObj(errors)
-    },[audio,title])
+    },[audio,title,formErr])
     return(
         <>
             <form
@@ -76,7 +76,6 @@ function SongForm(){
                 />
                 {formErr && <div style={{'color':'red'}}>{errorObj.audio}</div>}
                 <button type='submit'
-                    disabled = {formErr? true:false}
                 >Submit</button>
             </form>
         </>

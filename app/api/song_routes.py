@@ -21,7 +21,7 @@ def getSongs():
 
 # getting details of a song
 @song_routes.route('/new',methods=["POST"])
-# @login_required
+@login_required
 # @login_manager.user_loader
 def createSong():
     form = SongForm()
@@ -47,7 +47,7 @@ def createSong():
         if form.data['album'] is True:
             album = Album.query.filter(Album.id == form.data['album'])
             if not album:
-                return {'errors':"could not find the album"}
+                return {'errors':"could not find the album"},404
 
         newSong = Song(
             title =  form.data['title'],
@@ -58,7 +58,7 @@ def createSong():
         )
         db.session.add(newSong)
         db.session.commit()
-        return newSong.to_dict()
+        return newSong.to_dict(),201
 
 
     if form.errors:
@@ -68,27 +68,43 @@ def createSong():
 
     # return render_template("post_form.html", form=form, errors=None)
 
-@song_routes.route("/<int:id>", methods=['DELETE'])
+# editting song
+@song_routes.route('/<int:songId>',methods=['PUT'])
 @login_required
-def deleteSong(id):
-    song = Song.query.get(id)
-    deleteSong = remove_file_from_s3(song.audio)
+def editSong(songId):
+    form = SongForm()
+    song = Song.query.get(songId)
+    if not song:
+        return {'message':'Song could not be found'},404
+
+    user_id = session['_user_id']
+    if(int(user_id) != song.user_id):
+        return {'errors':'Forbidden'},401
+
+    form.populate_obj(song)
+    db.session.commit()
+    return song.to_dict(),200
+
+# deleting song by specified ID
+@song_routes.route('/<int:songId>',methods=["DELETE"])
+@login_required
+def deleteSong(songId):
+    song = Song.query.get(songId)
+
+    if not song:
+        return {'message':'Song could not be found'},404
+
+    user_id = session['_user_id']
+    if(int(user_id) != song.user_id):
+        return {'errors':'Forbidden'},401
+
     db.session.delete(song)
     db.session.commit()
-    return {
-        'message': 'Successfully Deleted'
-    }
 
-@song_routes.route('/<int:id>/like', methods=["POST"])
-def like_song(id):
-    song = Song.query.get(id)
-    current_user.liked_songs.append(song)
-    db.session.commit()
-    return ''
+    return {'message':"Successfully deleted song"},200
 
-@song_routes.route('/<int:id>/unlike', methods=["POST"])
-def unlike_song(id):
-    song = Song.query.get(id)
-    current_user.liked_songs.remove(song)
-    db.session.commit()
-    return ''
+# getting song details by ID
+@song_routes.route('/<int:songId>',methods=["GET"])
+def getSong(songId):
+    song = Song.query.get(songId)
+    return song.to_dict()
