@@ -34,19 +34,19 @@ def new_album():
 @album_routes.route('/<int:id>/songs/add', methods=['POST'])
 @login_required
 def add_songs(id):
-    # data = request.json
-    # for d in data["songId"]:
-    #     print("THIS IS OUR D:", d)
-    #     song = Song.query.get(d)
-    #     song.album_id = id
-    # db.session.commit()
-    # album = Album.query.get(id)    
-    # return album.to_dict(), 200
-    data = json.loads(request.data)
-    song_ids = data.get('song_ids', [])
-    songs = Song.query.filter(Song.id.in_(song_ids)).all()
-    album.songs.extend(songs)
+    data = request.json
+    for d in data["songId"]:
+        print("THIS IS OUR D:", d)
+        song = Song.query.get(d)
+        song.album_id = id
     db.session.commit()
+    album = Album.query.get(id)
+    return album.to_dict(), 200
+    # data = json.loads(request.data)
+    # song_ids = data.get('song_ids', [])
+    # songs = Song.query.filter(Song.id.in_(song_ids)).all()
+    # album.songs.extend(songs)
+    # db.session.commit()
 
 # edit an album route
 
@@ -73,7 +73,7 @@ def update_album(id):
 @login_required
 def delete_album(id):
 
-    try:    
+    try:
         album = Album.query.get(id)
         user_id = session['_user_id']
         if(int(user_id) != album.user_id):
@@ -93,7 +93,7 @@ def remove_song_from_album(id, songId):
     user_id = session['_user_id']
     if(int(user_id) != album.user_id):
         return {'errors':'Forbidden'},401
-        
+
     if not album:
         return {'errors':'Album not found'}
     if album.user_id != int(session['_user_id']):
