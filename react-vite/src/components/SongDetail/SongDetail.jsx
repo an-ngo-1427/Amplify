@@ -1,60 +1,67 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getSongThunk } from '../../redux/songDetail'
-import {redirect, useParams} from 'react-router-dom'
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom'; 
 
-function SongDetail(){
-    const {songId} = useParams()
-    const dispatch = useDispatch()
+import { getSongThunk } from '../../redux/songDetail';
 
+function SongDetail() {
+    const { songId } = useParams();
+    const dispatch = useDispatch();
+    const navigate = useNavigate(); 
 
-    const currSong = useSelector(state=>state.currSong)
-    const user = useSelector(state=>state.session.user)
+    const currSong = useSelector(state => state.currSong);
+    const user = useSelector(state => state.session.user);
 
-    const [liked,setLiked] = useState(false)
-
-
-
-    useEffect(()=>{
-        dispatch(getSongThunk(songId))
-    },[liked])
+    const [liked, setLiked] = useState(false);
 
     useEffect(() => {
-        if (user && currSong?.user_likes?.includes(user.id)) {
-            setLiked(true)
+        if (currSong?.user_likes?.includes(user?.id)) {
+            setLiked(true);
+        } else {
+            setLiked(false);
         }
-    }, [currSong, user])
-    function handlePlay(){
-        window.alert('feature comming soon')
-    }
+    }, [currSong, user]);
 
-    async function handleLike(){
-        if (!user){
-            redirect('/login')
-        }
-        fetch(`/api/songs/${songId}/likes`,{
-            method:'POST'
-        })
-        if(!liked) setLiked(true)
-    }
+    useEffect(() => {
+        dispatch(getSongThunk(songId));
+    }, [dispatch, songId]);
 
-    async function handleUnlike(){
-        if (!user){
-            redirect('/login')
+    const handlePlay = () => {
+        window.alert('Feature coming soon');
+    };
+
+    const handleLike = async (e) => {
+        e.preventDefault();
+        if (!user) {
+            navigate('/login'); 
+            return;
         }
-        fetch(`/api/songs/${songId}/likes`,{
-            method:'DELETE'
-        })
-        if(liked) setLiked(false)
-    }
-    if(!Object.keys(currSong).length) return null
+        await fetch(`/api/songs/${songId}/likes`, {
+            method: 'POST',
+        });
+        setLiked(true);
+    };
+
+    const handleUnlike = async (e) => {
+        e.preventDefault();
+        if (!user) {
+            navigate('/login'); 
+            return;
+        }
+        await fetch(`/api/songs/${songId}/likes`, {
+            method: 'DELETE',
+        });
+        setLiked(false);
+    };
+
+    if (!Object.keys(currSong).length) return null;
     return (
         <>
             <div className="song-detail-header">
                 <div className="song-image">
-                    <img src = {currSong.image_url}/>
+                    <img src={currSong.image_url} alt={currSong.title}/>
                 </div>
-                <div className = 'song-info'>
+                <div className='song-info'>
                     <h1>{currSong.title}</h1>
                     <div>
                         <span>{currSong.artist.first_name}</span>
@@ -63,16 +70,12 @@ function SongDetail(){
                     </div>
                 </div>
                 <div className='song-int'>
-                    <button onClick={handlePlay}>play</button>
-                    {liked && <button onClick= {() => {handleLike}>Unlike</button>}
-                    {!liked && <button onClick={handleUnlike}>like</button>}
+                    <button onClick={handlePlay}>Play</button>
+                    {liked ? <button onClick={handleUnlike}>Unlike</button> : <button onClick={handleLike}>Like</button>}
                 </div>
             </div>
         </>
-
-    )
-
-
+    );
 }
 
-export default SongDetail
+export default SongDetail;

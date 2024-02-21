@@ -20,7 +20,7 @@ function PlaylistForm() {
     const handleSubmit = async e => {
         e.preventDefault()
         setSubmitted(true)
-        playlist = {name, description}
+        const playlist = {name, description}
         if(!Object.keys(validationErrors).length) {
             return dispatch(createPlaylistThunk(playlist))
         }
