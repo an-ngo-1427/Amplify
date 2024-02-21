@@ -3,6 +3,7 @@
 export const LOAD_PLAYLISTS = '/songs/LOAD_PLAYLISTS'
 export const RECEIVE_PLAYLIST = '/songs/RECEIVE_PLAYLIST'
 export const UPDATE_PLAYLIST = '/songs/UPDATE_PLAYLIST'
+export const REMOVE_PLAYLIST = '/songs/REMOVE_PLAYLIST'
 
 export const loadPlaylists = (playlists) => ({
     type: LOAD_PLAYLISTS,
@@ -17,6 +18,11 @@ export const receivePlaylist = (playlist) => ({
 export const editPlaylist = (playlist) => ({
     type: UPDATE_PLAYLIST,
     playlist
+})
+
+export const removePlaylist = (playlistId) => ({
+    type: REMOVE_PLAYLIST,
+    playlistId
 })
 
 // Thunk actions
@@ -76,6 +82,16 @@ export const editPlaylistThunk = (playlist) => async (dispatch) => {
       }
 }
 
+export const deletePlaylistThunk = (playlistId) => async (dispatch) => {
+    const response = await fetch(`/api/playlists/${playlistId}`, {
+        method: 'DELETE'
+      })
+
+      if(response.ok) {
+        dispatch(removePlaylist(playlistId))
+      }
+}
+
 const initialState = {}
 
 function playlistsReducer(state = initialState, action) {
@@ -91,6 +107,11 @@ function playlistsReducer(state = initialState, action) {
             return { ...state, [action.playlist.id]: action.playlist }
         case UPDATE_PLAYLIST:
             return { ...state, [action.playlist.id]: action.playlist }
+        case REMOVE_PLAYLIST: {
+            const newState = { ...state }
+            delete newState[action.playlistId]
+            return newState
+        }
         default:
             return state
     }
