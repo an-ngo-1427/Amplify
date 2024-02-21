@@ -29,7 +29,7 @@ def new_album():
         db.session.add(album)
         db.session.commit()
         return album.to_dict()
-    return 'Error'
+    return {'Error':'Failed to create album'},404
 
 @album_routes.route('/<int:id>/songs/add', methods=['POST'])
 @login_required
