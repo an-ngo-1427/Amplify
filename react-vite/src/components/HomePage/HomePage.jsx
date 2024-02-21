@@ -1,29 +1,38 @@
-import { thunkLogout } from "../../redux/session";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
-import Library from "../Library";
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { thunkLogout } from '../../redux/session';
+import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import Library from '../Library';
 import './HomePage.css';
 
 function HomePage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
+    const playlists = useSelector((state) => Object.values(state.playlists));
+    const [selectedPlaylist, setSelectedPlaylist] = useState(null);
 
     const logout = async e => {
-        e.preventDefault()
-        await dispatch(thunkLogout())
-        navigate('/')
-    }
+        e.preventDefault();
+        await dispatch(thunkLogout());
+        navigate('/');
+    };
 
     const login = async e => {
-        e.preventDefault()
-        navigate('/login')
-    }
+        e.preventDefault();
+        navigate('/login');
+    };
 
     const signup = async e => {
-        e.preventDefault()
-        navigate('/signup')
-    }
+        e.preventDefault();
+        navigate('/signup');
+    };
+
+    const handlePlaylistClick = playlist => {
+        setSelectedPlaylist(playlist);
+    };
 
     return (
         <>
@@ -43,7 +52,7 @@ function HomePage() {
                             </ul>
                         </div>
                         <div className="left-sidebar-bottom">
-                            <Library />
+                            <Library playlists={playlists} onPlaylistClick={handlePlaylistClick} />
                         </div>
                     </div>
                 </div>
@@ -60,7 +69,11 @@ function HomePage() {
                             </div>
                         )}
                     </div>
-                    <div className="main-content"></div>
+                    {selectedPlaylist && (
+                        <div className="playlist-details">
+                            <h2>{selectedPlaylist.title}</h2>
+                        </div>
+                    )}
                 </div>
                 <div className="now-playing-bar"></div>
             </div>
@@ -68,7 +81,7 @@ function HomePage() {
                 <button onClick={logout}>Log Out</button>
             )}
         </>
-    )
+    );
 }
 
-export default HomePage
+export default HomePage;
