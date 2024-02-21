@@ -3,7 +3,7 @@ from sqlalchemy.sql import text
 
 def seed_songs():
     song1 = Song(
-        title = 'Song', user_id = 1, song_url = 'song.com', image_url = 'image1.jpg'
+        title = 'Song', user_id = 1, song_url = 'song.com', image_url = 'image1.jpg', album_id = 1
     )
     song2 = Song(
         title = 'Song2', user_id = 1, song_url = 'song2.com', image_url = 'image2.jpg'

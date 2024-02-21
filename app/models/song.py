@@ -35,5 +35,6 @@ class Song(db.Model):
             'created_at': self.created_at,
             'updated_at': self.updated_at,
             'artist':self.user.to_dict(),
-            'album':self.album
+            'album':self.album.to_dict() if self.album else self.album
+
         }
