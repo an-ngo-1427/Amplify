@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createSongThunk } from "../../redux/createSong";
+import { thunkCreateSong} from "../../redux/createSong";
 
 function SongForm() {
   const [audio, setAudio] = useState(null);
@@ -12,7 +12,7 @@ function SongForm() {
     formData.append("audio", audio);
     // AWS uploads can be a bit slow—displaying
     // some sort of loading message is a good idea
-    await dispatch(createSongThunk(formData));
+    await dispatch(thunkCreateSong(formData));
     // history.push("/images");
   };
 
