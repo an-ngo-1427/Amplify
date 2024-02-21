@@ -12,49 +12,54 @@ function SongDetail() {
     const currSong = useSelector(state => state.currSong);
     const user = useSelector(state => state.session.user);
 
-    const [liked, setLiked] = useState(false);
+    const [liked,setLiked] = useState(false)
 
-    useEffect(() => {
-        if (currSong?.user_likes?.includes(user?.id)) {
-            setLiked(true);
-        } else {
-            setLiked(false);
+
+
+    useEffect(()=>{
+
+        if (Object.keys(currSong).length){
+            console.log('entered')
+            if(currSong.user_likes.includes(user.id)) setLiked(true)
         }
-    }, [currSong, user]);
+        console.log('in effect',liked)
+        dispatch(getSongThunk(songId))
+    },[liked,songId])
 
-    useEffect(() => {
-        dispatch(getSongThunk(songId));
-    }, [dispatch, songId]);
+    function handlePlay(){
+        window.alert('feature comming soon')
+    }
 
-    const handlePlay = () => {
-        window.alert('Feature coming soon');
-    };
+    async function handleLike(e){
+        e.preventDefault()
+        e.stopPropagation()
 
-    const handleLike = async (e) => {
-        e.preventDefault();
-        if (!user) {
-            navigate('/login'); 
-            return;
+        if (!user){
+            redirect('/login')
         }
-        await fetch(`/api/songs/${songId}/likes`, {
-            method: 'POST',
-        });
-        setLiked(true);
-    };
-
-    const handleUnlike = async (e) => {
-        e.preventDefault();
-        if (!user) {
-            navigate('/login'); 
-            return;
+        if(!liked){
+            fetch(`/api/songs/${songId}/likes`,{
+                method:'POST'
+            })
+            setLiked(true)
         }
-        await fetch(`/api/songs/${songId}/likes`, {
-            method: 'DELETE',
-        });
-        setLiked(false);
-    };
 
-    if (!Object.keys(currSong).length) return null;
+    }
+
+    async function handleUnlike(e){
+        e.preventDefault()
+        console.log(liked)
+        if (!user){
+            redirect('/login')
+        }
+        if(liked){
+            setLiked(false)
+            fetch(`/api/songs/${songId}/likes`,{
+                method:'DELETE'
+            })
+        }
+    }
+    if(!Object.keys(currSong).length) return null
     return (
         <>
             <div className="song-detail-header">
@@ -70,8 +75,9 @@ function SongDetail() {
                     </div>
                 </div>
                 <div className='song-int'>
-                    <button onClick={handlePlay}>Play</button>
-                    {liked ? <button onClick={handleUnlike}>Unlike</button> : <button onClick={handleLike}>Like</button>}
+                    <button onClick={handlePlay}>play</button>
+                    {liked && <button onClick={(e)=>handleUnlike(e)}>Unlike</button>}
+                    {!liked && <button onClick={(e)=>handleLike(e)}>like</button>}
                 </div>
             </div>
         </>
