@@ -33,12 +33,31 @@ def get_playlist_by_id(id):
     return playlist.to_dict()
 
 @playlist_routes.route('/current')
+@login_required
 def get_current_user_playlists():
     user_playlists = Playlist.query.filter(Playlist.user_id == current_user.id).all()
     response = [playlist.to_dict() for playlist in user_playlists]
     return {'playlists': response}
 
-@playlist_routes.route('/<int:id>/delete', methods=['DELETE'])
+@playlist_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def edit_playlist(id):
+    form = PlaylistForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    playlist = Playlist.query.get(id)
+
+    if not playlist:
+        return {'error': "Playlist couldn't be found"}, 404
+
+    if playlist.user_id != current_user.id:
+        return {'errors':'Forbidden'}, 401
+
+    form.populate_obj(playlist)
+    db.session.commit()
+    return playlist.to_dict(), 200
+
+@playlist_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
 def delete_playlist(id):
     try:
         playlist = Playlist.query.get(id)

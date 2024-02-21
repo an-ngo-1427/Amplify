@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import OpenModalButton from "../OpenModalButton";
 import EditPlaylist from "../EditPlaylist/EditPlaylist";
@@ -11,10 +10,11 @@ function Playlist({ playlist }) {
             {playlist && (
                 <>
                     <h2>{playlist.title}</h2>
+                    <h4>{playlist.description}</h4>
                     <h3>{sessionUser.username}</h3>
                     <OpenModalButton
                         buttonText='...'
-                        modalComponent={<EditPlaylist />}
+                        modalComponent={<EditPlaylist playlist={playlist}/>}
                     />
                 </>
             )}

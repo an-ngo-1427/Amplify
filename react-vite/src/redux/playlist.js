@@ -2,6 +2,7 @@
 // action creator
 export const LOAD_PLAYLISTS = '/songs/LOAD_PLAYLISTS'
 export const RECEIVE_PLAYLIST = '/songs/RECEIVE_PLAYLIST'
+export const UPDATE_PLAYLIST = '/songs/UPDATE_PLAYLIST'
 
 export const loadPlaylists = (playlists) => ({
     type: LOAD_PLAYLISTS,
@@ -10,6 +11,11 @@ export const loadPlaylists = (playlists) => ({
 
 export const receivePlaylist = (playlist) => ({
     type: RECEIVE_PLAYLIST,
+    playlist
+})
+
+export const editPlaylist = (playlist) => ({
+    type: UPDATE_PLAYLIST,
     playlist
 })
 
@@ -50,6 +56,26 @@ export const createPlaylistThunk = (playlist) => async (dispatch) => {
     }
 }
 
+export const editPlaylistThunk = (playlist) => async (dispatch) => {
+    const response = await fetch(`/api/playlists/${playlist.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(playlist)
+      })
+
+      if(response.ok) {
+        const playlist = await response.json()
+        dispatch(editPlaylist(playlist))
+        return playlist
+      }
+      else {
+        const error = await response.json()
+        return error
+      }
+}
+
 const initialState = {}
 
 function playlistsReducer(state = initialState, action) {
@@ -62,6 +88,8 @@ function playlistsReducer(state = initialState, action) {
             return playlistsState
         }
         case RECEIVE_PLAYLIST:
+            return { ...state, [action.playlist.id]: action.playlist }
+        case UPDATE_PLAYLIST:
             return { ...state, [action.playlist.id]: action.playlist }
         default:
             return state

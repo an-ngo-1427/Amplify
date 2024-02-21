@@ -5,6 +5,7 @@ import Layout from './Layout';
 import SongForm from '../components/CreateSong'
 import HomePage from '../components/HomePage/HomePage';
 import Playlist from '../components/Playlist';
+import SongDetail from '../components/SongDetail/SongDetail';
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path:'/playlists/:playlistId',
         element: <Playlist/>
+      },
+      {
+        path:'songs/:songId',
+        element:<SongDetail/>
       }
     ],
   },
