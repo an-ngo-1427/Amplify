@@ -4,6 +4,7 @@ import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import SongForm from '../components/CreateSong'
 import HomePage from '../components/HomePage/HomePage';
+import PlaylistForm from '../components/PlaylistForm/PlaylistForm';
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path:"aws-testing",
         element:<SongForm/>
+      },
+      {
+        path:'playlist-form',
+        element: <PlaylistForm/>
       }
     ],
   },
