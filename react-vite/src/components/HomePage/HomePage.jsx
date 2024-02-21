@@ -41,6 +41,9 @@ function HomePage() {
                                 </li>
                             </ul>
                         </div>
+                        <div className="left-sidebar-bottom">
+                            
+                        </div>
                     </div>
                 </div>
                 <div className="main-view">

@@ -1,6 +1,6 @@
 import { useState,useEffect} from "react";
 import { useDispatch } from "react-redux";
-import { createSongThunk } from "../../redux/createSong";
+import { thunkCreateSong} from "../../redux/createSong";
 
 function SongForm(){
     const [audio,setAudio] = useState()
@@ -27,7 +27,7 @@ function SongForm(){
             // some sort of loading message is a good idea
 
 
-            dispatch(createSongThunk(formData))
+            dispatch(thunkCreateSong(formData))
             .then((response)=>{console.log(response)})
 
         }

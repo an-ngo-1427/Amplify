@@ -10,7 +10,7 @@ export const createSong = (data)=>(
 
 
 // THUNK ACTIONS
-export const createSongThunk = (data)=> async (dispatch)=>{
+export const thunkCreateSong = (data)=> async (dispatch) => {
     const response = await fetch('/api/songs/new',{
         method:'POST',
         body:data
@@ -20,21 +20,21 @@ export const createSongThunk = (data)=> async (dispatch)=>{
         dispatch(createSong(newSong))
         return newSong
     }
-    return data
-
+    return newSong
 }
 
 
 const initialState = {}
-function createSongReducer(state=initialState,action){
+function createSongReducer(state = initialState, action) {
     switch(action.type){
         case CREATE_SONG:{
             const newObj = {}
             newObj[action.data] = action.data
             return newObj
         }
+        default:
+            return state
     }
-    return state
 }
 
 export default createSongReducer
