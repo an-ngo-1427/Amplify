@@ -67,3 +67,22 @@ def createSong():
 
 
     # return render_template("post_form.html", form=form, errors=None)
+
+
+# edit song route
+
+
+
+
+# delete song route
+
+@song_routes.route("/<int:id>", methods=['DELETE'])
+@login_required
+def deleteSong(id):
+    song = Song.query.get(id)
+    delete = remove_file_from_s3(song.audio)
+    db.session.delete(song)
+    db.session.commit()
+    return {
+        'message': 'Successfully Deleted'
+    }
