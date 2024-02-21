@@ -1,12 +1,15 @@
 import { thunkLogout } from "../../redux/session";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
+import OpenModalButton from '../OpenModalButton'
+import PlaylistForm from '../PlaylistForm'
 import './HomePage.css';
 
 function HomePage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
+    const playlists = useSelector(state => Object.values(state.playlists))
 
     const logout = async e => {
         e.preventDefault()
@@ -41,16 +44,26 @@ function HomePage() {
                                 </li>
                             </ul>
                         </div>
+                        <div className="left-sidebar-bottom">
+                            <OpenModalButton
+                                modalComponent={<PlaylistForm />}
+                                buttonText='Create Playlist'
+                            />
+                        </div>
                     </div>
                 </div>
                 <div className="main-view">
                     <div className="main-header">
-                        <button onClick={signup} className="signup-button">
-                            Sign up
-                        </button>
-                        <button onClick={login} className="login-button">
-                            Login in
-                        </button>
+                        {!sessionUser && (
+                            <div>
+                                <button onClick={signup} className="signup-button">
+                                    Sign up
+                                </button>
+                                <button onClick={login} className="login-button">
+                                    Login in
+                                </button>
+                            </div>
+                        )}
                     </div>
                     <div className="main-content"></div>
                 </div>

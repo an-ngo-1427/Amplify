@@ -9,12 +9,14 @@ import sessionReducer from "./session";
 import createSongReducer from "./createSong";
 import getSongsReducer from "./song";
 import playlistsReducer from "./playlist";
+import createAlbumReducer from "./album";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   newSong: createSongReducer,
   songs: getSongsReducer,
-  playlists: playlistsReducer
+  playlists: playlistsReducer,
+  newAlbum: createAlbumReducer
 });
 
 let enhancer;

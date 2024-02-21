@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA,add_prefix_for_prod
 from datetime import datetime
+import json
 
 playlist_songs = db.Table(
     'playlist_songs',
@@ -31,11 +32,11 @@ class Playlist(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'user_id': self.user_id,
             'title': self.title,
             'description': self.description,
             'image_url': self.image_url,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
-            'user': self.user,
-            'songs': [song for song in self.songs]
+            'songs': [song.to_dict() for song in self.songs]
         }
