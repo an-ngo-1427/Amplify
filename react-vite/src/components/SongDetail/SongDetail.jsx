@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { getSongThunk } from '../../redux/songDetail'
 import {redirect, useParams} from 'react-router-dom'
+
 function SongDetail(){
     const {songId} = useParams()
     const dispatch = useDispatch()
@@ -12,7 +12,6 @@ function SongDetail(){
     const user = useSelector(state=>state.session.user)
 
     const [liked,setLiked] = useState(false)
-    if (currSong?.user_likes?.includes(user.id)) setLiked(true)
 
 
 
@@ -20,14 +19,16 @@ function SongDetail(){
         dispatch(getSongThunk(songId))
     },[liked])
 
+    useEffect(() => {
+        if (user && currSong?.user_likes?.includes(user.id)) {
+            setLiked(true)
+        }
+    }, [currSong, user])
     function handlePlay(){
         window.alert('feature comming soon')
     }
 
     async function handleLike(){
-        e.preventDefault()
-        e.stopPropagation()
-        e.stopPro
         if (!user){
             redirect('/login')
         }
@@ -38,8 +39,6 @@ function SongDetail(){
     }
 
     async function handleUnlike(){
-        e.preventDefault()
-        e.stopPropagation()
         if (!user){
             redirect('/login')
         }
@@ -65,7 +64,7 @@ function SongDetail(){
                 </div>
                 <div className='song-int'>
                     <button onClick={handlePlay}>play</button>
-                    {liked && <button onClick={handleLike}>Unlike</button>}
+                    {liked && <button onClick= {() => {handleLike}>Unlike</button>}
                     {!liked && <button onClick={handleUnlike}>like</button>}
                 </div>
             </div>
