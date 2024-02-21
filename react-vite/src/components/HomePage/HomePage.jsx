@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { thunkLogout } from '../../redux/session';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Library from '../Library';
-import Playlist from '../Playlist'; // Import Playlist component
+import Playlist from '../Playlist';
 import './HomePage.css';
 
 function HomePage() {
@@ -14,10 +14,6 @@ function HomePage() {
     const sessionUser = useSelector((state) => state.session.user);
     const playlists = useSelector((state) => Object.values(state.playlists));
     const [selectedPlaylist, setSelectedPlaylist] = useState(null);
-
-    useEffect(() => {
-
-    }, [selectedPlaylist])
 
     const logout = async e => {
         e.preventDefault();
@@ -37,6 +33,10 @@ function HomePage() {
 
     const handlePlaylistClick = playlist => {
         setSelectedPlaylist(playlist);
+    };
+
+    const handlePlaylistDelete = () => {
+        setSelectedPlaylist(null); 
     };
 
     return (
@@ -75,7 +75,7 @@ function HomePage() {
                         )}
                     </div>
                     {selectedPlaylist ? (
-                        <Playlist playlist={selectedPlaylist} />
+                        <Playlist playlist={selectedPlaylist} onDelete={handlePlaylistDelete} />
                     ) : (
                         <div>
                             {/* Default content when no playlist is selected */}

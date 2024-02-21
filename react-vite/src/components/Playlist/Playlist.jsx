@@ -3,25 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import OpenModalButton from "../OpenModalButton";
 import EditPlaylist from "../EditPlaylist/EditPlaylist";
 import { deletePlaylistThunk } from "../../redux/playlist";
-import { useNavigate } from "react-router-dom";
 
-function Playlist({ playlist }) {
+function Playlist({ playlist, onDelete }) {
     const sessionUser = useSelector(state => state.session.user);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
+    const dispatch = useDispatch()
 
     const deletePlaylist = async e => {
-        e.preventDefault();
-        const result = await dispatch(deletePlaylistThunk(playlist.id));
-        if (result.success) {
-            closeModal(); 
-            navigate('/');
-        }
-    };
+        e.preventDefault()
+        dispatch(deletePlaylistThunk(playlist.id))
+        onDelete();
+    }
 
     return (
         <div>
