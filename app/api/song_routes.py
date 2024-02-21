@@ -72,9 +72,23 @@ def createSong():
 @login_required
 def deleteSong(id):
     song = Song.query.get(id)
-    delete = remove_file_from_s3(song.audio)
+    deleteSong = remove_file_from_s3(song.audio)
     db.session.delete(song)
     db.session.commit()
     return {
         'message': 'Successfully Deleted'
     }
+
+@song_routes.route('/<int:id>/like', methods=["POST"])
+def like_song(id):
+    song = Song.query.get(id)
+    current_user.liked_songs.append(song)
+    db.session.commit()
+    return ''
+
+@song_routes.route('/<int:id>/unlike', methods=["POST"])
+def unlike_song(id):
+    song = Song.query.get(id)
+    current_user.liked_songs.remove(song)
+    db.session.commit()
+    return ''
