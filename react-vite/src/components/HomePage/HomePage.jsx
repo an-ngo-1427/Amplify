@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { thunkLogout } from '../../redux/session';
@@ -14,6 +14,10 @@ function HomePage() {
     const sessionUser = useSelector((state) => state.session.user);
     const playlists = useSelector((state) => Object.values(state.playlists));
     const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+
+    useEffect(() => {
+
+    }, [selectedPlaylist])
 
     const logout = async e => {
         e.preventDefault();

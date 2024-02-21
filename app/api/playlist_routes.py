@@ -47,7 +47,7 @@ def edit_playlist(id):
     playlist = Playlist.query.get(id)
 
     if not playlist:
-        return {'error': "Playlist couldn't be found"}, 404
+        return {'error':"Playlist couldn't be found"}, 404
 
     if playlist.user_id != current_user.id:
         return {'errors':'Forbidden'}, 401
@@ -59,10 +59,14 @@ def edit_playlist(id):
 @playlist_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_playlist(id):
-    try:
-        playlist = Playlist.query.get(id)
-        db.session.delete(playlist)
-        db.session.commit()
-        return { 'message': 'Successfully deleted' }
-    except Exception as e:
-        return { 'message': str(e) }
+    playlist = Playlist.query.get(id)
+
+    if not playlist:
+        return {'error':"Playlist couldn't be found"}, 404
+
+    if playlist.user_id != current_user.id:
+        return {'errors':'Forbidden'}, 401
+
+    db.session.delete(playlist)
+    db.session.commit()
+    return {'message': 'Successfully deleted'}, 200
