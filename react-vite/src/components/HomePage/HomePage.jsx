@@ -41,16 +41,23 @@ function HomePage() {
                                 </li>
                             </ul>
                         </div>
+                        <div className="left-sidebar-bottom">
+
+                        </div>
                     </div>
                 </div>
                 <div className="main-view">
                     <div className="main-header">
-                        <button onClick={signup} className="signup-button">
-                            Sign up
-                        </button>
-                        <button onClick={login} className="login-button">
-                            Login in
-                        </button>
+                        {!sessionUser && (
+                            <div>
+                                <button onClick={signup} className="signup-button">
+                                    Sign up
+                                </button>
+                                <button onClick={login} className="login-button">
+                                    Login in
+                                </button>
+                            </div>
+                        )}
                     </div>
                     <div className="main-content"></div>
                 </div>
