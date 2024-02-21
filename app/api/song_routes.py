@@ -16,7 +16,7 @@ song_routes = Blueprint('songs',__name__)
 def getSongs():
     songs = Song.query.all()
     response = [song.to_dict() for song in songs]
-    return response
+    return {"songs": response}
 
 
 # getting details of a song
@@ -67,14 +67,6 @@ def createSong():
 
 
     # return render_template("post_form.html", form=form, errors=None)
-
-
-# edit song route
-
-
-
-
-# delete song route
 
 @song_routes.route("/<int:id>", methods=['DELETE'])
 @login_required
