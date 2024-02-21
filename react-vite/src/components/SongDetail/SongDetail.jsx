@@ -12,41 +12,51 @@ function SongDetail(){
     const user = useSelector(state=>state.session.user)
 
     const [liked,setLiked] = useState(false)
-    if (currSong?.user_likes?.includes(user.id)) setLiked(true)
 
 
 
     useEffect(()=>{
+
+        if (Object.keys(currSong).length){
+            console.log('entered')
+            if(currSong.user_likes.includes(user.id)) setLiked(true)
+        }
+        console.log('in effect',liked)
         dispatch(getSongThunk(songId))
-    },[liked])
+    },[liked,songId])
 
     function handlePlay(){
         window.alert('feature comming soon')
     }
 
-    async function handleLike(){
+    async function handleLike(e){
         e.preventDefault()
         e.stopPropagation()
-        e.stopPro
+
         if (!user){
             redirect('/login')
         }
-        fetch(`/api/songs/${songId}/likes`,{
-            method:'POST'
-        })
-        if(!liked) setLiked(true)
+        if(!liked){
+            fetch(`/api/songs/${songId}/likes`,{
+                method:'POST'
+            })
+            setLiked(true)
+        }
+
     }
 
-    async function handleUnlike(){
+    async function handleUnlike(e){
         e.preventDefault()
-        e.stopPropagation()
+        console.log(liked)
         if (!user){
             redirect('/login')
         }
-        fetch(`/api/songs/${songId}/likes`,{
-            method:'DELETE'
-        })
-        if(liked) setLiked(false)
+        if(liked){
+            setLiked(false)
+            fetch(`/api/songs/${songId}/likes`,{
+                method:'DELETE'
+            })
+        }
     }
     if(!Object.keys(currSong).length) return null
     return (
@@ -65,8 +75,8 @@ function SongDetail(){
                 </div>
                 <div className='song-int'>
                     <button onClick={handlePlay}>play</button>
-                    {liked && <button onClick={handleLike}>Unlike</button>}
-                    {!liked && <button onClick={handleUnlike}>like</button>}
+                    {liked && <button onClick={(e)=>handleUnlike(e)}>Unlike</button>}
+                    {!liked && <button onClick={(e)=>handleLike(e)}>like</button>}
                 </div>
             </div>
         </>

@@ -12,7 +12,7 @@ export const getSong = (data)=>{
 
 // thunk action
 export const getSongThunk = (songId)=>async (dispatch)=>{
-    console.log('entered')
+
     const response = await fetch(`/api/songs/${songId}`)
     const data = await response.json()
     if(response.ok){
