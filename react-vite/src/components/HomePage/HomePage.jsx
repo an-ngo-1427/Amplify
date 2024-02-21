@@ -5,6 +5,7 @@ import { thunkLogout } from '../../redux/session';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Library from '../Library';
+import Playlist from '../Playlist'; // Import Playlist component
 import './HomePage.css';
 
 function HomePage() {
@@ -69,9 +70,11 @@ function HomePage() {
                             </div>
                         )}
                     </div>
-                    {selectedPlaylist && (
-                        <div className="playlist-details">
-                            <h2>{selectedPlaylist.title}</h2>
+                    {selectedPlaylist ? (
+                        <Playlist playlist={selectedPlaylist} />
+                    ) : (
+                        <div>
+                            {/* Default content when no playlist is selected */}
                         </div>
                     )}
                 </div>
