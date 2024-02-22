@@ -2,7 +2,7 @@
 // import ProfileButton from "./ProfileButton";
 import { useSelector } from "react-redux";
 import AudioPlayerComp from "../AudioPlayerComp/AudioPlayerComp";
-import "./Navigation.css";
+import "./MusicPlayer.css";
 
 
 function Navigation() {
