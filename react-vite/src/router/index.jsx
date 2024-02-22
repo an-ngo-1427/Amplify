@@ -50,8 +50,10 @@ export const router = createBrowserRouter([
       },
       {
         path:'albums',
-        element: <AllAlbums />,
-        path:'/testing-audio',
+        element: <AllAlbums />
+      },
+      {
+        path:'/playing-audio',
         element:<AudioPlayerComp/>
       },
       {
