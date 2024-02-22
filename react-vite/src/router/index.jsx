@@ -9,7 +9,6 @@ import SongDetail from '../components/SongDetail/SongDetail';
 import AlbumDetails from '../components/AlbumDetails';
 import AlbumForm from '../components/AlbumForm';
 import AllAlbums from '../components/AllAlbums/AllAlbums';
-
 import AudioPlayerComp from '../components/AudioPlayerComp/AudioPlayerComp';
 import EditSong from '../components/EditSong';
 
@@ -50,16 +49,16 @@ export const router = createBrowserRouter([
         element:<AlbumForm/>
       },
       {
-        path:'/testing-audio',
+        path:'albums',
+        element: <AllAlbums />
+      },
+      {
+        path:'/playing-audio',
         element:<AudioPlayerComp/>
       },
       {
         path:'/songs/:songId/edit',
         element:<EditSong/>
-      },
-      {
-        path:'albums',
-        element: <AllAlbums />
       }
     ],
   },

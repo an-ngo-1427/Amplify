@@ -45,7 +45,7 @@ function HomePage() {
         e.preventDefault();
         window.alert('Log in to create and share playlists.')
     };
-
+   
     return (
         <>
             <div className="main-homepage">
