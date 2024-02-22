@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation} from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import Library from '../Library';
 import Playlist from '../Playlist';
@@ -10,6 +10,7 @@ import ProfileButton from './ProfileButton';
 
 function HomePage() {
     const navigate = useNavigate();
+    const location = useLocation();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const playlists = useSelector((state) => Object.values(state.playlists));
@@ -41,7 +42,12 @@ function HomePage() {
         e.preventDefault();
         window.alert('Log in to create and share playlists.')
     };
-
+    const handleHomeClick = (e) => {
+        if (location.pathname === '/') {
+            e.preventDefault(); 
+            window.location.reload(); 
+        }
+    };
     return (
         <>
             <div className="main-homepage">
@@ -50,7 +56,7 @@ function HomePage() {
                         <div className="left-sidebar-top">
                             <ul>
                                 <li className="list-label">
-                                    <NavLink className='link-home' to='/'>
+                                    <NavLink className='link-home' to='/' onClick={handleHomeClick}>
                                         <span className="link-label"><span className="home-icon"><i className="fa-solid fa-house" /></span> Home</span>
                                     </NavLink>
                                 </li>

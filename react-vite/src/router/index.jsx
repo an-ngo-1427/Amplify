@@ -8,7 +8,7 @@ import Playlist from '../components/Playlist';
 import SongDetail from '../components/SongDetail/SongDetail';
 import AlbumDetails from '../components/AlbumDetails';
 import AlbumForm from '../components/AlbumForm';
-
+import AllAlbums from '../components/AllAlbums/AllAlbums';
 export const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -44,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path:'/albums/new',
         element:<AlbumForm/>
+      },
+      {
+        path:'albums',
+        element: <AllAlbums />
       }
     ],
   },
