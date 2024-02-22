@@ -18,7 +18,7 @@ const AllAlbums = () => {
     return (
         <div>
             <h1> HELLO </h1>
-            <p>{album.title}</p>
+            <p>{albumObj[0].title}</p>
         </div>
     )
 }

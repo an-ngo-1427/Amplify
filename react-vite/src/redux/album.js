@@ -1,5 +1,5 @@
-const CREATE_ALBUM='/albums/CREATE_ALBUM'
-const LOAD_ALBUMS = '/albums/LOAD_ALBUMS'
+export const CREATE_ALBUM='/albums/CREATE_ALBUM'
+export const LOAD_ALBUMS = '/albums/LOAD_ALBUMS'
 // const UPLOAD_ALBUM_IMAGE='/albums/UPLOAD_ALBUM_IMAGE'
 
 // ACTION CREATOR
@@ -11,12 +11,13 @@ export const createAlbum = (data) => (
     }
 )
 
-export const loadAlbums = (Albums) => {
+export const loadAlbums = (Albums) => (
     {
         type: LOAD_ALBUMS,
         Albums
     }
-}
+)
+    
 
 // export const uploadAlbumImage = (img) => (
 //     {
@@ -65,7 +66,7 @@ function createAlbumReducer(state = initialState, action) {
         case LOAD_ALBUMS:{
             const newObj = {}
             console.log('THIS IS THE ACTION', action)
-            action.Albums.albums.forEach(album => {newObj[album.id] = album})
+            action.Albums.forEach(album => {newObj[album.id] = album})
             return newObj
         }
         default:
