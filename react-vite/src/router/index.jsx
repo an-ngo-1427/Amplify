@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
         element: <AllAlbums />
       },
       {
-        path:'/testing-audio',
+        path:'/playing-audio',
         element:<AudioPlayerComp/>
       },
       {
