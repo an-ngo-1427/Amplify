@@ -36,7 +36,7 @@ function SongDetail() {
         e.stopPropagation()
 
         if (!user){
-            redirect('/login')
+            navigate('/login')
         }
         if(!liked){
             fetch(`/api/songs/${songId}/likes`,{
@@ -51,7 +51,7 @@ function SongDetail() {
         e.preventDefault()
         console.log(liked)
         if (!user){
-            redirect('/login')
+            navigate('/login')
         }
         if(liked){
             setLiked(false)

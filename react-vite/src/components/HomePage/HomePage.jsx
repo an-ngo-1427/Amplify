@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import Library from '../Library';
@@ -10,6 +10,7 @@ import ProfileButton from './ProfileButton';
 
 function HomePage() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const playlists = useSelector((state) => Object.values(state.playlists));
     const [selectedPlaylist, setSelectedPlaylist] = useState(null);
@@ -17,12 +18,6 @@ function HomePage() {
     useEffect(() => {
         dispatch(getUserPlaylistsThunk())
     }, [dispatch])
-
-    const logout = async e => {
-        e.preventDefault();
-        await dispatch(thunkLogout());
-        navigate('/');
-    };
 
     const login = async e => {
         e.preventDefault();
