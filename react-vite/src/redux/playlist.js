@@ -107,7 +107,10 @@ export const deletePlaylistThunk = (playlistId) => async (dispatch) => {
 }
 
 export const addSongToPlaylist = (song, playlistId) => async (dispatch) => {
-    const response = await fetch(`/api/playlists/${playlistId}/add/${song.id}`)
+    const response = await fetch(`/api/playlists/${playlistId}/add/${song.id}`, {
+        method: 'POST',
+
+    })
     if(response.ok) {
         dispatch(addSong(song, playlistId))
         console.log('RESPONSE', response)
