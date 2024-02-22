@@ -30,7 +30,11 @@ function HomePage() {
     };
 
     const handlePlaylistClick = playlist => {
-        setSelectedPlaylist(playlist);
+        if (playlist === null) {
+            setSelectedPlaylist(null);
+        } else {
+            setSelectedPlaylist(playlist);
+        }
     };
 
     const handlePlaylistDelete = () => {
@@ -50,7 +54,7 @@ function HomePage() {
                         <div className="left-sidebar-top">
                             <ul>
                                 <li className="list-label">
-                                    <NavLink className='link-home' to='/'>
+                                    <NavLink className='link-home' to='/' onClick={() => handlePlaylistClick(null)}>
                                         <span className="link-label"><span className="home-icon"><i className="fa-solid fa-house" /></span> Home</span>
                                     </NavLink>
                                 </li>
