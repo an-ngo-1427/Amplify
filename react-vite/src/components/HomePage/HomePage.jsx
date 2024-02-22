@@ -17,7 +17,7 @@ function HomePage() {
 
     useEffect(() => {
         dispatch(getUserPlaylistsThunk())
-    }, [dispatch])
+    }, [Library])
 
     const login = async e => {
         e.preventDefault();
@@ -30,7 +30,11 @@ function HomePage() {
     };
 
     const handlePlaylistClick = playlist => {
-        setSelectedPlaylist(playlist);
+        if (playlist === null) {
+            setSelectedPlaylist(null);
+        } else {
+            setSelectedPlaylist(playlist);
+        }
     };
 
     const handlePlaylistDelete = () => {
@@ -41,7 +45,7 @@ function HomePage() {
         e.preventDefault();
         window.alert('Log in to create and share playlists.')
     };
-
+   
     return (
         <>
             <div className="main-homepage">
@@ -50,7 +54,7 @@ function HomePage() {
                         <div className="left-sidebar-top">
                             <ul>
                                 <li className="list-label">
-                                    <NavLink className='link-home' to='/'>
+                                    <NavLink className='link-home' to='/' onClick={() => handlePlaylistClick(null)}>
                                         <span className="link-label"><span className="home-icon"><i className="fa-solid fa-house" /></span> Home</span>
                                     </NavLink>
                                 </li>
@@ -86,7 +90,7 @@ function HomePage() {
                             <ProfileButton user={sessionUser} />
                         )}
                     </div>
-                    {selectedPlaylist ? (
+                    {selectedPlaylist && sessionUser ? (
                         <Playlist playlist={selectedPlaylist} onDelete={handlePlaylistDelete} />
                     ) : (
                         <div>

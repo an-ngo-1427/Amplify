@@ -11,6 +11,7 @@ import getSongsReducer from "./song";
 import playlistsReducer from "./playlist";
 import createAlbumReducer from "./album";
 import getSongReducer from "./songDetail";
+import currSongReducer from "./currSong";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   songs: getSongsReducer,
   playlists: playlistsReducer,
   newAlbum: createAlbumReducer,
-  currSong: getSongReducer
+  currSong: getSongReducer,
+  audioSong: currSongReducer
 });
 
 let enhancer;
