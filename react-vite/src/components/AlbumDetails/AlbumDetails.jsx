@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { loadOneAlbumThunk } from "../../redux/album";
 import AlbumSongTile from '../AlbumSongTile/AlbumSongTile';
+import MusicPlayer from '../MusicPlayer/MusicPlayer';
 
 function AlbumDetails() {
     const dispatch = useDispatch()
@@ -24,6 +25,9 @@ function AlbumDetails() {
                         {albumDetail.songs?.map((song) => (
                             <AlbumSongTile key={song.id} song={song} />
                         ))}
+                    </div>
+                    <div>
+                        <MusicPlayer />
                     </div>
                 </div>
             ))}
