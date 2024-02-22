@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import Library from '../Library';
 import Playlist from '../Playlist';
 import './HomePage.css';
+import { getUserPlaylistsThunk } from '../../redux/playlist';
 import ProfileButton from './ProfileButton';
 
 function HomePage() {
@@ -12,6 +13,16 @@ function HomePage() {
     const sessionUser = useSelector((state) => state.session.user);
     const playlists = useSelector((state) => Object.values(state.playlists));
     const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+
+    useEffect(() => {
+        dispatch(getUserPlaylistsThunk())
+    }, [dispatch])
+
+    const logout = async e => {
+        e.preventDefault();
+        await dispatch(thunkLogout());
+        navigate('/');
+    };
 
     const login = async e => {
         e.preventDefault();
@@ -85,6 +96,7 @@ function HomePage() {
                     ) : (
                         <div>
                             {/* Default content when no playlist is selected */}
+                            <div>Home Page</div>
                         </div>
                     )}
                 </div>

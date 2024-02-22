@@ -1,9 +1,10 @@
 
 // action creator
-export const LOAD_PLAYLISTS = '/songs/LOAD_PLAYLISTS'
-export const RECEIVE_PLAYLIST = '/songs/RECEIVE_PLAYLIST'
-export const UPDATE_PLAYLIST = '/songs/UPDATE_PLAYLIST'
-export const REMOVE_PLAYLIST = '/songs/REMOVE_PLAYLIST'
+export const LOAD_PLAYLISTS = '/playlists/LOAD_PLAYLISTS'
+export const RECEIVE_PLAYLIST = '/playlists/RECEIVE_PLAYLIST'
+export const UPDATE_PLAYLIST = '/playlists/UPDATE_PLAYLIST'
+export const REMOVE_PLAYLIST = '/playlists/REMOVE_PLAYLIST'
+export const ADD_TO_PLAYLIST = '/playlists/ADD_TO_PLAYLIST'
 
 export const loadPlaylists = (playlists) => ({
     type: LOAD_PLAYLISTS,
@@ -23,6 +24,11 @@ export const editPlaylist = (playlist) => ({
 export const removePlaylist = (playlistId) => ({
     type: REMOVE_PLAYLIST,
     playlistId
+})
+
+export const addSong = (songId) => ({
+    type: ADD_TO_PLAYLIST,
+    songId
 })
 
 // Thunk actions
@@ -95,10 +101,18 @@ export const deletePlaylistThunk = (playlistId) => async (dispatch) => {
       }
 }
 
+export const addSongToPlaylist = (songId) => async (dispatch) => {
+    dispatch(addSong(songId))
+}
+
 const initialState = {}
 
 function playlistsReducer(state = initialState, action) {
     switch (action.type) {
+        case ADD_TO_PLAYLIST: {
+            const playlistState = {}
+            return playlistState
+        }
         case LOAD_PLAYLISTS: {
             const playlistsState = {}
             action.playlists.playlists.forEach(playlist => {
