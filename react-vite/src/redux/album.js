@@ -1,5 +1,6 @@
 export const CREATE_ALBUM='/albums/CREATE_ALBUM'
 export const LOAD_ALBUMS = '/albums/LOAD_ALBUMS'
+export const LOAD_ONE_ALBUM = '/albums/LOAD_ONE_ALBUM'
 // const UPLOAD_ALBUM_IMAGE='/albums/UPLOAD_ALBUM_IMAGE'
 
 // ACTION CREATOR
@@ -15,6 +16,12 @@ export const loadAlbums = (Albums) => (
     {
         type: LOAD_ALBUMS,
         Albums
+    }
+)
+export const loadOneAlbum = (Album) => (
+    {
+        type: LOAD_ONE_ALBUM,
+        Album
     }
 )
     
@@ -51,6 +58,18 @@ export const loadAlbumsThunk = () => async(dispatch) => {
     return data
 }
 
+export const loadOneAlbumThunk = (albumId) => async(dispatch) => {
+    const response = await fetch(`/api/albums/${albumId}`)
+    const data = await response.json();
+    if (response.ok){
+        dispatch(loadOneAlbum(data))
+        return data
+    }
+    return data
+}
+
+
+
 // export const thunkUploadImage = (img) => async (dispatch) => {
 //     const response = await fetch ('/api/albums/')
 // }
@@ -65,9 +84,13 @@ function createAlbumReducer(state = initialState, action) {
         }
         case LOAD_ALBUMS:{
             const newObj = {}
-            console.log('THIS IS THE ACTION', action)
             action.Albums.forEach(album => {newObj[album.id] = album})
             return newObj
+        }
+        case LOAD_ONE_ALBUM: { 
+            const newObj = { ...state };
+            newObj[action.Album.id] = action.Album;
+            return newObj;
         }
         default:
             return state

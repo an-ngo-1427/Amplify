@@ -6,7 +6,7 @@ import SongForm from '../components/CreateSong'
 import HomePage from '../components/HomePage/HomePage';
 import Playlist from '../components/Playlist';
 import SongDetail from '../components/SongDetail/SongDetail';
-import AlbumDetails from '../components/AlbumDetails';
+import AlbumDetails from '../components/AlbumDetails/';
 import AlbumForm from '../components/AlbumForm';
 import AllAlbums from '../components/AllAlbums/AllAlbums';
 import AudioPlayerComp from '../components/AudioPlayerComp/AudioPlayerComp';

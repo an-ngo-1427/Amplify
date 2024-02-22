@@ -1,26 +1,34 @@
-import { useSelector } from "react-redux"
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { loadOneAlbumThunk } from "../../redux/album";
+import AlbumSongTile from '../AlbumSongTile/AlbumSongTile';
 
-function AlbumDetails({album}){
-    // const {album} = props
-    // user = useSelector(state=>state.session.user)
-    // return(
-    //     <>
-    //         <div className="album-header">
-    //             <div className="album-image">
-    //                 <img src = {album.image_url}/>
-    //             </div>
-    //             <div className="album-info">
-    //                 <h1>{album.title}</h1>
-    //                 <div>
-    //                     <span>{album.artist}</span>
-    //                     <span>{album.title}</span>
-    //                     <span>{album.created_at}</span>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     </>
-    // )
-    return <h1>album</h1>
+function AlbumDetails() {
+    const dispatch = useDispatch()
+    const {albumId} = useParams()
+    const album = useSelector(state => state.newAlbum);
+    const albumObj = Object.values(album);
+
+    useEffect(() => {
+        dispatch(loadOneAlbumThunk(albumId))
+    }, [dispatch, albumId])
+
+    return (
+        <>
+            {albumObj.map((albumDetail, index) => (
+                <div key={index}>
+                    <p>{albumDetail.title}</p>
+                    <img src={albumDetail.image_url} alt={`Album titled ${albumDetail.title}`} />
+                    <div>
+                        {albumDetail.songs?.map((song) => (
+                            <AlbumSongTile key={song.id} song={song} />
+                        ))}
+                    </div>
+                </div>
+            ))}
+        </>
+    );
 }
 
-export default AlbumDetails
+export default AlbumDetails;
