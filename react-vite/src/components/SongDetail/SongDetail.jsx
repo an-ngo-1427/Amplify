@@ -16,8 +16,9 @@ function SongDetail(){
 
 
     useEffect(()=>{
+        const isCurrSong = Object.keys(currSong).length
 
-        if (Object.keys(currSong).length){
+        if (isCurrSong && user){
             console.log('entered')
             if(currSong.user_likes.includes(user.id)) setLiked(true)
         }
