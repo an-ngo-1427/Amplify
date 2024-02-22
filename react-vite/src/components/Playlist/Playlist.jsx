@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import OpenModalButton from "../OpenModalButton";
 import EditPlaylist from "../EditPlaylist/EditPlaylist";
@@ -22,15 +21,8 @@ function Playlist({ playlist, onDelete }) {
                     <h4>{playlist.description}</h4>
                     <h3>{sessionUser.username}</h3>
                     <OpenModalButton
-                        buttonText="..."
-                        modalComponent={
-                            <EditPlaylist 
-                                playlist={playlist} 
-                                isOpen={isModalOpen} 
-                                onRequestClose={closeModal} 
-                            />
-                        }
-                        onButtonClick={openModal} // Assuming OpenModalButton accepts an onButtonClick prop to open the modal
+                        buttonText='...'
+                        modalComponent={<EditPlaylist playlist={playlist}/>}
                     />
                     <button onClick={deletePlaylist}>Delete Playlist</button>
                 </>

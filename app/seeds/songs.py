@@ -3,31 +3,43 @@ from sqlalchemy.sql import text
 
 def seed_songs():
     song1 = Song(
-        title = 'Song', user_id = 1, song_url = 'song.com', image_url = 'image1.jpg', album_id = 1
+        title = 'all-american bitch', user_id = 1, song_url = 'song.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song2 = Song(
-        title = 'Song2', user_id = 1, song_url = 'song2.com', image_url = 'image2.jpg'
+        title = 'bad idea right?', user_id = 1, song_url = 'song2.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song3 = Song(
-        title = 'Song3', user_id = 2, song_url = 'song3.com', image_url = 'image3.jpg'
+        title = 'vampire', user_id = 1, song_url = 'song3.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song4 = Song(
-        title = 'Song4', user_id = 2, song_url = 'song4.com', image_url = 'image4.jpg'
+        title = 'lacy', user_id = 1, song_url = 'song4.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song5 = Song(
-        title = 'Song5', user_id = 3, song_url = 'song5.com', image_url = 'image5.jpg'
+        title = 'ballad of a homeschooled girl', user_id = 1, song_url = 'song5.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song6 = Song(
-        title = 'Song6', user_id = 3, song_url = 'song6.com', image_url = 'image6.jpg'
+        title = 'making the bed', user_id = 1, song_url = 'song6.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song7 = Song(
-        title = 'Song7', user_id = 4, song_url = 'song7.com', image_url = 'image7.jpg'
+        title = 'logical', user_id = 1, song_url = 'song7.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song8 = Song(
-        title = 'Song8', user_id = 4, song_url = 'song8.com', image_url = 'image8.jpg'
+        title = 'get him back!', user_id = 1, song_url = 'song8.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
+    )
+    song9 = Song(
+        title = 'love is embarrassing', user_id = 1, song_url = 'song8.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
+    )
+    song10 = Song(
+        title = 'the grudge', user_id = 1, song_url = 'song8.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
+    )
+    song11 = Song(
+        title = "pretty isn't pretty", user_id = 1, song_url = 'song8.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
+    )
+    song12 = Song(
+        title = 'teenage dream', user_id = 1, song_url = 'song8.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
 
-    db.session.add_all([song1,song2,song3,song4,song5,song6,song7,song8])
+    db.session.add_all([song1,song2,song3,song4,song5,song6,song7,song8,song9,song10,song11])
     db.session.commit()
 
 def undo_songs():

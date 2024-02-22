@@ -21,10 +21,30 @@ songs = [song1, song2, song3, song4, song5]
 
 def seed_playlists():
     playlist1 = Playlist(
-        title = 'Playlist1', user_id = 1, description = 'Playlist1 Description', image_url = 'palylist_image.jpg', songs = songs
+        title = "Today's Top Hits", 
+        user_id = 1, 
+        description = 'Dua Lipa is on top of the Hottest 50!', 
+        image_url = 'https://pbs.twimg.com/profile_images/1681029895449907200/blTMiMOK_400x400.jpg', 
+        songs = songs
+    )
+    playlist2 = Playlist(
+        title = 'lofi beats', 
+        user_id = 2, 
+        description = 'chill beats, lofi vibes, new tracks every week...', 
+        image_url = 'https://i.scdn.co/image/ab67706f0000000254473de875fea0fd19d39037', 
+        songs = songs
+    )
+    playlist3 = Playlist(
+        title = 'Playlist1', 
+        user_id = 3, 
+        description = 'Songs to cry to while coding', 
+        image_url = 'https://i.scdn.co/image/ab67706c0000da84aec1c9f63ca8c6a7a2873b6b', 
+        songs = songs
     )
 
     db.session.add(playlist1)
+    db.session.add(playlist2)
+    db.session.add(playlist3)
     db.session.commit()
 
 def undo_playlists():
