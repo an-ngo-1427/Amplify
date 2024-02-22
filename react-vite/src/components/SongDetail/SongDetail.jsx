@@ -71,6 +71,7 @@ function SongDetail(){
         navigate(`/songs/${currSong.id}/edit`)
     }
     if(!Object.keys(currSong).length) return null
+    console.log(currSong.user_id,user.id)
     return (
         <>
             <div className="song-detail-header">

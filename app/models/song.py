@@ -35,6 +35,5 @@ class Song(db.Model):
             'created_at': self.created_at,
             'updated_at': self.updated_at,
             'artist':self.user.to_dict(),
-            'album_id':self.album_id
-
+            'album_id':self.album_id,
         }

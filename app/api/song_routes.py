@@ -54,7 +54,7 @@ def createSong():
             user_id = user_id,
             song_url = upload['url'],
             image_url = form.data['image_url'],
-            album_id = form.data['album']
+            album_id = int(form.data['album'])
         )
         db.session.add(newSong)
         db.session.commit()
@@ -81,7 +81,17 @@ def editSong(songId):
     if(int(user_id) != song.user_id):
         return {'errors':'Forbidden'},401
 
-    form.populate_obj(song)
+    audioFile = form.data['audio']
+
+    audioFile.filename = get_unique_filename(audioFile.filename)
+    upload = upload_file_to_s3(audioFile)
+
+    song.title = form.data['title']
+    song.user_id = user_id
+    song.song_url = upload['url']
+    song.image_url = form.data['image_url']
+    if(form.data['album'] != 'undefined'):
+        song.album_id = int(form.data['album'])
     db.session.commit()
     return song.to_dict(),200
 

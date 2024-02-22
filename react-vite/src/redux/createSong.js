@@ -23,7 +23,17 @@ export const thunkCreateSong = (data)=> async (dispatch) => {
     return newSong
 }
 
-
+export const thunkUpdateSong = (data,songId)=>async(dispatch)=>{
+    const response = await fetch(`/api/songs/${songId}`,{
+        method:'PUT',
+        body:data
+    })
+    const song = await response.json()
+    if(response.ok){
+        dispatch(createSong(song))
+        return song
+    }
+}
 const initialState = {}
 function createSongReducer(state = initialState, action) {
     switch(action.type){
