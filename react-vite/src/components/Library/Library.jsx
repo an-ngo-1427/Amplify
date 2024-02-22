@@ -1,4 +1,3 @@
-
 import { useDispatch } from "react-redux";
 import { createPlaylistThunk } from '../../redux/playlist';
 
@@ -17,7 +16,7 @@ function Library({ playlists, onPlaylistClick }) {
 
     return (
         <>
-            <div>Library</div>
+            <div>Your Library</div>
             <button onClick={newPlaylist}>New Playlist</button>
             <ul>
                 {playlists.map((playlist) => (

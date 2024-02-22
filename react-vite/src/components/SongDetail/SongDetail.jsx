@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { getSongThunk } from '../../redux/songDetail'
 import {redirect, useNavigate, useParams} from 'react-router-dom'
@@ -9,8 +10,8 @@ function SongDetail(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const currSong = useSelector(state=>state.currSong)
-    const user = useSelector(state=>state.session.user)
+    const currSong = useSelector(state => state.currSong);
+    const user = useSelector(state => state.session.user);
 
     const [liked,setLiked] = useState(false)
 
@@ -41,7 +42,7 @@ function SongDetail(){
         e.stopPropagation()
 
         if (!user){
-            redirect('/login')
+            navigate('/login')
         }
         if(!liked){
             fetch(`/api/songs/${songId}/likes`,{
@@ -56,7 +57,7 @@ function SongDetail(){
         e.preventDefault()
         e.stopPropagation()
         if (!user){
-            redirect('/login')
+            navigate('/login')
         }
         if(liked){
             fetch(`/api/songs/${songId}/likes`,{
@@ -75,9 +76,9 @@ function SongDetail(){
         <>
             <div className="song-detail-header">
                 <div className="song-image">
-                    <img src = {currSong.image_url}/>
+                    <img src={currSong.image_url} alt={currSong.title}/>
                 </div>
-                <div className = 'song-info'>
+                <div className='song-info'>
                     <h1>{currSong.title}</h1>
                     <div>
                         <span>{currSong.artist.first_name}</span>
@@ -93,10 +94,7 @@ function SongDetail(){
             </div>
             {user.id == currSong.user_id && <button onClick={handleEdit}>edit</button>}
         </>
-
-    )
-
-
+    );
 }
 
-export default SongDetail
+export default SongDetail;

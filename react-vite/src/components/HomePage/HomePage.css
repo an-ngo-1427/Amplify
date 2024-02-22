@@ -20,6 +20,10 @@ ul {
     font-size: 1.25rem;
 }
 
+.link-label:hover {
+    color: white;
+}
+
 .home-icon {
     padding-right: 2em;
     font-size: 1.5rem;
@@ -88,4 +92,20 @@ button:hover {
     padding-inline: 6px;
     padding: 20px 40px;
     color: #a7a7a7;
+}
+
+.hidden {
+    display: none;
+}
+
+.profile-dropdown {
+    padding-top: 25px;
+    right: 0;
+}
+
+.profile-menu {
+    height: 30px;
+    width: 30px;
+    box-sizing: border-box;
+    border-radius: 25px;
 }
