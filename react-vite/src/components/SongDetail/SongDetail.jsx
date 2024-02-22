@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { getSongThunk } from '../../redux/songDetail'
-import {redirect, useNavigate, useParams} from 'react-router-dom'
+
 import { getCurrSong } from '../../redux/currSong'
 function SongDetail(){
     const {songId} = useParams()
