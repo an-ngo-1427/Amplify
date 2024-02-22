@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { thunkCreateSong } from "../../redux/createSong";
+import { useDispatch, useSelector } from "react-redux";
+import { thunkCreateSong, thunkUpdateSong } from "../../redux/createSong";
 import { useNavigate } from "react-router-dom";
+import { getUserAlbumsThunk } from "../../redux/album";
 
 function SongForm({song}) {
     const [audio, setAudio] = useState(null)
@@ -10,11 +11,23 @@ function SongForm({song}) {
     const [image_url, setImageUrl] = useState(null)
     const [errorObj, setErrorObj] = useState({})
     const [formErr, setFormError] = useState(false)
+    const user = useSelector(state=>state.session.user)
+    const userAlbums = useSelector(state=>state.newAlbum)
 
-    console.log(song)
+    console.log('user album',userAlbums)
+
+    useEffect(()=>{
+        dispatch(getUserAlbumsThunk(user.id))
+        if(song){
+            setAudio(song.song_url)
+            setTitle(song.title)
+            setAlbum(song.album_title)
+        }
+    },[])
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (Object.values(errorObj).length) setFormError(true)
@@ -30,13 +43,15 @@ function SongForm({song}) {
             // aws uploads can be a bit slow—displaying
             // some sort of loading message is a good idea
 
-
-            dispatch(thunkCreateSong(formData))
+            if(song){
+                dispatch(thunkUpdateSong(formData,song.id))
                 .then(result=>{navigate(`/songs/${result.id}`)})
+            }else{
+                dispatch(thunkCreateSong(formData))
+                .then(result=>{navigate(`/songs/${result.id}`)})
+            }
         }
-
     }
-
     useEffect(() => {
 
         let errors = {}
@@ -57,7 +72,8 @@ function SongForm({song}) {
                         type="text"
                         name="title"
                         placeholder="Title of the song"
-                        onChange={(e) => setTitle(e.target.value)}
+                        onChange={(e) => {setTitle(e.target.value)}}
+                        value={title}
                     />
                     {formErr && <div style={{ 'color': 'red' }}>{errorObj.title}</div>}
 
@@ -65,17 +81,19 @@ function SongForm({song}) {
                 <div>
                     <select
                         name="album"
-                        value=""
-                        onChange={(e) => setAlbum(e.target.value)}
+                        value={album}
+                        onChange={(e) => {setAlbum(e.target.value)}}
                     >
-                        <option>Select an album</option>
+                        <option value = "">Select an album</option>
+                        {/* {userAlbums && userAlbums.map(album=><option key = {album.id} value = {album.id}>{album.title}</option>)} */}
                     </select>
 
                 </div>
                 <div>
                     <input
                         name='image_url'
-                        onChange={(e) => setImageUrl(e.target.value)}
+                        onChange={(e) => {setImageUrl(e.target.value)}}
+                        value={image_url}
                     />
 
                 </div>
