@@ -2,8 +2,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { getSongsThunk } from "../../redux/song"
 import { useEffect } from "react"
 import './Playlist.css'
+import { addSongToPlaylist } from "../../redux/playlist"
 
-function Songs() {
+function Songs({playlist}) {
     const dispatch = useDispatch()
     const allSongs = useSelector(state => Object.values(state.songs))
 
@@ -11,8 +12,8 @@ function Songs() {
         dispatch(getSongsThunk())
     }, [dispatch])
 
-    const addToPlaylist = async e => {
-        e.preventDefault()
+    const addToPlaylist = async (song) => {
+        dispatch(addSongToPlaylist(song, playlist.id))
     }
 
     return (
@@ -20,8 +21,8 @@ function Songs() {
             <h2>Let&apos;s find something for your playlist</h2>
             {allSongs.map(song => (
                 <div key={song.id}>
-                    <li>{song?.title}</li>
-                    <button onClick={addToPlaylist}>Add to playlist</button>
+                    <li>{song.title}</li>
+                    <button onClick={() => addToPlaylist(song)}>Add to playlist</button>
                 </div>
             ))}
         </div>

@@ -5,6 +5,7 @@ export const RECEIVE_PLAYLIST = '/playlists/RECEIVE_PLAYLIST'
 export const UPDATE_PLAYLIST = '/playlists/UPDATE_PLAYLIST'
 export const REMOVE_PLAYLIST = '/playlists/REMOVE_PLAYLIST'
 export const ADD_TO_PLAYLIST = '/playlists/ADD_TO_PLAYLIST'
+export const REMOVE_FROM_PLAYLIST = '/playlists/REMOVE_FROM_PLAYLIST'
 
 export const loadPlaylists = (playlists) => ({
     type: LOAD_PLAYLISTS,
@@ -26,9 +27,16 @@ export const removePlaylist = (playlistId) => ({
     playlistId
 })
 
-export const addSong = (songId) => ({
+export const addSong = (song, playlistId) => ({
     type: ADD_TO_PLAYLIST,
-    songId
+    song,
+    playlistId
+})
+
+export const removeSong = (songIndex, playlistId) => ({
+    type: REMOVE_FROM_PLAYLIST,
+    songIndex,
+    playlistId
 })
 
 // Thunk actions
@@ -95,14 +103,19 @@ export const deletePlaylistThunk = (playlistId) => async (dispatch) => {
 
       if(response.ok) {
         dispatch(removePlaylist(playlistId));
-        return { success: true };
-      } else {
-        return { success: false };
       }
 }
 
-export const addSongToPlaylist = (songId) => async (dispatch) => {
-    dispatch(addSong(songId))
+export const addSongToPlaylist = (song, playlistId) => async (dispatch) => {
+    const response = await fetch(`/api/playlists/${playlistId}/add/${song.id}`)
+    if(response.ok) {
+        dispatch(addSong(song, playlistId))
+        console.log('RESPONSE', response)
+    }
+}
+
+export const removeSongFromPlaylist = (songIndex, playlistId) => async (dispatch) => {
+    dispatch(removeSongFromPlaylist(songIndex, playlistId))
 }
 
 const initialState = {}
@@ -110,9 +123,12 @@ const initialState = {}
 function playlistsReducer(state = initialState, action) {
     switch (action.type) {
         case ADD_TO_PLAYLIST: {
-            const playlistState = {}
-            console.log('ADDTOPLAYLIST STATE', state)
-            return playlistState
+            state[action.playlistId].songs.push(action.song)
+            return state
+        }
+        case REMOVE_FROM_PLAYLIST: {
+            console.log(state[action.playlistId].songs)
+            return state
         }
         case LOAD_PLAYLISTS: {
             const playlistsState = {}

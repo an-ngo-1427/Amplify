@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from flask_login import current_user, login_required
-from app.models import db, Playlist
+from app.models import db, Playlist, Song
+from app.models.playlist import playlist_songs
 from app.forms.playlist_form import PlaylistForm
 playlist_routes = Blueprint('playlists',__name__)
 
@@ -70,3 +71,23 @@ def delete_playlist(id):
     db.session.delete(playlist)
     db.session.commit()
     return {'message': 'Successfully deleted'}, 200
+
+@playlist_routes.route('/<int:id>/add/<int:songId>', methods=['POST'])
+@login_required
+def add_song_to_playlist(id, song_id):
+    print('PLAYLISTID/////', id)
+    print('SONGID////////', song_id)
+    playlist = Playlist.query.get(id)
+    song = Song.query.get(song_id)
+
+    if not playlist:
+        return {'error':"Playlist couldn't be found"}, 404
+    if not song:
+        return {'error':"Song couldn't be found"}, 404
+    if playlist.user_id != current_user.id:
+        return {'errors':'Forbidden'}, 401
+
+    data = {'song_id': song_id, 'playlist_id': id}
+    db.session.execute(playlist_songs.insert(), data)
+    db.session.commit()
+    return playlist.to_dict()

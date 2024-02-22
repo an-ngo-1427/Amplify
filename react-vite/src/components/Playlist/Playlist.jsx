@@ -15,6 +15,13 @@ function Playlist({ playlist, onDelete }) {
         onDelete();
     }
 
+    const removeSongFromPlaylist = async songId => {
+        const songIndex = songs.findIndex(song => song.id == songId)
+        console.log('SONG ARRAY', songs)
+        console.log('SONG TO DELETE', songIndex)
+        // dispatch(removeSongFromPlaylist(songIndex, playlist.id))
+    }
+
     console.log('SONGS', songs)
 
     return (
@@ -34,11 +41,14 @@ function Playlist({ playlist, onDelete }) {
                                 <div className="playlist-song-left">
                                     <img src={song.image_url} alt={song.title} className="playlist-song-image" />
                                     <div className="playlist-song-info">
-                                        <li>{song.title}</li>
-                                        <li>{song.artist.first_name} {song.artist.last_name}</li>
+                                        <li>{song?.title}</li>
+                                        <li>{song?.artist?.first_name} {song.artist?.last_name}</li>
                                     </div>
                                 </div>
-                                <i className="fa-regular fa-circle-play"></i>
+                                <div className="playlist-song-right">
+                                    <i className="fa-regular fa-circle-play"/>
+                                    <button onClick={() => removeSongFromPlaylist(song.id)}>Remove</button>
+                                </div>
                             </div>
                         ))}
                     </ul>
