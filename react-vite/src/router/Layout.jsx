@@ -18,7 +18,7 @@ export default function Layout() {
         {isLoaded && <Outlet />}
         {/* <Modal /> */}
       </ModalProvider>
-      <MusicPlayer />
+      {/* <MusicPlayer /> */}
     </>
   );
 }

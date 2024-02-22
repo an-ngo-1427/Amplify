@@ -7,6 +7,7 @@ import Playlist from '../Playlist';
 import './HomePage.css';
 import { getUserPlaylistsThunk } from '../../redux/playlist';
 import ProfileButton from './ProfileButton';
+import MusicPlayer from '../MusicPlayer/MusicPlayer';
 
 function HomePage() {
     const navigate = useNavigate();
@@ -78,7 +79,7 @@ function HomePage() {
                 <div className="main-view">
                     <div className="main-header">
                         {!sessionUser ? (
-                            <div>
+                            <div className='main-header-buttons'>
                                 <button onClick={signup} className="signup-button">
                                     Sign up
                                 </button>
@@ -91,15 +92,19 @@ function HomePage() {
                         )}
                     </div>
                     {selectedPlaylist && sessionUser ? (
-                        <Playlist playlist={selectedPlaylist} onDelete={handlePlaylistDelete} />
+                        <div className='playlist-details'>
+                            <Playlist playlist={selectedPlaylist} onDelete={handlePlaylistDelete} />
+                        </div>
                     ) : (
                         <div>
                             {/* Default content when no playlist is selected */}
-                            <div>Home Page</div>
+                            <div className='album-details'>Home Page</div>
                         </div>
                     )}
                 </div>
-                <div className="now-playing-bar"></div>
+                <div className="now-playing-bar">
+                    <MusicPlayer />
+                </div>
             </div>
         </>
     );
