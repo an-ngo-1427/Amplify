@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { thunkCreateSong } from "../../redux/createSong";
+import { useNavigate } from "react-router-dom";
 
 function SongForm() {
     const [audio, setAudio] = useState(null)
@@ -12,7 +13,7 @@ function SongForm() {
 
 
     const dispatch = useDispatch()
-
+    const navigate = useNavigate()
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (Object.values(errorObj).length) setFormError(true)
@@ -30,8 +31,7 @@ function SongForm() {
 
 
             dispatch(thunkCreateSong(formData))
-                .then((response) => { console.log(response) })
-
+                .then(result=>{navigate(`/songs/${result.id}`)})
         }
 
     }

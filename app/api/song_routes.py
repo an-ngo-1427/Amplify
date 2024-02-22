@@ -27,22 +27,22 @@ def createSong():
     form = SongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     # form.data['audio'] = request.form['audio']
-    print(form.data)
     if form.validate_on_submit:
 
         audioFile = form.data['audio']
+        print (audioFile.filename)
         audioFile.filename = get_unique_filename(audioFile.filename)
         upload = upload_file_to_s3(audioFile)
 
         if 'url' not in upload:
-            print (upload)
+
             return {"message":"failed to upload file"}
 
         user_id = session['_user_id']
         user = User.query.get(user_id)
 
         if(not user):
-           return {"message":"Unorthorized"}
+           return {"message":"Unauthorized"}
 
         if form.data['album'] is True:
             album = Album.query.filter(Album.id == form.data['album'])
@@ -62,7 +62,7 @@ def createSong():
 
 
     if form.errors:
-        print('entered')
+
         return form.errors
 
 
@@ -98,8 +98,13 @@ def deleteSong(songId):
     if(int(user_id) != song.user_id):
         return {'errors':'Forbidden'},401
 
+    aws_res = remove_file_from_s3(song.song_url)
+    if aws_res['errors']:
+        return aws_res
+
     db.session.delete(song)
     db.session.commit()
+
 
     return {'message':"Successfully deleted song"},200
 
@@ -113,7 +118,7 @@ def getSong(songId):
 @login_required
 @song_routes.route('/<int:songId>/likes',methods=['POST'])
 def likeSong(songId):
-    print('----entered')
+
     user_id = int(session['_user_id'])
 
     song = Song.query.get(songId)
