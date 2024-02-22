@@ -36,7 +36,7 @@ function Playlist({ playlist }) {
                     </ul>
                     <OpenModalButton
                         buttonText='Add Song'
-                        modalComponent={<Songs/>}
+                        modalComponent={<Songs playlist={playlist}/>}
                     />
                     <button onClick={deletePlaylist}>Delete Playlist</button>
                 </>

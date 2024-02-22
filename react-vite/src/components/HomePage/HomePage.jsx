@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { thunkLogout } from '../../redux/session';
@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 import Library from '../Library';
 import Playlist from '../Playlist'; // Import Playlist component
 import './HomePage.css';
+import { getUserPlaylistsThunk } from '../../redux/playlist';
 
 function HomePage() {
     const navigate = useNavigate();
@@ -14,6 +15,10 @@ function HomePage() {
     const sessionUser = useSelector((state) => state.session.user);
     const playlists = useSelector((state) => Object.values(state.playlists));
     const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+
+    useEffect(() => {
+        dispatch(getUserPlaylistsThunk())
+    }, [dispatch])
 
     const logout = async e => {
         e.preventDefault();
