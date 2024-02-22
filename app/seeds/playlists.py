@@ -28,16 +28,16 @@ def seed_playlists():
         # songs = songs
     )
     playlist2 = Playlist(
-        title = 'lofi beats', 
+        title = 'PARTY TIME', 
         user_id = 2, 
-        description = 'PARTY TIME', 
+        description = 'WOOOOOOO LETS GET WASTED!!!', 
         image_url = 'https://i.scdn.co/image/ab67616d00001e02cc4dcda2ed33a5071dfb77bb', 
         # songs = songs
     )
     playlist3 = Playlist(
-        title = 'Playlist1', 
+        title = 'Songs to cry to while coding', 
         user_id = 3, 
-        description = 'Songs to cry to while coding', 
+        description = "print('cry')", 
         image_url = 'https://i.scdn.co/image/ab67706c0000da84aec1c9f63ca8c6a7a2873b6b', 
         # songs = songs
     )
