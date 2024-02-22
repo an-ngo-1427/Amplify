@@ -9,6 +9,9 @@ import SongDetail from '../components/SongDetail/SongDetail';
 import AlbumDetails from '../components/AlbumDetails';
 import AlbumForm from '../components/AlbumForm';
 import AllAlbums from '../components/AllAlbums/AllAlbums';
+import AudioPlayerComp from '../components/AudioPlayerComp/AudioPlayerComp';
+import EditSong from '../components/EditSong';
+
 export const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -26,7 +29,7 @@ export const router = createBrowserRouter([
         element: <SignupFormPage />,
       },
       {
-        path:"aws-testing",
+        path:"/songs/new",
         element:<SongForm/>
       },
       {
@@ -47,7 +50,13 @@ export const router = createBrowserRouter([
       },
       {
         path:'albums',
-        element: <AllAlbums />
+        element: <AllAlbums />,
+        path:'/testing-audio',
+        element:<AudioPlayerComp/>
+      },
+      {
+        path:'/songs/:songId/edit',
+        element:<EditSong/>
       }
     ],
   },

@@ -1,34 +1,40 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom'; 
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { getSongThunk } from '../../redux/songDetail';
-
-function SongDetail() {
-    const { songId } = useParams();
-    const dispatch = useDispatch();
-    const navigate = useNavigate(); 
+import { getSongThunk } from '../../redux/songDetail'
+import {redirect, useNavigate, useParams} from 'react-router-dom'
+import { getCurrSong } from '../../redux/currSong'
+function SongDetail(){
+    const {songId} = useParams()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const currSong = useSelector(state => state.currSong);
     const user = useSelector(state => state.session.user);
 
     const [liked,setLiked] = useState(false)
 
+    const isCurrSong = Object.keys(currSong).length
 
 
     useEffect(()=>{
-        const isCurrSong = Object.keys(currSong).length
+        dispatch(getSongThunk(songId))
+        console.log(currSong)
 
         if (isCurrSong && user){
-            console.log('entered')
-            if(currSong.user_likes.includes(user.id)) setLiked(true)
+            console.log(currSong.user_likes,'outside')
+            if(currSong.user_likes.includes(user.id)){
+                setLiked(true)
+                console.log(currSong.user_likes,'in if block')
+
+            }
         }
         console.log('in effect',liked)
-        dispatch(getSongThunk(songId))
-    },[liked,songId])
+    },[liked,dispatch,songId,user,isCurrSong])
 
     function handlePlay(){
-        window.alert('feature comming soon')
+        dispatch(getCurrSong(currSong))
     }
 
     async function handleLike(e){
@@ -49,16 +55,21 @@ function SongDetail() {
 
     async function handleUnlike(e){
         e.preventDefault()
-        console.log(liked)
+        e.stopPropagation()
         if (!user){
             navigate('/login')
         }
         if(liked){
-            setLiked(false)
             fetch(`/api/songs/${songId}/likes`,{
                 method:'DELETE'
             })
+            setLiked(false)
         }
+    }
+
+    function handleEdit(e){
+        e.preventDefault()
+        navigate(`/songs/${currSong.id}/edit`)
     }
     if(!Object.keys(currSong).length) return null
     return (
@@ -81,6 +92,7 @@ function SongDetail() {
                     {!liked && <button onClick={(e)=>handleLike(e)}>like</button>}
                 </div>
             </div>
+            {user.id == currSong.user_id && <button onClick={handleEdit}>edit</button>}
         </>
     );
 }
