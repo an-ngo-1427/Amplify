@@ -17,7 +17,7 @@ function HomePage() {
 
     useEffect(() => {
         dispatch(getUserPlaylistsThunk())
-    }, [dispatch])
+    }, [Library])
 
     const login = async e => {
         e.preventDefault();
@@ -86,7 +86,7 @@ function HomePage() {
                             <ProfileButton user={sessionUser} />
                         )}
                     </div>
-                    {selectedPlaylist ? (
+                    {selectedPlaylist && sessionUser ? (
                         <Playlist playlist={selectedPlaylist} onDelete={handlePlaylistDelete} />
                     ) : (
                         <div>
