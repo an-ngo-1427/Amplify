@@ -13,7 +13,8 @@ function SongForm({song}) {
     const [formErr, setFormError] = useState(false)
     const user = useSelector(state=>state.session.user)
     const userAlbums = useSelector(state=>state.newAlbum)
-    console.log(userAlbums)
+
+    console.log('user album',userAlbums)
 
     useEffect(()=>{
         dispatch(getUserAlbumsThunk(user.id))
@@ -84,7 +85,7 @@ function SongForm({song}) {
                         onChange={(e) => {setAlbum(e.target.value)}}
                     >
                         <option value = "">Select an album</option>
-                        <option value = "2">Select an album2</option>
+                        {/* {userAlbums && userAlbums.map(album=><option key = {album.id} value = {album.id}>{album.title}</option>)} */}
                     </select>
 
                 </div>

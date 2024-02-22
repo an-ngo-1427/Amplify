@@ -49,12 +49,18 @@ def createSong():
             if not album:
                 return {'errors':"could not find the album"},404
 
+        albumId = form.data['album']
+
+        print(form.data['album'])
+        if(not albumId == 'undefined' and not albumId == 'null'):
+            albumId = int(form.data['album'])
+
         newSong = Song(
             title =  form.data['title'],
             user_id = user_id,
             song_url = upload['url'],
             image_url = form.data['image_url'],
-            album_id = int(form.data['album'])
+            album_id = albumId
         )
         db.session.add(newSong)
         db.session.commit()
