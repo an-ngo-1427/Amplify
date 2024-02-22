@@ -5,21 +5,24 @@ import './Playlist.css'
 
 function Songs() {
     const dispatch = useDispatch()
-    const allSongs = useSelector(state => state.songs)
-    const allSongsArray = Object.values(allSongs)
+    const allSongs = useSelector(state => Object.values(state.songs))
 
     useEffect(() => {
         dispatch(getSongsThunk())
     }, [dispatch])
 
-    console.log('allSongs', allSongs)
-    console.log('allSongsArray', allSongsArray)
+    const addToPlaylist = async e => {
+        e.preventDefault()
+    }
 
     return (
         <div className="add-song-container">
-            <h2>Let's find something for your playlist</h2>
-            {allSongsArray.map(song => (
-                <li>{song?.title}</li>
+            <h2>Let&apos;s find something for your playlist</h2>
+            {allSongs.map(song => (
+                <div key={song.id}>
+                    <li>{song?.title}</li>
+                    <button onClick={addToPlaylist}>Add to playlist</button>
+                </div>
             ))}
         </div>
     )
