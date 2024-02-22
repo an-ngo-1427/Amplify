@@ -29,8 +29,7 @@ function getSongsReducer(state = initialState,action){
     switch (action.type){
         case GET_SONGS:{
             const newObj = {}
-            console.log('action', action)
-            action.Songs.forEach(song => {newObj[song.id] = song})
+            action.Songs.songs.forEach(song => {newObj[song.id] = song})
             return newObj
         }
     }
