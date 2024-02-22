@@ -19,12 +19,6 @@ function HomePage() {
         dispatch(getUserPlaylistsThunk())
     }, [dispatch])
 
-    const logout = async e => {
-        e.preventDefault();
-        await dispatch(thunkLogout());
-        navigate('/');
-    };
-
     const login = async e => {
         e.preventDefault();
         navigate('/login');
