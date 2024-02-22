@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { thunkCreateSong } from "../../redux/createSong";
 import { useNavigate } from "react-router-dom";
 
-function SongForm() {
+function SongForm({song}) {
     const [audio, setAudio] = useState(null)
     const [title, setTitle] = useState(null)
     const [album, setAlbum] = useState(null)
@@ -11,6 +11,7 @@ function SongForm() {
     const [errorObj, setErrorObj] = useState({})
     const [formErr, setFormError] = useState(false)
 
+    console.log(song)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()

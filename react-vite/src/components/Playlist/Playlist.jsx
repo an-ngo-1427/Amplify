@@ -9,15 +9,13 @@ function Playlist({ playlist, onDelete }) {
     const dispatch = useDispatch()
     const songs = playlist.songs
 
-    const addSong = async e => {
-        e.preventDefault()
-    }
-
     const deletePlaylist = async e => {
         e.preventDefault()
         dispatch(deletePlaylistThunk(playlist.id))
         onDelete();
     }
+
+    console.log('SONGS', songs)
 
     return (
         <div>
@@ -28,16 +26,25 @@ function Playlist({ playlist, onDelete }) {
                     <h3>{sessionUser.username}</h3>
                     <OpenModalButton
                         buttonText='...'
-                        modalComponent={<EditPlaylist playlist={playlist}/>}
+                        modalComponent={<EditPlaylist playlist={playlist} />}
                     />
-                      <ul>
+                    <ul>
                         {songs.map(song => (
-                            <li key={song.id}>{song.name}</li>
+                            <div key={song.id} className="playlist-songs">
+                                <div className="playlist-song-left">
+                                    <img src={song.image_url} alt={song.title} className="playlist-song-image" />
+                                    <div className="playlist-song-info">
+                                        <li>{song.title}</li>
+                                        <li>{song.artist.first_name} {song.artist.last_name}</li>
+                                    </div>
+                                </div>
+                                <i className="fa-regular fa-circle-play"></i>
+                            </div>
                         ))}
                     </ul>
                     <OpenModalButton
                         buttonText='Add Song'
-                        modalComponent={<Songs playlist={playlist}/>}
+                        modalComponent={<Songs playlist={playlist} />}
                     />
                     <button onClick={deletePlaylist}>Delete Playlist</button>
                 </>

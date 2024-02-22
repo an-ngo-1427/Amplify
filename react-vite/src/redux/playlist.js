@@ -95,7 +95,7 @@ export const deletePlaylistThunk = (playlistId) => async (dispatch) => {
 
       if(response.ok) {
         dispatch(removePlaylist(playlistId));
-        return { success: true }; 
+        return { success: true };
       } else {
         return { success: false };
       }
@@ -111,6 +111,7 @@ function playlistsReducer(state = initialState, action) {
     switch (action.type) {
         case ADD_TO_PLAYLIST: {
             const playlistState = {}
+            console.log('ADDTOPLAYLIST STATE', state)
             return playlistState
         }
         case LOAD_PLAYLISTS: {

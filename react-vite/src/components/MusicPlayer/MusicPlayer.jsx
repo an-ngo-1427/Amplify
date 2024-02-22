@@ -1,11 +1,9 @@
-// import { NavLink } from "react-router-dom";
-// import ProfileButton from "./ProfileButton";
 import { useSelector } from "react-redux";
 import AudioPlayerComp from "../AudioPlayerComp/AudioPlayerComp";
-import "./Navigation.css";
+import "./MusicPlayer.css";
 
 
-function Navigation() {
+function MusicPlayer() {
   const audioSong = useSelector(state=>state.audioSong)
   console.log('rendered')
   return(
@@ -13,4 +11,4 @@ function Navigation() {
   )
 }
 
-export default Navigation;
+export default MusicPlayer;
