@@ -1,25 +1,17 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { thunkLogout } from '../../redux/session';
-import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Library from '../Library';
 import Playlist from '../Playlist';
 import './HomePage.css';
+import ProfileButton from './ProfileButton';
 
 function HomePage() {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const playlists = useSelector((state) => Object.values(state.playlists));
     const [selectedPlaylist, setSelectedPlaylist] = useState(null);
-
-    const logout = async e => {
-        e.preventDefault();
-        await dispatch(thunkLogout());
-        navigate('/');
-    };
 
     const login = async e => {
         e.preventDefault();
@@ -36,7 +28,12 @@ function HomePage() {
     };
 
     const handlePlaylistDelete = () => {
-        setSelectedPlaylist(null); 
+        setSelectedPlaylist(null);
+    };
+
+    const newPlaylist = async (e) => {
+        e.preventDefault();
+        window.alert('Log in to create and share playlists.')
     };
 
     return (
@@ -57,13 +54,20 @@ function HomePage() {
                             </ul>
                         </div>
                         <div className="left-sidebar-bottom">
-                            <Library playlists={playlists} onPlaylistClick={handlePlaylistClick} />
+                            {sessionUser ? (
+                                <Library playlists={playlists} onPlaylistClick={handlePlaylistClick} />
+                            ) : (
+                                <>
+                                    <div>Your Library</div>
+                                    <button onClick={newPlaylist}>New Playlist</button>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
                 <div className="main-view">
                     <div className="main-header">
-                        {!sessionUser && (
+                        {!sessionUser ? (
                             <div>
                                 <button onClick={signup} className="signup-button">
                                     Sign up
@@ -72,6 +76,8 @@ function HomePage() {
                                     Login in
                                 </button>
                             </div>
+                        ) : (
+                            <ProfileButton user={sessionUser} />
                         )}
                     </div>
                     {selectedPlaylist ? (
@@ -84,9 +90,6 @@ function HomePage() {
                 </div>
                 <div className="now-playing-bar"></div>
             </div>
-            {sessionUser && (
-                <button onClick={logout}>Log Out</button>
-            )}
         </>
     );
 }
