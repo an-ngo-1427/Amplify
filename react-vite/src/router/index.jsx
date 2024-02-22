@@ -6,6 +6,8 @@ import SongForm from '../components/CreateSong'
 import HomePage from '../components/HomePage/HomePage';
 import Playlist from '../components/Playlist';
 import SongDetail from '../components/SongDetail/SongDetail';
+import AlbumDetails from '../components/AlbumDetails';
+import AlbumForm from '../components/AlbumForm';
 
 export const router = createBrowserRouter([
   {
@@ -32,8 +34,16 @@ export const router = createBrowserRouter([
         element: <Playlist/>
       },
       {
-        path:'songs/:songId',
+        path:'/songs/:songId',
         element:<SongDetail/>
+      },
+      {
+        path:'/albums/:albumId',
+        element:<AlbumDetails/>
+      },
+      {
+        path:'/albums/new',
+        element:<AlbumForm/>
       }
     ],
   },

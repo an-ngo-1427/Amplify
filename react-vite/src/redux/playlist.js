@@ -94,7 +94,10 @@ export const deletePlaylistThunk = (playlistId) => async (dispatch) => {
       })
 
       if(response.ok) {
-        dispatch(removePlaylist(playlistId))
+        dispatch(removePlaylist(playlistId));
+        return { success: true }; 
+      } else {
+        return { success: false };
       }
 }
 

@@ -1,23 +1,25 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom'; 
 
-import { getSongThunk } from '../../redux/songDetail'
-import {redirect, useParams} from 'react-router-dom'
-function SongDetail(){
-    const {songId} = useParams()
-    const dispatch = useDispatch()
+import { getSongThunk } from '../../redux/songDetail';
 
+function SongDetail() {
+    const { songId } = useParams();
+    const dispatch = useDispatch();
+    const navigate = useNavigate(); 
 
-    const currSong = useSelector(state=>state.currSong)
-    const user = useSelector(state=>state.session.user)
+    const currSong = useSelector(state => state.currSong);
+    const user = useSelector(state => state.session.user);
 
     const [liked,setLiked] = useState(false)
 
 
 
     useEffect(()=>{
+        const isCurrSong = Object.keys(currSong).length
 
-        if (Object.keys(currSong).length){
+        if (isCurrSong && user){
             console.log('entered')
             if(currSong.user_likes.includes(user.id)) setLiked(true)
         }
@@ -63,9 +65,9 @@ function SongDetail(){
         <>
             <div className="song-detail-header">
                 <div className="song-image">
-                    <img src = {currSong.image_url}/>
+                    <img src={currSong.image_url} alt={currSong.title}/>
                 </div>
-                <div className = 'song-info'>
+                <div className='song-info'>
                     <h1>{currSong.title}</h1>
                     <div>
                         <span>{currSong.artist.first_name}</span>
@@ -80,10 +82,7 @@ function SongDetail(){
                 </div>
             </div>
         </>
-
-    )
-
-
+    );
 }
 
-export default SongDetail
+export default SongDetail;

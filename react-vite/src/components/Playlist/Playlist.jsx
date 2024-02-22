@@ -4,7 +4,7 @@ import EditPlaylist from "../EditPlaylist/EditPlaylist";
 import { deletePlaylistThunk } from "../../redux/playlist";
 import Songs from './Songs'
 
-function Playlist({ playlist }) {
+function Playlist({ playlist, onDelete }) {
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch()
     const songs = playlist.songs

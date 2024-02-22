@@ -2,6 +2,7 @@ from flask import Blueprint,request,session
 from flask_login import current_user, login_required
 from app.models import db, Album,Song
 from app.forms import AlbumForm
+import json
 album_routes = Blueprint('albums',__name__)
 
 @album_routes.route('/')
@@ -29,7 +30,7 @@ def new_album():
         db.session.add(album)
         db.session.commit()
         return album.to_dict()
-    return 'Error'
+    return {'Error':'Failed to create album'},404
 
 @album_routes.route('/<int:id>/songs/add', methods=['POST'])
 @login_required
@@ -47,6 +48,7 @@ def add_songs(id):
     # songs = Song.query.filter(Song.id.in_(song_ids)).all()
     # album.songs.extend(songs)
     # db.session.commit()
+
 
 # edit an album route
 

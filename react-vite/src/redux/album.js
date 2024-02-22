@@ -22,8 +22,7 @@ export const createAlbum = (data) => (
 export const thunkCreateAlbum = (data) => async (dispatch) => {
     const response = await fetch('/api/albums/new', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
+        body: (data)
     })
     const newAlbum = await response.json()
     if (response.ok) {
@@ -45,7 +44,7 @@ function createAlbumReducer(state = initialState, action) {
             newObj[action.data] = action.data
             return newObj
         }
-        default: 
+        default:
             return state
     }
 }
