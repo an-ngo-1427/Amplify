@@ -38,13 +38,14 @@
 }
 
 .album-remove-button {
-    background-color: #e63946; 
+    background-color: #e22134; 
     padding: 6px 16px;
     border-radius: 20px;
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
     display: none; 
+    color: white;
 }
 
 .album-song-tile:hover .album-play-button,
