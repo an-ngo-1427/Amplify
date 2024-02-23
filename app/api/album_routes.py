@@ -49,7 +49,6 @@ def add_songs(id):
     # album.songs.extend(songs)
     # db.session.commit()
 
-
 # edit an album route
 
 @album_routes.route('/<int:id>/edit', methods=['PUT'])
