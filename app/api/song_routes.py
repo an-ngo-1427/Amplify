@@ -26,50 +26,47 @@ def getSongs():
 def createSong():
     form = SongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    # form.data['audio'] = request.form['audio']
-    if form.validate_on_submit:
+    # # form.data['audio'] = request.form['audio']
+    # if form.validate_on_submit:
 
-        audioFile = form.data['audio']
-        print (audioFile.filename)
-        audioFile.filename = get_unique_filename(audioFile.filename)
-        upload = upload_file_to_s3(audioFile)
+    audioFile = form.data['audio']
+    print (audioFile.filename)
+    audioFile.filename = get_unique_filename(audioFile.filename)
+    upload = upload_file_to_s3(audioFile)
 
-        if 'url' not in upload:
+    if 'url' not in upload:
 
-            return {"message":"failed to upload file"}
+        return {"message":"failed to upload file"}
 
-        user_id = session['_user_id']
-        user = User.query.get(user_id)
+    user_id = int(session['_user_id'])
+    user = User.query.get(user_id)
 
-        if(not user):
-           return {"message":"Unauthorized"}
+    if(not user):
+        return {"message":"Unauthorized"}
 
-        if form.data['album'] is True:
-            album = Album.query.filter(Album.id == form.data['album'])
-            if not album:
-                return {'errors':"could not find the album"},404
+    if form.data['album'] is True:
+        album = Album.query.filter(Album.id == form.data['album'])
+        if not album:
+            return {'errors':"could not find the album"},404
 
-        albumId = form.data['album']
-
-        print(form.data['album'])
-        if(not albumId == 'undefined' and not albumId == 'null'):
-            albumId = int(form.data['album'])
-
-        newSong = Song(
-            title =  form.data['title'],
-            user_id = user_id,
-            song_url = upload['url'],
-            image_url = form.data['image_url'],
-            album_id = albumId
-        )
-        db.session.add(newSong)
-        db.session.commit()
-        return newSong.to_dict(),201
+    albumId = form.data['album']
 
 
-    if form.errors:
+    if(not albumId == 'undefined' and not albumId == 'null'):
+        albumId = int(form.data['album'])
 
-        return form.errors
+    newSong = Song(
+        title =  form.data['title'],
+        user_id = user_id,
+        song_url = upload['url'],
+        image_url = form.data['image_url'],
+        album_id = albumId
+    )
+    db.session.add(newSong)
+    db.session.commit()
+    return newSong.to_dict(),201
+
+
 
 
     # return render_template("post_form.html", form=form, errors=None)
@@ -93,7 +90,6 @@ def editSong(songId):
     upload = upload_file_to_s3(audioFile)
 
     song.title = form.data['title']
-    song.user_id = user_id
     song.song_url = upload['url']
     song.image_url = form.data['image_url']
     if(form.data['album'] != 'undefined'):
