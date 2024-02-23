@@ -26,12 +26,11 @@ function Songs({playlist}) {
             <h2>Let&apos;s find something for your playlist</h2>
             {allSongs.map(song => {
                 const album = allAlbums.find(al => al.id === song.album_id)
-                console.log("THIS IS THE ALBUM ALBUM >>>>>>", album)
                 return (
                 <div key={song.id}>
                     <img src={song.image_url} alt={song.title} className="playlist-song-image" />
                     <li className="playlist-song-title">{song.title}</li>
-                    <span>{album.title}</span>
+                    <span>{album?.title}</span>
                     <button className="add-playlist-button" onClick={() => addToPlaylist(song)}>Add to playlist</button>
 
                 </div>

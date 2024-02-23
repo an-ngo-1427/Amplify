@@ -10,7 +10,7 @@ import createSongReducer from "./createSong";
 import {getSongsReducer} from "./song";
 import{ getUserSongsReducer} from './song'
 import playlistsReducer from "./playlist";
-import createAlbumReducer from "./album";
+import createAlbumReducer, { getOneAlbumReducer, getUserAlbumsReducer } from "./album";
 import getSongReducer from "./songDetail";
 import currSongReducer from "./currSong";
 
@@ -22,7 +22,9 @@ const rootReducer = combineReducers({
   newAlbum: createAlbumReducer,
   currSong: getSongReducer,
   audioSong: currSongReducer,
-  userSongs : getUserSongsReducer
+  userSongs : getUserSongsReducer,
+  userAlbums: getUserAlbumsReducer,
+  currAlbum: getOneAlbumReducer
 });
 
 let enhancer;

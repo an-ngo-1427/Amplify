@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate, NavLink } from "react-router-dom";
 import { thunkSignup } from "../../redux/session";
 import "./SignupForm.css";
-import AmplifyLogo from "../../../public/amplifylogo.jpeg";
+import AmplifyLogo from "../../image/amplifylogo.jpeg";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
