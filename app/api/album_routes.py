@@ -36,6 +36,7 @@ def new_album():
 @login_required
 def add_songs(id):
     data = request.json
+    print('DATA >>>>>', data)
     for d in data["songId"]:
         print("THIS IS OUR D:", d)
         song = Song.query.get(d)
@@ -48,7 +49,6 @@ def add_songs(id):
     # songs = Song.query.filter(Song.id.in_(song_ids)).all()
     # album.songs.extend(songs)
     # db.session.commit()
-
 
 # edit an album route
 

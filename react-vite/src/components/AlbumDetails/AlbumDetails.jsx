@@ -1,14 +1,22 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { loadOneAlbumThunk } from "../../redux/album";
+import { addSongToAlbum, loadOneAlbumThunk } from "../../redux/album";
 import AlbumSongTile from '../AlbumSongTile/AlbumSongTile';
 import './AlbumDetails.css';
+import Songs from './Songs';
+import OpenModalButton from '../OpenModalButton';
 
 function AlbumDetails() {
+    const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
     const { albumId } = useParams();
     const album = useSelector(state => state.newAlbum[albumId]);
+
+    const addToAlbum = async e => {
+        e.preventDefault()
+        console.log('hi')
+    }
 
     useEffect(() => {
         dispatch(loadOneAlbumThunk(albumId));
@@ -26,10 +34,16 @@ function AlbumDetails() {
                     <p className="album-prefix">Album</p>
                     <h1 className="album-details-title">{album.title}</h1>
                 </div>
+                {sessionUser.id === album.user_id && (
+                    <OpenModalButton
+                    buttonText='Add to album'
+                    modalComponent={<Songs album={album}/>}
+                />
+                )}
             </div>
             <div className="album-details-songs">
                 {album.songs?.map((song) => (
-                    <AlbumSongTile key={song.id} song={song} />
+                    <AlbumSongTile key={song.id} song={song} album={album} />
                 ))}
             </div>
         </div>
