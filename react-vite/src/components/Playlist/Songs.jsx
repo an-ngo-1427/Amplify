@@ -12,8 +12,6 @@ function Songs({playlist}) {
         dispatch(getSongsThunk())
     }, [dispatch])
 
-    console.log('songs wahoo')
-
     const addToPlaylist = async (song) => {
         dispatch(addSongToPlaylist(song, playlist.id))
     }

@@ -6,6 +6,7 @@ import AlbumSongTile from '../AlbumSongTile/AlbumSongTile';
 import './AlbumDetails.css';
 
 function AlbumDetails() {
+    const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
     const { albumId } = useParams();
     const album = useSelector(state => state.newAlbum[albumId]);
@@ -26,6 +27,11 @@ function AlbumDetails() {
                     <p className="album-prefix">Album</p>
                     <h1 className="album-details-title">{album.title}</h1>
                 </div>
+                {sessionUser.id === album.user_id ? (
+                    <button>Add Song to Album</button>
+                ) : (
+                    <></>
+                )}
             </div>
             <div className="album-details-songs">
                 {album.songs?.map((song) => (
