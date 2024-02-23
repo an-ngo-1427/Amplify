@@ -14,9 +14,9 @@ const AlbumSongTile = ({ song, album }) => {
         dispatch(getCurrSong(song));
     };
 
-    const removeAlbumSong = (e) => {
-        e.stopPropagation(); 
-        dispatch(removeSongFromAlbum(song.id, album.id));
+    const removeAlbumSong = async (e) => {
+        e.stopPropagation();
+        await dispatch(removeSongFromAlbum(song.id, album.id));
     };
 
     return (

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, NavLink } from 'react-router-dom';
-import { addSongToAlbum, loadOneAlbumThunk } from "../../redux/album";
+import { loadOneAlbumThunk } from "../../redux/album";
 import AlbumSongTile from '../AlbumSongTile/AlbumSongTile';
 import './AlbumDetails.css';
 import Songs from './Songs';
@@ -13,6 +13,7 @@ function AlbumDetails() {
     const dispatch = useDispatch();
     const { albumId } = useParams();
     const album = useSelector(state => state.newAlbum[albumId]);
+    const songs = useSelector(state => state.newAlbum[albumId]?.songs)
 
     useEffect(() => {
         dispatch(loadOneAlbumThunk(albumId));
@@ -43,7 +44,7 @@ function AlbumDetails() {
                 )}
             </div>
             <div className="album-details-songs">
-                {album.songs?.map((song) => (
+                {songs?.map((song) => (
                     <AlbumSongTile key={song.id} song={song} album={album} />
                 ))}
             </div>
