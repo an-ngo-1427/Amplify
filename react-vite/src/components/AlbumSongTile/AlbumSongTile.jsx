@@ -1,28 +1,23 @@
 import { useDispatch } from "react-redux";
 import { getCurrSong } from "../../redux/currSong";
+import './AlbumSongTile.css';
 
-const AlbumSongTile = ({song}) => {
+const AlbumSongTile = ({ song }) => {
     const dispatch = useDispatch();
     
-    
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        dispatch(getCurrSong(song))
-        
+    const handleClick = () => {
+        dispatch(getCurrSong(song));
     };
+
     return (
-        <div>
-            <div>
-                <div>
-                    {song.title}
-                </div>
-                <div>
-                    {song.artist.first_name} {song.artist.last_name} 
-                </div>
+        <div className="album-song-tile" onClick={handleClick}>
+            <div className="album-song-info">
+                <span className="album-song-title">{song.title}</span>
+                <span className="album-song-artist">{song.artist.first_name} {song.artist.last_name}</span>
             </div>
-            <button onClick={handleSubmit}>Play</button>
+            <div className="album-play-button">Play</div>
         </div>
-    )
+    );
 }
 
 export default AlbumSongTile;
