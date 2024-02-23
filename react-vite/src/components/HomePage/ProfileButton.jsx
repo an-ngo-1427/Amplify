@@ -48,7 +48,7 @@ function ProfileButton({ user }) {
     const manageSongs = (e) => {
         e.preventDefault();
         closeMenu();
-        navigate('/songs/')
+        navigate('/songs/manage')
     }
 
     const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -66,7 +66,7 @@ function ProfileButton({ user }) {
                             <button className='new-song-button' onClick={newSong}>New Song</button>
                         </li>
                         <li>
-                            <button className='manage-songs-button' onClick={newSong}>Manage Songs</button>
+                            <button className='manage-songs-button' onClick={manageSongs}>Manage Songs</button>
                         </li>
                         <li className='logout-button-list-space'>
                             <button className='logout-button' onClick={logout}>Log Out</button>
