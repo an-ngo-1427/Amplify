@@ -11,6 +11,12 @@
     transition: background-color 0.2s ease;
 }
 
+.song-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
 .album-song-tile:hover {
     background-color: #282828;
 }
@@ -18,20 +24,10 @@
 .album-song-info {
     display: flex;
     flex-direction: column;
+    gap: 5px;
 }
 
-.album-song-tile{
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.album-song-artist {
-    font-size: 14px;
-    color: #b3b3b3;
-}
-
-.album-play-button{
-    display: none;
+.album-play-button {
     background-color: #1DB954;
     color: #fff;
     padding: 6px 16px;
@@ -41,6 +37,17 @@
     cursor: pointer;
 }
 
-.album-song-tile:hover .album-play-button {
-    display: inline-block;
+.album-remove-button {
+    background-color: #e63946; 
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: none; 
+}
+
+.album-song-tile:hover .album-play-button,
+.album-song-tile:hover .album-remove-button {
+    display: inline-block; 
 }

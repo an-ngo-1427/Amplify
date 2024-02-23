@@ -35,7 +35,7 @@ function AlbumDetails() {
                     <p className="album-prefix">Album</p>
                     <h1 className="album-details-title">{album.title}</h1>
                 </div>
-                {sessionUser.id === album.user_id && (
+                {sessionUser?.id === album?.user_id && (
                     <OpenModalButton
                         buttonText='Add to album'
                         modalComponent={<Songs album={album} />}
