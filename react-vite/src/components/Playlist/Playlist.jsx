@@ -7,7 +7,7 @@ import Songs from './Songs'
 function Playlist({ playlist, onDelete }) {
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch()
-    const songs = playlist.songs
+    const songs = useSelector(state => state.playlists[playlist.id].songs)
 
     const deletePlaylist = async e => {
         e.preventDefault()
@@ -16,7 +16,6 @@ function Playlist({ playlist, onDelete }) {
     }
 
     const removePlaylistSong = async (songId) => {
-        console.log("REMOVE SONG FROM PLAYLIST")
         await dispatch(removeSongFromPlaylist(songId, playlist.id));
         await dispatch(getUserPlaylistsThunk());
     }
