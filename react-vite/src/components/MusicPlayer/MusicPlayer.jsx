@@ -5,7 +5,7 @@ import "./MusicPlayer.css";
 
 function MusicPlayer() {
   const audioSong = useSelector(state=>state.audioSong)
-  console.log('rendered')
+  // console.log('rendered')
   return(
     <AudioPlayerComp song={audioSong}/>
   )

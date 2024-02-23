@@ -8,6 +8,22 @@ export const getSongs = (Songs)=>({
     Songs
 })
 
+// getting all user songs
+const GET_USER_SONGS = '/songs/GET_USER_SONGS'
+export const getUserSongs = (songs)=>(
+    {
+        type:GET_USER_SONGS,
+        songs
+    }
+)
+
+// deleting a song
+const DELETE_SONG = '/songs/DELETE_SONG'
+export const deleteSong = (song)=>({
+    type:DELETE_SONG,
+    song
+})
+
 
 // Thunk actions
 export const getSongsThunk = ()=> async (dispatch)=>{
@@ -22,10 +38,30 @@ export const getSongsThunk = ()=> async (dispatch)=>{
     return data
 }
 
+// getting user songs thunk
+export const getUserSongsThunk = (userId)=> async (dispatch)=>{
+    const response = await fetch(`/api/songs/user/${userId}`)
+    const data = await response.json()
+    if(response.ok){
+        dispatch(getUserSongs(data))
+    }
+    return data
+}
+
+export const deleteSongThunk = (songId) => async (dispatch)=>{
+    const response = await fetch(`/api/songs/${songId}`,{
+        method:'DELETE'
+    })
+    const data = await response.json()
+    if(response.ok){
+        dispatch(deleteSong(data))
+        return data
+    }
+}
 
 const initialState={}
 
-function getSongsReducer(state = initialState,action){
+export function getSongsReducer(state = initialState,action){
     switch (action.type){
         case GET_SONGS:{
             const newObj = {}
@@ -36,4 +72,20 @@ function getSongsReducer(state = initialState,action){
     return state
 }
 
-export default getSongsReducer
+export function getUserSongsReducer(state = initialState,action){
+    switch(action.type){
+        case GET_USER_SONGS:{
+            const newObj = {}
+
+            action.songs.Songs.forEach(song => {newObj[song.id] = song})
+            return newObj
+        }
+        case DELETE_SONG:{
+            let newObj = {...state}
+            delete(newObj[action.song.id])
+            return newObj
+        }
+    }
+    return state
+}
+// module.exports = {getSongsReducer,getUserSongsReducer}

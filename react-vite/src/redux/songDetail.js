@@ -2,7 +2,7 @@
 // action creator
 // getting a song detail
 
-import SongDetail from "../components/SongDetail/SongDetail"
+// import SongDetail from "../components/SongDetail/SongDetail"
 
 const GET_SONG_ID = '/song/get_song_id'
 const DELETE_SONG = 'song/DELETE_SONG'
@@ -37,7 +37,7 @@ export const thunkDeleteSong = (songId) => async (dispatch) => {
     const response = await fetch(`/api/songs/${songId}`, {
         method: 'DELETE'
     })
-   
+
     if (response.ok) {
         dispatch(deleteSong(songId));
     }

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { thunkLogout } from "../../redux/session";
 import './HomePage.css';
 
@@ -8,6 +8,7 @@ function ProfileButton({ user }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
+
     const ulRef = useRef();
 
     const toggleMenu = (e) => {
@@ -38,6 +39,7 @@ function ProfileButton({ user }) {
         navigate("/");
     };
 
+
     const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
     return (
@@ -49,6 +51,12 @@ function ProfileButton({ user }) {
                     <div id="profile-login-drop-down">
                         <li>Hello, {user.first_name}</li>
                         <li>{user.email}</li>
+                        <li>
+                            <NavLink to='/songs/new'>New Song</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/songs/manage'>Manage Songs</NavLink>
+                        </li>
                         <li className='logout-button-list-space'>
                             <button className='logout-button' onClick={logout}>Log Out</button>
                         </li>

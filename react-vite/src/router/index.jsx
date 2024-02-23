@@ -11,6 +11,7 @@ import AlbumForm from '../components/AlbumForm';
 import AllAlbums from '../components/AllAlbums/AllAlbums';
 import AudioPlayerComp from '../components/AudioPlayerComp/AudioPlayerComp';
 import EditSong from '../components/EditSong';
+import UserSongs from '../components/UserSongs';
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ export const router = createBrowserRouter([
       {
         path:'/songs/:songId/edit',
         element:<EditSong/>
+      },
+      {
+        path:'/songs/manage',
+        element:<UserSongs/>
       }
     ],
   },

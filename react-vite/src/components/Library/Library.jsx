@@ -1,9 +1,10 @@
 import { useDispatch } from "react-redux";
 import { createPlaylistThunk } from '../../redux/playlist';
+import { useNavigate } from "react-router-dom";
 
 function Library({ playlists, onPlaylistClick }) {
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const newPlaylist = async (e) => {
         e.preventDefault();
         const formData = new FormData()
@@ -13,6 +14,11 @@ function Library({ playlists, onPlaylistClick }) {
         formData.append('submit', true)
         dispatch(createPlaylistThunk(formData))
     };
+
+    const newSong = async (e)=>{
+        e.preventDefault();
+        navigate('/songs/new')
+    }
 
     return (
         <>
@@ -27,6 +33,7 @@ function Library({ playlists, onPlaylistClick }) {
                     </li>
                 ))}
             </ul>
+            <button onClick={newSong}>New Song</button>
         </>
     );
 }

@@ -5,25 +5,28 @@ import { useNavigate } from "react-router-dom";
 import { getUserAlbumsThunk } from "../../redux/album";
 
 function SongForm({song}) {
-    const [audio, setAudio] = useState(null)
-    const [title, setTitle] = useState(null)
-    const [album, setAlbum] = useState(null)
-    const [image_url, setImageUrl] = useState(null)
+    // console.log('song -----',song)
+    const [audio, setAudio] = useState()
+    const [title, setTitle] = useState("")
+    const [album, setAlbum] = useState("")
+    const [image_url, setImageUrl] = useState("")
     const [errorObj, setErrorObj] = useState({})
     const [formErr, setFormError] = useState(false)
     const user = useSelector(state=>state.session.user)
     const userAlbums = useSelector(state=>state.newAlbum)
 
-    console.log('user album',userAlbums)
+    // console.log('user album',userAlbums)
 
     useEffect(()=>{
-        dispatch(getUserAlbumsThunk(user.id))
-        if(song){
-            setAudio(song.song_url)
-            setTitle(song.title)
-            setAlbum(song.album_title)
+        if(!Object.keys(userAlbums).length){
+            dispatch(getUserAlbumsThunk(user.id))
         }
-    },[])
+        if(song){
+            setTitle(song.title)
+            setAlbum(song.album_id)
+            setImageUrl(song.image_url)
+        }
+    },[userAlbums])
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -84,8 +87,8 @@ function SongForm({song}) {
                         value={album}
                         onChange={(e) => {setAlbum(e.target.value)}}
                     >
-                        <option value = "">Select an album</option>
-                        {/* {userAlbums && userAlbums.map(album=><option key = {album.id} value = {album.id}>{album.title}</option>)} */}
+                        <option value ={""} >Select an album</option>
+                        {Object.keys(userAlbums).length && userAlbums.Albums.map(album=><option key = {album.id} value = {album.id}>{album.title}</option>)}
                     </select>
 
                 </div>
@@ -94,6 +97,7 @@ function SongForm({song}) {
                         name='image_url'
                         onChange={(e) => {setImageUrl(e.target.value)}}
                         value={image_url}
+                        placeholder="image_url"
                     />
 
                 </div>
@@ -107,8 +111,8 @@ function SongForm({song}) {
                     {formErr && <div style={{ 'color': 'red' }}>{errorObj.audio}</div>}
 
                 </div>
-                <button type='submit'
-                >Submit</button>
+                {song &&<button type='submit'>Update song</button>}
+                {!song &&<button type='submit'>Create song</button>}
             </form>
         </>
     )

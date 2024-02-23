@@ -7,6 +7,7 @@ import Playlist from '../Playlist';
 import './HomePage.css';
 import { getUserPlaylistsThunk } from '../../redux/playlist';
 import ProfileButton from './ProfileButton';
+import AllAlbums from '../AllAlbums/AllAlbums';
 // import MusicPlayer from '../MusicPlayer/MusicPlayer';
 
 function HomePage() {
@@ -47,6 +48,11 @@ function HomePage() {
         window.alert('Log in to create and share playlists.')
     };
 
+    const newSong = async (e) => {
+        e.preventDefault()
+        window.alert('Log in to create and share songs.')
+    }
+
     return (
         <>
             <div className="main-homepage">
@@ -70,7 +76,17 @@ function HomePage() {
                             ) : (
                                 <>
                                     <div>Your Library</div>
-                                    <button onClick={newPlaylist}>New Playlist</button>
+                                    <div>
+                                        <div>
+                                            <button onClick={newPlaylist}>New Playlist</button>
+
+                                        </div>
+                                        <div>
+                                            <button onClick={newSong}>New Song</button>
+
+                                        </div>
+
+                                    </div>
                                 </>
                             )}
                         </div>
@@ -97,8 +113,9 @@ function HomePage() {
                         </div>
                     ) : (
                         <div>
-                            {/* Default content when no playlist is selected */}
-                            <div className='album-details'>Home Page</div>
+                            <div className='album-details'>
+                                <AllAlbums />
+                            </div>
                         </div>
                     )}
                 </div>
