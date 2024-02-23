@@ -29,7 +29,7 @@ const AlbumSongTile = ({ song, album }) => {
                 </div>
                 <div onClick={(e)=>handlePlaySong(e)} className="album-play-button">Play</div>
             </div>
-            {sessionUser.id === album.user_id && (
+            {sessionUser.id === album?.user_id && (
                 <button onClick={removeAlbumSong}>Remove</button>
             )}
         </>
