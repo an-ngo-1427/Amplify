@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import OpenModalButton from "../OpenModalButton";
 import EditPlaylist from "../EditPlaylist/EditPlaylist";
-import { deletePlaylistThunk } from "../../redux/playlist";
+import { deletePlaylistThunk, removeSongFromPlaylist } from "../../redux/playlist";
 import Songs from './Songs'
 
 function Playlist({ playlist, onDelete }) {
@@ -15,14 +15,9 @@ function Playlist({ playlist, onDelete }) {
         onDelete();
     }
 
-    const removeSongFromPlaylist = async songId => {
-        const songIndex = songs.findIndex(song => song.id == songId)
-        console.log('SONG ARRAY', songs)
-        console.log('SONG TO DELETE', songIndex)
-        // dispatch(removeSongFromPlaylist(songIndex, playlist.id))
+    const removePlaylistSong = async (songId) => {
+        dispatch(removeSongFromPlaylist(songId, playlist.id))
     }
-
-    console.log('SONGS', songs)
 
     return (
         <div>
@@ -47,7 +42,7 @@ function Playlist({ playlist, onDelete }) {
                                 </div>
                                 <div className="playlist-song-right">
                                     <i className="fa-regular fa-circle-play"/>
-                                    <button onClick={() => removeSongFromPlaylist(song.id)}>Remove</button>
+                                    <button onClick={() => removePlaylistSong(song.id)}>Remove</button>
                                 </div>
                             </div>
                         ))}

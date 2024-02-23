@@ -72,11 +72,9 @@ def delete_playlist(id):
     db.session.commit()
     return {'message': 'Successfully deleted'}, 200
 
-@playlist_routes.route('/<int:id>/add/<int:songId>', methods=['POST'])
+@playlist_routes.route('/<int:id>/add/<int:song_id>', methods=['POST'])
 @login_required
 def add_song_to_playlist(id, song_id):
-    print('PLAYLISTID/////', id)
-    print('SONGID////////', song_id)
     playlist = Playlist.query.get(id)
     song = Song.query.get(song_id)
 
@@ -91,3 +89,19 @@ def add_song_to_playlist(id, song_id):
     db.session.execute(playlist_songs.insert(), data)
     db.session.commit()
     return playlist.to_dict()
+
+@playlist_routes.route('/<int:id>/remove/<int:song_id>', methods=['DELETE'])
+def remove_song_from_playlist(id, song_id):
+    playlist = Playlist.query.get(id)
+    song = Song.query.get(song_id)
+
+    if not playlist:
+        return {'error':"Playlist couldn't be found"}, 404
+    if not song:
+        return {'error':"Song couldn't be found"}, 404
+    if playlist.user_id != current_user.id:
+        return {'errors':'Forbidden'}, 401
+
+    playlist.songs.remove(song)
+    db.session.commit()
+    return {'message': 'Successfully deleted'}, 200
