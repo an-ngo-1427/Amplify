@@ -7,7 +7,7 @@ function AudioPlayerComp({song}){
         <div>
             <h3>{song.title}</h3>
             <AudioPlayer
-                header={"song header"}
+                header={`${song.title}`}
                 src={song.song_url}
                 onPlay={e => console.log(e)}
             />

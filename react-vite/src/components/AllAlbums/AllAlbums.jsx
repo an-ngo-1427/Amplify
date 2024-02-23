@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loadAlbumsThunk } from "../../redux/album";
-import MusicPlayer from "../MusicPlayer/MusicPlayer";
+// import MusicPlayer from "../MusicPlayer/MusicPlayer";
 
 const AllAlbums = () => {
   const navigate = useNavigate();
@@ -32,9 +32,9 @@ const AllAlbums = () => {
           </div>
         ))}
       </div>
-      <div>
+      {/* <div>
         <MusicPlayer />
-      </div>
+      </div> */}
     </>
   );
 };

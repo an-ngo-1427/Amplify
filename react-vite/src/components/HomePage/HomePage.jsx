@@ -7,7 +7,7 @@ import Playlist from '../Playlist';
 import './HomePage.css';
 import { getUserPlaylistsThunk } from '../../redux/playlist';
 import ProfileButton from './ProfileButton';
-import MusicPlayer from '../MusicPlayer/MusicPlayer';
+// import MusicPlayer from '../MusicPlayer/MusicPlayer';
 
 function HomePage() {
     const navigate = useNavigate();
@@ -46,7 +46,7 @@ function HomePage() {
         e.preventDefault();
         window.alert('Log in to create and share playlists.')
     };
-   
+
     return (
         <>
             <div className="main-homepage">
@@ -102,9 +102,9 @@ function HomePage() {
                         </div>
                     )}
                 </div>
-                <div className="now-playing-bar">
+                {/* <div className="now-playing-bar">
                     <MusicPlayer />
-                </div>
+                </div> */}
             </div>
         </>
     );

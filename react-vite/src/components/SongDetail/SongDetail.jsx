@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getSongThunk } from '../../redux/songDetail'
 import { getCurrSong } from '../../redux/currSong'
+import MusicPlayer from '../MusicPlayer/MusicPlayer';
 
 function SongDetail(){
     const {songId} = useParams()
@@ -93,6 +94,7 @@ function SongDetail(){
                 </div>
             </div>
             {user.id == currSong.user_id && <button onClick={handleEdit}>edit</button>}
+            <MusicPlayer/>
         </>
     );
 }
