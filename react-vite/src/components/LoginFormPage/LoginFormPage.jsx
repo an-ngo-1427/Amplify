@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate, NavLink } from "react-router-dom";
 import "./LoginForm.css";
 import * as sessionActions from '../../redux/session';
-import AmplifyLogo from "../../../public/amplifylogo.jpeg";
+import AmplifyLogo from "../../image/amplifylogo.jpeg";
 
 function LoginFormPage() {
   const navigate = useNavigate();
