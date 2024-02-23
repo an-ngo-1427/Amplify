@@ -83,9 +83,7 @@ function HomePage() {
                                         </div>
                                         <div>
                                             <button onClick={newSong}>New Song</button>
-
                                         </div>
-
                                     </div>
                                 </>
                             )}
