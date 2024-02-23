@@ -101,10 +101,12 @@ export const getUserAlbumsThunk = (userId) => async(dispatch) =>{
 }
 
 export const addSongToAlbum = (song, albumId) => async (dispatch) => {
-    const response = await fetch(`/api/albums/${albumId}/add/${song.id}`, {
+    const response = await fetch(`/api/albums/${albumId}/songs/add`, {
         method: 'POST',
-        body: JSON.stringify([song.id])
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({songId: [song.id]})
     })
+    console.log(response)
     if(response.ok) {
         dispatch(addSong(song, albumId))
     }
