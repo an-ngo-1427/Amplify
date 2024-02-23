@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import OpenModalButton from "../OpenModalButton";
 import EditPlaylist from "../EditPlaylist/EditPlaylist";
-import { deletePlaylistThunk, removeSongFromPlaylist } from "../../redux/playlist";
+import { deletePlaylistThunk, getUserPlaylistsThunk, removeSongFromPlaylist } from "../../redux/playlist";
 import Songs from './Songs'
 
 function Playlist({ playlist, onDelete }) {
@@ -16,7 +16,9 @@ function Playlist({ playlist, onDelete }) {
     }
 
     const removePlaylistSong = async (songId) => {
-        dispatch(removeSongFromPlaylist(songId, playlist.id))
+        console.log("REMOVE SONG FROM PLAYLIST")
+        await dispatch(removeSongFromPlaylist(songId, playlist.id));
+        await dispatch(getUserPlaylistsThunk());
     }
 
     return (
