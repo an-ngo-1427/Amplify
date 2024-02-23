@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getSongsThunk } from "../../redux/song"
 import { useEffect } from "react"
 import './Playlist.css'
-import { addSongToPlaylist } from "../../redux/playlist"
+import { addSongToPlaylist, getUserPlaylistsThunk } from "../../redux/playlist"
 
 function Songs({playlist}) {
     const dispatch = useDispatch()
@@ -13,7 +13,9 @@ function Songs({playlist}) {
     }, [dispatch])
 
     const addToPlaylist = async (song) => {
-        dispatch(addSongToPlaylist(song, playlist.id))
+        console.log("ADD SONG TO PLAYLIST")
+        await dispatch(addSongToPlaylist(song, playlist.id));
+        await dispatch(getUserPlaylistsThunk());
     }
 
     return (
