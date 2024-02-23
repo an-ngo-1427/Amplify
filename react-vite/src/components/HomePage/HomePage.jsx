@@ -18,7 +18,7 @@ function HomePage() {
 
     useEffect(() => {
         dispatch(getUserPlaylistsThunk())
-    }, [Library, dispatch])
+    }, [Library])
 
     const login = async e => {
         e.preventDefault();
