@@ -1,0 +1,15 @@
+textarea {
+    resize: none;
+}
+
+.edit-playlist-container {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: #121212;
+}
+
+.edit-playlist-errors {
+    background-color: red;
+    color: white;
+}

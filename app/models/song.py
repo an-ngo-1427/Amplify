@@ -33,5 +33,7 @@ class Song(db.Model):
             'likes': len(self.user_likes),
             'user_likes': [user.id for user in self.user_likes],
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            'artist':self.user.to_dict(),
+            'album_id':self.album_id,
         }

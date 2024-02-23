@@ -1,28 +1,51 @@
-import { thunkLogout } from "../../redux/session";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import Library from '../Library';
+import Playlist from '../Playlist';
 import './HomePage.css';
+import { getUserPlaylistsThunk } from '../../redux/playlist';
+import ProfileButton from './ProfileButton';
+// import MusicPlayer from '../MusicPlayer/MusicPlayer';
 
 function HomePage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
+    const playlists = useSelector((state) => Object.values(state.playlists));
+    const [selectedPlaylist, setSelectedPlaylist] = useState(null);
 
-    const logout = async e => {
-        e.preventDefault()
-        await dispatch(thunkLogout())
-        navigate('/')
-    }
+    useEffect(() => {
+        dispatch(getUserPlaylistsThunk())
+    }, [Library])
 
     const login = async e => {
-        e.preventDefault()
-        navigate('/login')
-    }
+        e.preventDefault();
+        navigate('/login');
+    };
 
     const signup = async e => {
-        e.preventDefault()
-        navigate('/signup')
-    }
+        e.preventDefault();
+        navigate('/signup');
+    };
+
+    const handlePlaylistClick = playlist => {
+        if (playlist === null) {
+            setSelectedPlaylist(null);
+        } else {
+            setSelectedPlaylist(playlist);
+        }
+    };
+
+    const handlePlaylistDelete = () => {
+        setSelectedPlaylist(null);
+    };
+
+    const newPlaylist = async (e) => {
+        e.preventDefault();
+        window.alert('Log in to create and share playlists.')
+    };
 
     return (
         <>
@@ -32,7 +55,7 @@ function HomePage() {
                         <div className="left-sidebar-top">
                             <ul>
                                 <li className="list-label">
-                                    <NavLink className='link-home' to='/'>
+                                    <NavLink className='link-home' to='/' onClick={() => handlePlaylistClick(null)}>
                                         <span className="link-label"><span className="home-icon"><i className="fa-solid fa-house" /></span> Home</span>
                                     </NavLink>
                                 </li>
@@ -41,26 +64,50 @@ function HomePage() {
                                 </li>
                             </ul>
                         </div>
+                        <div className="left-sidebar-bottom">
+                            {sessionUser ? (
+                                <Library playlists={playlists} onPlaylistClick={handlePlaylistClick} />
+                            ) : (
+                                <>
+                                    <div>Your Library</div>
+                                    <button onClick={newPlaylist}>New Playlist</button>
+                                </>
+                            )}
+                        </div>
                     </div>
                 </div>
                 <div className="main-view">
                     <div className="main-header">
-                        <button onClick={signup} className="signup-button">
-                            Sign up
-                        </button>
-                        <button onClick={login} className="login-button">
-                            Login in
-                        </button>
+                        {!sessionUser ? (
+                            <div className='main-header-buttons'>
+                                <button onClick={signup} className="signup-button">
+                                    Sign up
+                                </button>
+                                <button onClick={login} className="login-button">
+                                    Login in
+                                </button>
+                            </div>
+                        ) : (
+                            <ProfileButton user={sessionUser} />
+                        )}
                     </div>
-                    <div className="main-content"></div>
+                    {selectedPlaylist && sessionUser ? (
+                        <div className='playlist-details'>
+                            <Playlist playlist={selectedPlaylist} onDelete={handlePlaylistDelete} />
+                        </div>
+                    ) : (
+                        <div>
+                            {/* Default content when no playlist is selected */}
+                            <div className='album-details'>Home Page</div>
+                        </div>
+                    )}
                 </div>
-                <div className="now-playing-bar"></div>
+                {/* <div className="now-playing-bar">
+                    <MusicPlayer />
+                </div> */}
             </div>
-            {sessionUser && (
-                <button onClick={logout}>Log Out</button>
-            )}
         </>
-    )
+    );
 }
 
-export default HomePage
+export default HomePage;

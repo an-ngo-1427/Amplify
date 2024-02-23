@@ -11,6 +11,7 @@ from .seeds import seed_commands
 from .config import Config
 from .api.song_routes import song_routes
 from .api.album_routes import album_routes
+from .api.playlist_routes import playlist_routes
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
 
 # Setup login manager
@@ -31,6 +32,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(song_routes, url_prefix='/api/songs')
 app.register_blueprint(album_routes, url_prefix='/api/albums')
+app.register_blueprint(playlist_routes, url_prefix='/api/playlists')
 db.init_app(app)
 migrate = Migrate(app, db)
 

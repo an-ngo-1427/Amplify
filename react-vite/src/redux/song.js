@@ -16,7 +16,7 @@ export const getSongsThunk = ()=> async (dispatch)=>{
     })
     const data = await response.json()
     if(response.ok){
-        dispatch(getSongs(data.Songs))
+        dispatch(getSongs(data))
         return data
     }
     return data
@@ -29,7 +29,7 @@ function getSongsReducer(state = initialState,action){
     switch (action.type){
         case GET_SONGS:{
             const newObj = {}
-            action.Songs.forEach(song => {newObj[song.id] = song})
+            action.Songs.songs.forEach(song => {newObj[song.id] = song})
             return newObj
         }
     }
