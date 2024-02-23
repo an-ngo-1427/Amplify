@@ -56,7 +56,7 @@ def createSong():
     if(albumId):
         albumId = int(albumId)
     else:
-        albumId = 0
+        albumId = None
     newSong = Song(
         title =  form.data['title'],
         user_id = user_id,
@@ -96,7 +96,7 @@ def editSong(songId):
     if(albumId):
         albumId = int(albumId)
     else:
-        albumId = 0
+        albumId = None
 
     song.title = form.data['title']
     song.song_url = upload['url']
