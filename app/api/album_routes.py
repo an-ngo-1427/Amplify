@@ -111,7 +111,7 @@ def remove_song_from_album(id, songId):
 @album_routes.route('/user/<int:userId>')
 @login_required
 def getUserAlbums(userId):
-    print('-----------user album route')
+
     albums = Album.query.filter(Album.user_id == userId).all()
 
     return {'Albums':[album.to_dict() for album in albums]}

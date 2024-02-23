@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getSongThunk } from '../../redux/songDetail'
 import { getCurrSong } from '../../redux/currSong'
-
+import {deleteSongThunk} from '../../redux/song'
 function SongDetail(){
     const {songId} = useParams()
     const dispatch = useDispatch()
@@ -19,17 +19,17 @@ function SongDetail(){
 
     useEffect(()=>{
         dispatch(getSongThunk(songId))
-        console.log(currSong)
+        // console.log(currSong)
 
         if (isCurrSong && user){
-            console.log(currSong.user_likes,'outside')
+            // console.log(currSong.user_likes,'outside')
             if(currSong.user_likes.includes(user.id)){
                 setLiked(true)
-                console.log(currSong.user_likes,'in if block')
+                // console.log(currSong.user_likes,'in if block')
 
             }
         }
-        console.log('in effect',liked)
+        // console.log('in effect',liked)
     },[liked,dispatch,songId,user,isCurrSong])
 
     function handlePlay(){
@@ -70,8 +70,14 @@ function SongDetail(){
         e.preventDefault()
         navigate(`/songs/${currSong.id}/edit`)
     }
+
+    function handleDelete(e){
+        e.preventDefault()
+        dispatch(deleteSongThunk(songId))
+        .then(navigate('/songs/manage'))
+    }
     if(!Object.keys(currSong).length) return null
-    console.log(currSong.user_id,user.id)
+    // console.log(currSong.user_id,user.id)
     return (
         <>
             <div className="song-detail-header">
@@ -93,6 +99,8 @@ function SongDetail(){
                 </div>
             </div>
             {user.id == currSong.user_id && <button onClick={handleEdit}>edit</button>}
+            {user.id == currSong.user_id && <button onClick={handleDelete}>delete</button>}
+
         </>
     );
 }

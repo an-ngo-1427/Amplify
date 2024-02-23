@@ -5,16 +5,17 @@ import { useNavigate } from "react-router-dom";
 import { getUserAlbumsThunk } from "../../redux/album";
 
 function SongForm({song}) {
-    const [audio, setAudio] = useState(null)
-    const [title, setTitle] = useState(null)
-    const [album, setAlbum] = useState(null)
-    const [image_url, setImageUrl] = useState(null)
+    // console.log('song -----',song)
+    const [audio, setAudio] = useState()
+    const [title, setTitle] = useState("")
+    const [album, setAlbum] = useState("")
+    const [image_url, setImageUrl] = useState("")
     const [errorObj, setErrorObj] = useState({})
     const [formErr, setFormError] = useState(false)
     const user = useSelector(state=>state.session.user)
     const userAlbums = useSelector(state=>state.newAlbum)
 
-    console.log('user album',userAlbums)
+    // console.log('user album',userAlbums)
 
     useEffect(()=>{
         if(!Object.keys(userAlbums).length){
@@ -86,7 +87,7 @@ function SongForm({song}) {
                         value={album}
                         onChange={(e) => {setAlbum(e.target.value)}}
                     >
-                        <option value = "">Select an album</option>
+                        <option value ={""} >Select an album</option>
                         {Object.keys(userAlbums).length && userAlbums.Albums.map(album=><option key = {album.id} value = {album.id}>{album.title}</option>)}
                     </select>
 
