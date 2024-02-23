@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ModalProvider} from "../context/Modal";
+import { Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
 import MusicPlayer from "../components/MusicPlayer/MusicPlayer";
 
@@ -16,7 +17,7 @@ export default function Layout() {
     <>
       <ModalProvider>
         {isLoaded && <Outlet />}
-        {/* <Modal /> */}
+        <Modal />
       </ModalProvider>
       <MusicPlayer />
     </>
