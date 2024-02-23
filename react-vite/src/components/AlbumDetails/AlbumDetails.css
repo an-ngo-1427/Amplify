@@ -1,0 +1,29 @@
+.album-details-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.album-details-art {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+}
+
+.album-title-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.album-prefix {
+    color: #b3b3b3;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.album-details-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}

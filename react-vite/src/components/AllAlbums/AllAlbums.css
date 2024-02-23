@@ -1,0 +1,41 @@
+.all-albums-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 40px;
+    /* background-color: #121212; */
+    justify-content: center;
+  }
+  
+  .all-album-item {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    width: 180px; 
+    background-color: #181818;
+    color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .all-album-item:hover {
+    transform: scale(1.05);
+  }
+  
+  .all-album-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1; 
+    object-fit: cover;
+  }
+  
+  .all-album-title {
+    padding: 12px;
+    text-align: center;
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  

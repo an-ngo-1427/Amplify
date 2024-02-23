@@ -33,9 +33,9 @@ export const addSong = (song, playlistId) => ({
     playlistId
 })
 
-export const removeSong = (songIndex, playlistId) => ({
+export const removeSong = (songId, playlistId) => ({
     type: REMOVE_FROM_PLAYLIST,
-    songIndex,
+    songId,
     playlistId
 })
 
@@ -109,16 +109,19 @@ export const deletePlaylistThunk = (playlistId) => async (dispatch) => {
 export const addSongToPlaylist = (song, playlistId) => async (dispatch) => {
     const response = await fetch(`/api/playlists/${playlistId}/add/${song.id}`, {
         method: 'POST',
-
     })
     if(response.ok) {
         dispatch(addSong(song, playlistId))
-        console.log('RESPONSE', response)
     }
 }
 
-export const removeSongFromPlaylist = (songIndex, playlistId) => async (dispatch) => {
-    dispatch(removeSongFromPlaylist(songIndex, playlistId))
+export const removeSongFromPlaylist = (songId, playlistId) => async (dispatch) => {
+    const response = await fetch(`/api/playlists/${playlistId}/remove/${songId}`, {
+        method: 'DELETE'
+    })
+    if(response.ok) {
+        dispatch(removeSong(songId, playlistId))
+    }
 }
 
 const initialState = {}
@@ -130,7 +133,8 @@ function playlistsReducer(state = initialState, action) {
             return state
         }
         case REMOVE_FROM_PLAYLIST: {
-            console.log(state[action.playlistId].songs)
+            const songsArray = state[action.playlistId].songs.filter(song => song.id !== action.songId)
+            state[action.playlistId].songs = songsArray
             return state
         }
         case LOAD_PLAYLISTS: {

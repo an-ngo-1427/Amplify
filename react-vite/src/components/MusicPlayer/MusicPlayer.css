@@ -1,3 +1,7 @@
 .rhap_container {
   background-color: black;
+  position: fixed;
+  left: 0;
+  right:0;
+  bottom: 0;
 }
