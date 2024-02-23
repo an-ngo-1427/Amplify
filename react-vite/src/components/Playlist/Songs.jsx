@@ -16,10 +16,7 @@ function Songs({playlist}) {
         dispatch(getSongsThunk())
     }, [dispatch])
 
-    // console.log('songs wahoo')
-
     const addToPlaylist = async (song) => {
-        console.log("ADD SONG TO PLAYLIST")
         await dispatch(addSongToPlaylist(song, playlist.id));
         await dispatch(getUserPlaylistsThunk());
     }
@@ -36,7 +33,7 @@ function Songs({playlist}) {
                     <li className="playlist-song-title">{song.title}</li>
                     <span>{album.title}</span>
                     <button className="add-playlist-button" onClick={() => addToPlaylist(song)}>Add to playlist</button>
-                    
+
                 </div>
             )})}
         </div>
