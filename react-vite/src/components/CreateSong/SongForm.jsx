@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkCreateSong, thunkUpdateSong } from "../../redux/createSong";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { getUserAlbumsThunk } from "../../redux/album";
+import AmplifyLogo from "../../image/amplifylogo.jpeg";
 
-function SongForm({song}) {
+function SongForm({ song }) {
     // console.log('song -----',song)
     const [audio, setAudio] = useState()
     const [title, setTitle] = useState()
@@ -21,12 +22,12 @@ function SongForm({song}) {
         if(!userAlbums){
             dispatch(getUserAlbumsThunk(user.id))
         }
-        if(song){
+        if (song) {
             setTitle(song.title)
             setAlbum(song.album_id)
             setImageUrl(song.image_url)
         }
-    },[userAlbums])
+    }, [userAlbums])
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -46,12 +47,12 @@ function SongForm({song}) {
             // aws uploads can be a bit slow—displaying
             // some sort of loading message is a good idea
 
-            if(song){
-                dispatch(thunkUpdateSong(formData,song.id))
-                .then(result=>{navigate(`/songs/${result.id}`)})
-            }else{
+            if (song) {
+                dispatch(thunkUpdateSong(formData, song.id))
+                    .then(result => { navigate(`/songs/${result.id}`) })
+            } else {
                 dispatch(thunkCreateSong(formData))
-                .then(result=>{navigate(`/songs/${result.id}`)})
+                    .then(result => { navigate(`/songs/${result.id}`) })
             }
         }
     }
@@ -65,6 +66,11 @@ function SongForm({song}) {
     }, [audio, title, formErr])
     return (
         <>
+            <div className="amplify-navigation-bar">
+                <NavLink to='/'>
+                    <img className="amplify-logo" src={AmplifyLogo} />
+                </NavLink>
+            </div>
             <form
                 onSubmit={handleSubmit}
                 encType="multipart/form-data"
@@ -75,7 +81,7 @@ function SongForm({song}) {
                         type="text"
                         name="title"
                         placeholder="Title of the song"
-                        onChange={(e) => {setTitle(e.target.value)}}
+                        onChange={(e) => { setTitle(e.target.value) }}
                         value={title}
                     />
                     {formErr && <div style={{ 'color': 'red' }}>{errorObj.title}</div>}
@@ -85,7 +91,7 @@ function SongForm({song}) {
                     <select
                         name="album"
                         value={album}
-                        onChange={(e) => {setAlbum(e.target.value)}}
+                        onChange={(e) => { setAlbum(e.target.value) }}
                     >
                         <option value ={0} >Select an album</option>
                         {userAlbums && userAlbums.map(album=><option key = {album.id} value = {album.id}>{album.title}</option>)}
@@ -95,7 +101,7 @@ function SongForm({song}) {
                 <div>
                     <input
                         name='image_url'
-                        onChange={(e) => {setImageUrl(e.target.value)}}
+                        onChange={(e) => { setImageUrl(e.target.value) }}
                         value={image_url}
                         placeholder="image_url"
                     />
@@ -111,8 +117,8 @@ function SongForm({song}) {
                     {formErr && <div style={{ 'color': 'red' }}>{errorObj.audio}</div>}
 
                 </div>
-                {song &&<button type='submit'>Update song</button>}
-                {!song &&<button type='submit'>Create song</button>}
+                {song && <button type='submit'>Update song</button>}
+                {!song && <button type='submit'>Create song</button>}
             </form>
         </>
     )

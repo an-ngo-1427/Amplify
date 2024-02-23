@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
 import {loadOneAlbumThunk} from "../../redux/album";
 import AlbumSongTile from '../AlbumSongTile/AlbumSongTile';
 import './AlbumDetails.css';
 import Songs from './Songs';
 import OpenModalButton from '../OpenModalButton';
+import AmplifyLogo from "../../image/amplifylogo.jpeg";
 
 function AlbumDetails() {
     const sessionUser = useSelector(state => state.session.user);
@@ -29,6 +30,11 @@ function AlbumDetails() {
 
     return (
         <div className="album-details-container">
+            <div className="amplify-navigation-bar">
+                <NavLink to='/'>
+                    <img className="amplify-logo" src={AmplifyLogo} />
+                </NavLink>
+            </div>
             <div className="album-details-header">
                 <img src={album.image_url} alt={`Album titled ${album.title}`} className="album-details-art" />
                 <div className="album-title-container">
@@ -37,9 +43,9 @@ function AlbumDetails() {
                 </div>
                 {sessionUser.id === album.user_id && (
                     <OpenModalButton
-                    buttonText='Add to album'
-                    modalComponent={<Songs album={album}/>}
-                />
+                        buttonText='Add to album'
+                        modalComponent={<Songs album={album} />}
+                    />
                 )}
             </div>
             <div className="album-details-songs">
