@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { addSongToAlbum, loadOneAlbumThunk } from "../../redux/album";
+import {loadOneAlbumThunk} from "../../redux/album";
 import AlbumSongTile from '../AlbumSongTile/AlbumSongTile';
 import './AlbumDetails.css';
 import Songs from './Songs';
@@ -11,12 +11,13 @@ function AlbumDetails() {
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
     const { albumId } = useParams();
-    const album = useSelector(state => state.newAlbum[albumId]);
+    const album = useSelector(state => state.currAlbum[albumId]);
+    console.log('album id',album)
 
-    const addToAlbum = async e => {
-        e.preventDefault()
-        console.log('hi')
-    }
+    // const addToAlbum = async e => {
+    //     e.preventDefault()
+    //     console.log('hi')
+    // }
 
     useEffect(() => {
         dispatch(loadOneAlbumThunk(albumId));

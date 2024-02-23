@@ -136,19 +136,17 @@ function createAlbumReducer(state = initialState, action) {
             action.Albums.forEach(album => {newObj[album.id] = album})
             return newObj
         }
-        case LOAD_ONE_ALBUM: {
-            const newObj = { ...state };
-            newObj[action.Album.id] = action.Album;
-            return newObj;
-        }
-        case GET_USER_ALBUMS:{
-            return action.Albums
-        }
+        // case LOAD_ONE_ALBUM: {
+        //     const newObj = { ...state };
+        //     newObj[action.Album.id] = action.Album;
+        //     return newObj;
+        // }
         case ADD_TO_ALBUM: {
             state[action.albumId].songs.push(action.song)
             return state
         }
         case REMOVE_FROM_ALBUM: {
+            console.log(state)
             const songsArray = state[action.albumId].songs.filter(song => song.id !== action.songId)
             state[action.albumId].songs = songsArray
             return state
@@ -158,4 +156,25 @@ function createAlbumReducer(state = initialState, action) {
     }
 }
 
+export function getUserAlbumsReducer(state=initialState,action){
+    switch(action.type){
+        case GET_USER_ALBUMS:{
+            return action.Albums
+        }
+
+    }
+    return state
+}
+
+export function getOneAlbumReducer(state = initialState,action){
+    switch(action.type){
+        case LOAD_ONE_ALBUM: {
+            // const newObj = { ...state };
+            const newObj = {}
+            newObj[action.Album.id] = action.Album;
+            return newObj;
+        }
+    }
+    return state
+}
 export default createAlbumReducer
