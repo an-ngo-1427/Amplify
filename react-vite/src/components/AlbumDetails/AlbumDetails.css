@@ -1,3 +1,7 @@
+.album-details-container {
+    padding-bottom: 200px;
+}
+
 .album-details-header {
     display: flex;
     align-items: center;

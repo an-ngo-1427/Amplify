@@ -1,8 +1,10 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCurrSong } from "../../redux/currSong";
 import './AlbumSongTile.css';
+import { removeSongFromAlbum } from "../../redux/album";
 
-const AlbumSongTile = ({ song }) => {
+const AlbumSongTile = ({ song, album }) => {
+    const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
 
     const handleClick = () => {
@@ -11,7 +13,7 @@ const AlbumSongTile = ({ song }) => {
 
     const removeAlbumSong = (e) => {
         e.preventDefault()
-        console.log('hi')
+        dispatch(removeSongFromAlbum(song.id, album.id))
     }
 
     return (
@@ -23,7 +25,9 @@ const AlbumSongTile = ({ song }) => {
                 </div>
                 <div className="album-play-button">Play</div>
             </div>
-            <button onClick={removeAlbumSong}>Remove</button>
+            {sessionUser.id === album.user_id && (
+                <button onClick={removeAlbumSong}>Remove</button>
+            )}
         </>
     );
 }

@@ -1,10 +1,9 @@
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getSongsThunk } from "../../redux/song"
-import { useEffect } from "react"
-import './Playlist.css'
-import { addSongToPlaylist, getUserPlaylistsThunk } from "../../redux/playlist"
+import { addSongToAlbum } from "../../redux/album"
 
-function Songs({playlist}) {
+function Songs({album}) {
     const dispatch = useDispatch()
     const allSongs = useSelector(state => Object.values(state.songs))
 
@@ -12,18 +11,17 @@ function Songs({playlist}) {
         dispatch(getSongsThunk())
     }, [dispatch])
 
-    const addToPlaylist = async (song) => {
-        await dispatch(addSongToPlaylist(song, playlist.id));
-        await dispatch(getUserPlaylistsThunk());
+    const addToAlbum = async (song) => {
+        await dispatch(addSongToAlbum(song, album.id))
     }
 
     return (
         <div className="add-song-container">
-            <h2>Let&apos;s find something for your playlist</h2>
+            <h2>Add songs to your album</h2>
             {allSongs.map(song => (
                 <div key={song.id}>
                     <li>{song.title}</li>
-                    <button onClick={() => addToPlaylist(song)}>Add to playlist</button>
+                    <button onClick={() => addToAlbum(song)}>Add to album</button>
                 </div>
             ))}
         </div>
