@@ -87,8 +87,8 @@ function SongForm({song}) {
                         value={album}
                         onChange={(e) => {setAlbum(e.target.value)}}
                     >
-                        <option value ={0} >Select an album</option>
-                        {Object.keys(userAlbums).length && userAlbums.Albums.map(album=><option key = {album.id} value = {album.id}>{album.title}</option>)}
+                        <option value ={""} >Select an album</option>
+                        {Object.keys(userAlbums).map(album=><option key = {album.id} value = {album.id}>{album.title}</option>)}
                     </select>
 
                 </div>

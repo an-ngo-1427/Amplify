@@ -39,6 +39,17 @@ function ProfileButton({ user }) {
         navigate("/");
     };
 
+    const newSong = (e) => {
+        e.preventDefault();
+        closeMenu();
+        navigate("/songs/new");
+    };
+
+    const manageSongs = (e) => {
+        e.preventDefault();
+        closeMenu();
+        navigate('/songs/manage')
+    }
 
     const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
@@ -52,10 +63,10 @@ function ProfileButton({ user }) {
                         <li>Hello, {user.first_name}</li>
                         <li>{user.email}</li>
                         <li>
-                            <NavLink to='/songs/new'>New Song</NavLink>
+                            <button className='new-song-button' onClick={newSong}>New Song</button>
                         </li>
                         <li>
-                            <NavLink to='/songs/manage'>Manage Songs</NavLink>
+                            <button className='manage-songs-button' onClick={manageSongs}>Manage Songs</button>
                         </li>
                         <li className='logout-button-list-space'>
                             <button className='logout-button' onClick={logout}>Log Out</button>
