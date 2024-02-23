@@ -22,12 +22,12 @@ def seed():
         # Make sure to add all your other model's undo functions below
         undo_playlist_songs()
         undo_playlists()
-        undo_albums()
         undo_songs()
+        undo_albums()
         undo_users()
     seed_users()
-    seed_songs()
     seed_albums()
+    seed_songs()
     seed_playlists()
     seed_playlist_songs()
     # Add other seed functions here
@@ -38,7 +38,7 @@ def seed():
 def undo():
     undo_playlist_songs()
     undo_playlists()
-    undo_albums()
     undo_songs()
+    undo_albums()
     undo_users()
     # Add other undo functions here
