@@ -13,6 +13,10 @@
     color: white;
 }
 
-#modal {
-    overflow: auto;
-}
+/* #modal {
+    overflow: scroll;
+} */
+
+/* #modal-content {
+    position: relative;
+} */

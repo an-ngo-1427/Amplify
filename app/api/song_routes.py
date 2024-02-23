@@ -52,8 +52,8 @@ def createSong():
     albumId = form.data['album']
 
 
-    if(not albumId == 'undefined' and not albumId == 'null'):
-        albumId = int(form.data['album'])
+    if(albumId):
+        albumId = int(albumId)
 
     newSong = Song(
         title =  form.data['title'],
@@ -88,12 +88,15 @@ def editSong(songId):
 
     audioFile.filename = get_unique_filename(audioFile.filename)
     upload = upload_file_to_s3(audioFile)
+    albumId = form.data['album']
+    if(form.data['album']):
+        albumId = int(albumId)
 
     song.title = form.data['title']
     song.song_url = upload['url']
     song.image_url = form.data['image_url']
-    if(form.data['album'] != 'undefined'):
-        song.album_id = int(form.data['album'])
+    song.album_id = albumId
+
     db.session.commit()
     return song.to_dict(),200
 
@@ -111,14 +114,15 @@ def deleteSong(songId):
         return {'errors':'Forbidden'},401
 
     aws_res = remove_file_from_s3(song.song_url)
-    if aws_res['errors']:
+    print(aws_res)
+    if 'errors' in aws_res:
         return aws_res
 
     db.session.delete(song)
     db.session.commit()
 
 
-    return {'message':"Successfully deleted song"},200
+    return song.to_dict(),200
 
 # getting song details by ID
 @song_routes.route('/<int:songId>',methods=["GET"])
@@ -168,3 +172,11 @@ def unlikeSong(songId):
     # db.session.add(song)
     db.session.commit()
     return {'message':"Successfully unliked song"},200
+
+# Getting users songs
+@song_routes.route('/user/<int:userId>')
+@login_required
+def getUserSongs(userId):
+    songs = Song.query.filter(Song.user_id == userId).all()
+
+    return {"Songs":[song.to_dict() for song in songs]}

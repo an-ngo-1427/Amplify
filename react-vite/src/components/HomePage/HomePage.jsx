@@ -48,6 +48,11 @@ function HomePage() {
         window.alert('Log in to create and share playlists.')
     };
 
+    const newSong = async (e) => {
+        e.preventDefault()
+        window.alert('Log in to create and share songs.')
+    }
+
     return (
         <>
             <div className="main-homepage">
@@ -71,7 +76,15 @@ function HomePage() {
                             ) : (
                                 <>
                                     <div>Your Library</div>
-                                    <button onClick={newPlaylist}>New Playlist</button>
+                                    <div>
+                                        <div>
+                                            <button onClick={newPlaylist}>New Playlist</button>
+
+                                        </div>
+                                        <div>
+                                            <button onClick={newSong}>New Song</button>
+                                        </div>
+                                    </div>
                                 </>
                             )}
                         </div>

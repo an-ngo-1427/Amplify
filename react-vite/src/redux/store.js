@@ -7,7 +7,8 @@ import {
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import createSongReducer from "./createSong";
-import getSongsReducer from "./song";
+import {getSongsReducer} from "./song";
+import{ getUserSongsReducer} from './song'
 import playlistsReducer from "./playlist";
 import createAlbumReducer from "./album";
 import getSongReducer from "./songDetail";
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   playlists: playlistsReducer,
   newAlbum: createAlbumReducer,
   currSong: getSongReducer,
-  audioSong: currSongReducer
+  audioSong: currSongReducer,
+  userSongs : getUserSongsReducer
 });
 
 let enhancer;
