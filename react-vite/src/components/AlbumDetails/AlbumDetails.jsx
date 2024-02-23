@@ -13,11 +13,6 @@ function AlbumDetails() {
     const { albumId } = useParams();
     const album = useSelector(state => state.newAlbum[albumId]);
 
-    const addToAlbum = async e => {
-        e.preventDefault()
-        console.log('hi')
-    }
-
     useEffect(() => {
         dispatch(loadOneAlbumThunk(albumId));
     }, [dispatch, albumId]);
