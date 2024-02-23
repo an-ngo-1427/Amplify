@@ -1,5 +1,7 @@
 .add-song-container {
     color: black;
+    display: flex;
+    flex-direction: column;
 }
 
 .playlist-songs {
@@ -21,4 +23,12 @@
 .playlist-song-info {
     display: flex;
     flex-direction: column;
+}
+
+.playlist-song-title{
+    list-style-type: none;
+}
+
+.add-playlist-button{
+
 }
