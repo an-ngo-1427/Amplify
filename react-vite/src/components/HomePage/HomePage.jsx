@@ -7,6 +7,7 @@ import Playlist from '../Playlist';
 import './HomePage.css';
 import { getUserPlaylistsThunk } from '../../redux/playlist';
 import ProfileButton from './ProfileButton';
+import AllAlbums from '../AllAlbums/AllAlbums';
 // import MusicPlayer from '../MusicPlayer/MusicPlayer';
 
 function HomePage() {
@@ -97,8 +98,9 @@ function HomePage() {
                         </div>
                     ) : (
                         <div>
-                            {/* Default content when no playlist is selected */}
-                            <div className='album-details'>Home Page</div>
+                            <div className='album-details'>
+                                <AllAlbums />
+                            </div>
                         </div>
                     )}
                 </div>
