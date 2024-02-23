@@ -17,13 +17,15 @@ function SongForm({song}) {
     console.log('user album',userAlbums)
 
     useEffect(()=>{
-        dispatch(getUserAlbumsThunk(user.id))
-        if(song){
-            setAudio(song.song_url)
-            setTitle(song.title)
-            setAlbum(song.album_title)
+        if(!Object.keys(userAlbums).length){
+            dispatch(getUserAlbumsThunk(user.id))
         }
-    },[])
+        if(song){
+            setTitle(song.title)
+            setAlbum(song.album_id)
+            setImageUrl(song.image_url)
+        }
+    },[userAlbums])
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -85,7 +87,7 @@ function SongForm({song}) {
                         onChange={(e) => {setAlbum(e.target.value)}}
                     >
                         <option value = "">Select an album</option>
-                        {/* {userAlbums && userAlbums.map(album=><option key = {album.id} value = {album.id}>{album.title}</option>)} */}
+                        {Object.keys(userAlbums).length && userAlbums.Albums.map(album=><option key = {album.id} value = {album.id}>{album.title}</option>)}
                     </select>
 
                 </div>
@@ -94,6 +96,7 @@ function SongForm({song}) {
                         name='image_url'
                         onChange={(e) => {setImageUrl(e.target.value)}}
                         value={image_url}
+                        placeholder="image_url"
                     />
 
                 </div>
@@ -107,8 +110,8 @@ function SongForm({song}) {
                     {formErr && <div style={{ 'color': 'red' }}>{errorObj.audio}</div>}
 
                 </div>
-                <button type='submit'
-                >Submit</button>
+                {song &&<button type='submit'>Update song</button>}
+                {!song &&<button type='submit'>Create song</button>}
             </form>
         </>
     )
