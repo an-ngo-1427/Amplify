@@ -36,5 +36,4 @@ class Song(db.Model):
             'updated_at': self.updated_at,
             'artist':self.user.to_dict(),
             'album_id':self.album_id,
-            # 'album': self.album.to_dict() if self.album else ''
         }
