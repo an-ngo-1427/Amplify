@@ -1,15 +1,62 @@
-textarea {
-    resize: none;
-}
-
 .edit-playlist-container {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background-color: #121212;
+    background-color: #181818;
+    padding: 20px;
+    width: 100%;
+}
+.edit-playlist-header{
+    text-align: center;
+}
+.edit-playlist-errors {
+    color: #e22134;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
-.edit-playlist-errors {
-    background-color: red;
-    color: white;
+.spotify-fieldset {
+    border: none;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; 
+}
+
+.spotify-legend {
+    color: #b3b3b3;
+    margin-bottom: 10px; 
+    font-size: 1.1rem; 
+}
+
+.spotify-input, .spotify-textarea {
+    background-color: #121212;
+    border: 1px solid #535353;
+    color: #fff;
+    padding: 15px; 
+    margin-bottom: 15px; 
+}
+
+.spotify-textarea {
+    resize: none;
+    height: 100px;
+}
+
+.spotify-save-btn {
+    background-color: #1DB954;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    display: block; 
+    margin: 0 auto; 
+    width: 20% 
+}
+
+.spotify-save-btn:hover {
+    background-color: #1ed760;
+}
+
+.spotify-edit-disclaimer {
+    font-size: 0.9rem; 
+    color: #b3b3b3;
+    margin-top: 30px; 
+    text-align: center;
 }

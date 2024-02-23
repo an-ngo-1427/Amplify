@@ -7,33 +7,31 @@ import {loadOneAlbumThunk, removeSongFromAlbum } from "../../redux/album";
 const AlbumSongTile = ({ song, album }) => {
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
     const handlePlaySong = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         dispatch(getCurrSong(song));
     };
 
     const removeAlbumSong = (e) => {
-        e.preventDefault()
-        dispatch(removeSongFromAlbum(song.id, album.id))
-        .then(dispatch(loadOneAlbumThunk(album.id)))
-    }
+        e.stopPropagation();
+        dispatch(removeSongFromAlbum(song.id, album.id));
+    };
 
     return (
-        <>
-            <div className="album-song-tile" >
-                <div
-                onClick={()=>navigate(`/songs/${song.id}`)}
-                className="album-song-info">
-                    <span className="album-song-title">{song.title}</span>
-                    <span className="album-song-artist">{song.artist.first_name} {song.artist.last_name}</span>
-                </div>
-                <div onClick={(e)=>handlePlaySong(e)} className="album-play-button">Play</div>
+        <div className="album-song-tile">
+            <div onClick={() => navigate(`/songs/${song.id}`)} className="album-song-info">
+                <span className="album-song-title">{song.title}</span>
+                <span className="album-song-artist">{song.artist.first_name} {song.artist.last_name}</span>
             </div>
-            {sessionUser.id === album?.user_id && (
-                <button onClick={removeAlbumSong}>Remove</button>
-            )}
-        </>
+            <div className="song-actions">
+                {sessionUser?.id === album?.user_id && (
+                    <button onClick={removeAlbumSong} className="album-remove-button">Remove</button>
+                )}
+                <div onClick={handlePlaySong} className="album-play-button">Play</div>
+            </div>
+        </div>
     );
 }
 
