@@ -51,6 +51,7 @@ def createSong():
 
     albumId = form.data['album']
 
+    print('create------',albumId)
 
     if(albumId):
         albumId = int(albumId)
@@ -89,8 +90,12 @@ def editSong(songId):
     audioFile.filename = get_unique_filename(audioFile.filename)
     upload = upload_file_to_s3(audioFile)
     albumId = form.data['album']
-    if(form.data['album']):
+
+    print('------eidt',albumId)
+    if(albumId):
         albumId = int(albumId)
+    else:
+        albumId = 0
 
     song.title = form.data['title']
     song.song_url = upload['url']
