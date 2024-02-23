@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrSong } from "../../redux/currSong";
 import './AlbumSongTile.css';
 import { useNavigate } from "react-router-dom";
-import { removeSongFromAlbum } from "../../redux/album";
+import {removeSongFromAlbum } from "../../redux/album";
 
 const AlbumSongTile = ({ song, album }) => {
     const sessionUser = useSelector(state => state.session.user);

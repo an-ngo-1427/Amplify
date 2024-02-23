@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, NavLink } from 'react-router-dom';
-import { loadOneAlbumThunk } from "../../redux/album";
+import {loadOneAlbumThunk} from "../../redux/album";
 import AlbumSongTile from '../AlbumSongTile/AlbumSongTile';
 import './AlbumDetails.css';
 import Songs from './Songs';
