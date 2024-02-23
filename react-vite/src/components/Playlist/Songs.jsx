@@ -7,6 +7,10 @@ import { addSongToPlaylist, getUserPlaylistsThunk } from "../../redux/playlist"
 function Songs({playlist}) {
     const dispatch = useDispatch()
     const allSongs = useSelector(state => Object.values(state.songs))
+    const allAlbums = useSelector(state => Object.values(state.newAlbum))
+
+    // console.log("THIS IS THE ALBUMS >>>>>>>>>>>>>>", allAlbums)
+
 
     useEffect(() => {
         dispatch(getSongsThunk())
@@ -23,12 +27,18 @@ function Songs({playlist}) {
     return (
         <div className="add-song-container">
             <h2>Let&apos;s find something for your playlist</h2>
-            {allSongs.map(song => (
+            {allSongs.map(song => {
+                const album = allAlbums.find(al => al.id === song.album_id)
+                console.log("THIS IS THE ALBUM ALBUM >>>>>>", album)
+                return (
                 <div key={song.id}>
-                    <li>{song.title}</li>
-                    <button onClick={() => addToPlaylist(song)}>Add to playlist</button>
+                    <img src={song.image_url} alt={song.title} className="playlist-song-image" />
+                    <li className="playlist-song-title">{song.title}</li>
+                    <span>{album.title}</span>
+                    <button className="add-playlist-button" onClick={() => addToPlaylist(song)}>Add to playlist</button>
+                    
                 </div>
-            ))}
+            )})}
         </div>
     )
 }
