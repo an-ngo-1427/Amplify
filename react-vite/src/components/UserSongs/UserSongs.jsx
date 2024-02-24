@@ -29,7 +29,11 @@ function UserSongs() {
                 </NavLink>
             </div>
             <h1>Your Songs</h1>
-            {Object.values(userSongs).map(song => <AlbumSongTile key={song.id} song={song} type='Songs' />)}
+            {Object.values(userSongs).map(song =>
+                <NavLink to={`/songs/${song.id}`} key={song.id}>
+                    <AlbumSongTile key={song.id} song={song} type='Songs' />
+                </NavLink>
+            )}
         </div>
     )
 }
