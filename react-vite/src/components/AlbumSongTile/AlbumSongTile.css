@@ -9,12 +9,14 @@
     margin-bottom: 5px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    width:80%;
+    margin:auto;
 }
 
 .song-actions {
     display: flex;
     align-items: center;
-    gap: 10px; 
+    gap: 10px;
 }
 
 .album-song-tile:hover {
@@ -38,17 +40,17 @@
 }
 
 .album-remove-button {
-    background-color: #e22134; 
+    background-color: #e22134;
     padding: 6px 16px;
     border-radius: 20px;
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
-    display: none; 
+    display: none;
     color: white;
 }
 
 .album-song-tile:hover .album-play-button,
 .album-song-tile:hover .album-remove-button {
-    display: inline-block; 
+    display: inline-block;
 }

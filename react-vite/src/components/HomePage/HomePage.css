@@ -48,7 +48,7 @@ ul {
 
 .main-homepage {
     display: grid;
-    grid-template-columns: 
+    grid-template-columns:
     "left-sidebar main-view"
     "now-playing-bar now-playing-bar";
     grid-template-columns: 414px 1fr;
@@ -182,9 +182,13 @@ button:hover {
     left: 0;
     bottom: 0;
     width: 100%;
-    
+
 }
 
 .main-page-details {
     padding-top: 30px;
+}
+
+.search:hover{
+    cursor: pointer;
 }

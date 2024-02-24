@@ -35,9 +35,9 @@ const AlbumSongTile = ({ song, album, type }) => {
                 {sessionUser?.id === song?.user_id && type == 'Album' && (
                     <button onClick={removeAlbumSong} className="album-remove-button">Remove</button>
                 )}
-                {sessionUser?.id === song?.user_id && type == 'Songs' && (
+                {/* {sessionUser?.id === song?.user_id && type == 'Songs' && (
                     <button onClick={deleteSong} className="album-remove-button">Remove</button>
-                )}
+                )} */}
                 <div onClick={handlePlaySong} className="album-play-button">Play</div>
             </div>
         </div>

@@ -149,8 +149,8 @@ def likeSong(songId):
     if not song:
         return {'message':'Song could not be found'},404
 
-    if session['_user_id'] == song.user_id:
-        return {'error':"Forbidden"}
+    if int(session['_user_id']) == int(song.user_id):
+        return {'error':"Forbidden"},401
     db.session.execute(likes.insert(),
                     params={"song_id": song.id,
                              "user_id": user.id})
@@ -171,7 +171,7 @@ def unlikeSong(songId):
         return {'message':'Song could not be found'},404
 
     if session['_user_id'] == song.user_id:
-        return {'error':"Forbidden"}
+        return {'error':"Forbidden"},401
     db.session.execute(likes.delete(),
                     params={"song_id": song.id,
                              "user_id": user.id})

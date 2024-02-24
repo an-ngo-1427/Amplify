@@ -4,6 +4,7 @@ import EditPlaylist from "../EditPlaylist/EditPlaylist";
 import { deletePlaylistThunk, getUserPlaylistsThunk, removeSongFromPlaylist } from "../../redux/playlist";
 import Songs from './Songs'
 import { getCurrSong } from "../../redux/currSong";
+import AudioPlayerComp from "../AudioPlayerComp/AudioPlayerComp";
 
 function Playlist({ playlist, onDelete }) {
     const sessionUser = useSelector(state => state.session.user);
@@ -25,15 +26,18 @@ function Playlist({ playlist, onDelete }) {
         await dispatch(getUserPlaylistsThunk());
     }
 
+    // const playPlaylist = ()=>{
+    // }
     return (
         <div>
             {playlist && (
                 <>
                     <h2>{playlist.title}</h2>
+                    {/* <i onClick={()=>{playPlaylist}} className="fa-regular fa-circle-play"/> */}
                     <h4>{playlist.description}</h4>
                     <h3>{sessionUser.username}</h3>
                     <OpenModalButton
-                        buttonText='...'
+                        buttonText='Edit Playlist'
                         modalComponent={<EditPlaylist playlist={playlist} />}
                     />
                     <ul>

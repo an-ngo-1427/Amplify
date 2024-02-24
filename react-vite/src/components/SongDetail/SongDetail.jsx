@@ -1,107 +1,112 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { getSongThunk } from '../../redux/songDetail'
 import { getCurrSong } from '../../redux/currSong'
-import {deleteSongThunk} from '../../redux/song'
-function SongDetail(){
-    const {songId} = useParams()
+import { deleteSongThunk } from '../../redux/song'
+import AmplifyLogo from "../../image/amplifylogo.jpeg";
+import './SongDetail.css'
+function SongDetail() {
+    const { songId } = useParams()
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const currSong = useSelector(state => state.currSong);
     const user = useSelector(state => state.session.user);
-
-    const [liked,setLiked] = useState(false)
+    const [liked, setLiked] = useState(currSong?.user_likes?.includes(user.id))
 
     const isCurrSong = Object.keys(currSong).length
+    let dateString = currSong?.created_at
+    dateString = dateString?.substring(5, dateString.length - 13)
+    console.log(dateString)
 
-
-    useEffect(()=>{
+    console.log('rendering:', liked)
+    useEffect(() => {
         dispatch(getSongThunk(songId))
-        // console.log(currSong)
+    }, [dispatch, isCurrSong, liked])
 
-        if (isCurrSong && user){
-            // console.log(currSong.user_likes,'outside')
-            if(currSong.user_likes.includes(user.id)){
-                setLiked(true)
-                // console.log(currSong.user_likes,'in if block')
-
-            }
-        }
-        // console.log('in effect',liked)
-    },[liked,dispatch,songId,user,isCurrSong])
-
-    function handlePlay(){
+    function handlePlay() {
         dispatch(getCurrSong(currSong))
     }
 
-    async function handleLike(e){
+    async function handleLike(e) {
         e.preventDefault()
         e.stopPropagation()
 
-        if (!user){
+        if (!user) {
             navigate('/login')
         }
-        if(!liked){
-            fetch(`/api/songs/${songId}/likes`,{
-                method:'POST'
-            })
-            setLiked(true)
-        }
-
+        await fetch(`/api/songs/${songId}/likes`, {
+            method: 'POST'
+        })
+        setLiked(true)
     }
 
-    async function handleUnlike(e){
+
+
+    async function handleUnlike(e) {
         e.preventDefault()
         e.stopPropagation()
-        if (!user){
+        if (!user) {
             navigate('/login')
         }
-        if(liked){
-            fetch(`/api/songs/${songId}/likes`,{
-                method:'DELETE'
-            })
-            setLiked(false)
-        }
+
+        await fetch(`/api/songs/${songId}/likes`, {
+            method: 'DELETE'
+        })
+        setLiked(false)
+        // setLiked(false)
+
     }
 
-    function handleEdit(e){
+    function handleEdit(e) {
         e.preventDefault()
         navigate(`/songs/${currSong.id}/edit`)
     }
 
-    function handleDelete(e){
+    function handleDelete(e) {
         e.preventDefault()
         dispatch(deleteSongThunk(songId))
-        .then(navigate('/songs/manage'))
+            .then(navigate('/songs/manage'))
     }
-    if(!Object.keys(currSong).length) return null
-    // console.log(currSong.user_id,user.id)
+    if (!Object.keys(currSong).length) return null
     return (
-        <>
+        <div className='song-detail-page'>
+            <div className="amplify-navigation-bar">
+                <NavLink to='/'>
+                    <img style={{ "width": "15%" }} className="amplify-logo" src={AmplifyLogo} />
+                </NavLink>
+            </div>
             <div className="song-detail-header">
-                <div className="song-image">
-                    <img src={currSong.image_url} alt={currSong.title}/>
-                </div>
-                <div className='song-info'>
-                    <h1>{currSong.title}</h1>
-                    <div>
-                        <span>{currSong.artist.first_name}</span>
-                        <span>{currSong.created_at}</span>
-                        <span>{currSong.likes}</span>
+                <div className='song-header-child1'>
+                    <div className="song-image">
+                        <img className="song-image-child" src={currSong.image_url} alt={currSong.title} />
                     </div>
+                    <div className='song-info'>
+                        <h1>{currSong.title}</h1>
+                        <div className='song-info-details'>
+                            <span>{currSong.artist.first_name}</span>
+                            <span>{dateString}</span>
+                            <span>Likes {currSong.likes}</span>
+                        </div>
+                        <i onClick={() => { handlePlay() }} className="fa-regular fa-circle-play" />
+                    </div>
+
                 </div>
                 <div className='song-int'>
-                    <button onClick={handlePlay}>play</button>
-                    {liked && <button onClick={(e)=>handleUnlike(e)}>Unlike</button>}
-                    {!liked && <button onClick={(e)=>handleLike(e)}>like</button>}
+                    {currSong.user_id != user.id && liked && <button onClick={(e) => handleUnlike(e)}>Unlike</button>}
+                    {currSong.user_id != user.id && !liked && <button onClick={(e) => handleLike(e)}>like</button>}
+
                 </div>
             </div>
-            {user.id == currSong.user_id && <button onClick={handleEdit}>edit</button>}
-            {user.id == currSong.user_id && <button onClick={handleDelete}>delete</button>}
-
-        </>
+            <div className='song-buttons'>
+                {user.id == currSong.user_id && <button className='edit-song' onClick={handleEdit}>edit</button>}
+                {user.id == currSong.user_id && <button className='delete-song' onClick={handleDelete}>delete</button>}
+            </div>
+            <div>
+                <NavLink to="/songs/manage">Manage songs</NavLink>
+            </div>
+        </div>
     );
 }
 

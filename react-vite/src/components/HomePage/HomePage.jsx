@@ -48,6 +48,10 @@ function HomePage() {
         window.alert('Log in or Sign up to create and share playlists.')
     };
 
+    const handleSearch  = (e)=>{
+        e.preventDefault();
+        window.alert('feature comming soon')
+    }
     return (
         <>
             <div className="main-homepage">
@@ -61,7 +65,10 @@ function HomePage() {
                                     </NavLink>
                                 </li>
                                 <li className="list-label">
-                                    <span className="link-label"><span className="search-icon"><i className="fa-solid fa-magnifying-glass" /> </span>Search</span>
+                                    <div className = 'search' onClick={handleSearch}>
+                                        <span className="link-label"><span className="search-icon"><i className="fa-solid fa-magnifying-glass" /> </span>Search</span>
+
+                                    </div>
                                 </li>
                             </ul>
                         </div>

@@ -125,6 +125,7 @@ function SongForm({ song }) {
                 {song && <button type='submit'>Update song</button>}
                 {!song && <button type='submit'>Create song</button>}
             </form>
+            {song && <NavLink to={`/songs/${song.id}`}>Back to song</NavLink>}
         </>
     )
 }

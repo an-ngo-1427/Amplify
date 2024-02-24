@@ -1,0 +1,40 @@
+.song-image-child{
+    width:60%;
+}
+
+.song-detail-page{
+    width:85%;
+    margin:auto;
+}
+
+.song-header-child1{
+    display: flex;
+}
+
+.song-info-details{
+    display: flex;
+    gap:15px;
+}
+
+.fa-circle-play{
+    display: flex;
+    font-size: 50px;
+    padding-top:20px;
+
+}
+
+.fa-circle-play::before{
+    cursor: pointer;
+}
+
+.edit-song,.delete-song{
+    font-size: large;
+    background-color: black;
+    color:white;
+    margin: 15px 0px 15px 20px;
+}
+
+.song-buttons{
+    display: flex;
+    gap:10px;
+}
