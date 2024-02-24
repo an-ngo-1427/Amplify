@@ -12,6 +12,7 @@ import AllAlbums from '../components/AllAlbums/AllAlbums';
 import AudioPlayerComp from '../components/AudioPlayerComp/AudioPlayerComp';
 import EditSong from '../components/EditSong';
 import UserSongs from '../components/UserSongs';
+import UserAlbums from '../components/UserAlbums';
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
       {
         path:'/songs/manage',
         element:<UserSongs/>
+      },
+      {
+        path:'/albums/manage',
+        element:<UserAlbums />
       }
     ],
   },

@@ -106,11 +106,13 @@ function HomePage() {
                         )}
                     </div>
                     {selectedPlaylist && sessionUser ? (
-                        <div className='playlist-details'>
-                            <Playlist playlist={selectedPlaylist} onDelete={handlePlaylistDelete} />
+                        <div className='main-page-details'>
+                            <div className='playlist-details'>
+                                <Playlist playlist={selectedPlaylist} onDelete={handlePlaylistDelete} />
+                            </div>
                         </div>
                     ) : (
-                        <div>
+                        <div className='main-page-details'>
                             <div className='album-details'>
                                 <AllAlbums />
                             </div>

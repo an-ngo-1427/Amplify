@@ -1,0 +1,47 @@
+.library-labels {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #a7a7a7;
+    font-size: 1.25rem;
+}
+
+.library-icon {
+    margin-right: 8px;
+}
+
+.library-new-icon {
+    background-color: transparent;
+    font-size: 1.5rem;
+    color: #a7a7a7;
+    border: none;
+}
+
+.library-container {
+    padding: 12px 12px;
+}
+
+.playlist-image {
+    height: 50px;
+    width: 50px;
+    margin-right: 8px;
+}
+
+.playlist-tile {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.playlist-name {
+    background-color: transparent;
+    font-size: 1.25rem;
+    color: white;
+    border: none;
+}
+
+.playlist-holder {
+    overflow-y: scroll;
+    padding-bottom: 55px;
+    max-height: 550px;
+}
