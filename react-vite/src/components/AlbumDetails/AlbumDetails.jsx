@@ -19,6 +19,8 @@ function AlbumDetails() {
         dispatch(loadOneAlbumThunk(albumId));
     }, [dispatch, albumId]);
 
+    console.log('THIS IS THE ALBUM DETAILS', album)
+
     return (
         <div className="album-details-container">
             <div className="amplify-navigation-bar">
@@ -27,10 +29,10 @@ function AlbumDetails() {
                 </NavLink>
             </div>
             <div className="album-details-header">
-                <img src={album.image_url} alt={`Album titled ${album.title}`} className="album-details-art" />
+                <img src={album?.image_url} alt={`Album titled ${album?.title}`} className="album-details-art" />
                 <div className="album-title-container">
                     <p className="album-prefix">Album</p>
-                    <h1 className="album-details-title">{album.title}</h1>
+                    <h1 className="album-details-title">{album?.title}</h1>
                 </div>
                 {sessionUser?.id === album?.user_id && (
                     <OpenModalButton

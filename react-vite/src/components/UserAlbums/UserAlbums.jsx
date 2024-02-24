@@ -8,7 +8,7 @@ function UserAlbums() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user)
-    const userAlbums = useSelector(state => state.newAlbum)
+    const userAlbums = useSelector(state => state.userAlbums)
 
     console.log('THIS IS THE USER ALBUMS', userAlbums)
 
@@ -19,11 +19,6 @@ function UserAlbums() {
     useEffect(() => {
         dispatch(getUserAlbumsThunk(user.id))
     }, [dispatch])
-
-    // const handleAlbumNavigate = async (e) => {
-    //     e.preventDefault();
-    //     navigate('/')
-    // }
 
     return (
         <>

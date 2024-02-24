@@ -45,6 +45,12 @@ function ProfileButton() {
         navigate("/songs/new");
     };
 
+    const manageAlbums = (e) => {
+        e.preventDefault();
+        closeMenu();
+        navigate('/albums/manage')
+    }
+
     const manageSongs = (e) => {
         e.preventDefault();
         closeMenu();
@@ -62,6 +68,9 @@ function ProfileButton() {
                 <div id="profile-login-drop-down">
                     <li className="new-song-label" onClick={newSong}>
                         <span className="dropdown-label-names">New Song</span>
+                    </li>
+                    <li className="manage-albums-label" onClick={manageAlbums}>
+                        <span className="dropdown-label-names">Manage Albums</span>
                     </li>
                     <li className="manage-songs-label" onClick={manageSongs}>
                         <span className="dropdown-label-names">Manage Songs</span>

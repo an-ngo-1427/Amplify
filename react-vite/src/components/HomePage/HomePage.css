@@ -137,12 +137,21 @@ button:hover {
     cursor: pointer;
 }
 
+.manage-albums-label:hover {
+    background-color: #353535;
+    cursor: pointer;
+}
+
 .logout-label:hover {
     background-color: #353535;
     cursor: pointer;
 }
 
 .new-song-label {
+    padding: 10px 10px;
+}
+
+.manage-albums-label {
     padding: 10px 10px;
 }
 
