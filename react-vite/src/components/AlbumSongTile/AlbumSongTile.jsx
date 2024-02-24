@@ -3,7 +3,7 @@ import { getCurrSong } from "../../redux/currSong";
 import './AlbumSongTile.css';
 import { useNavigate } from "react-router-dom";
 import {removeSongFromAlbum } from "../../redux/album";
-import { deleteSongThunk } from "../../redux/song";
+// import { deleteSongThunk } from "../../redux/song";
 
 const AlbumSongTile = ({ song, album, type }) => {
     const sessionUser = useSelector(state => state.session.user);
@@ -20,10 +20,10 @@ const AlbumSongTile = ({ song, album, type }) => {
         await dispatch(removeSongFromAlbum(song.id, album.id));
     };
 
-    const deleteSong = async (e) => {
-        e.stopPropagation()
-        await dispatch(deleteSongThunk(song.id))
-    }
+    // const deleteSong = async (e) => {
+    //     e.stopPropagation()
+    //     await dispatch(deleteSongThunk(song.id))
+    // }
 
     return (
         <div className="album-song-tile">

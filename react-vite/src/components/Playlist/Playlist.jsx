@@ -4,7 +4,7 @@ import EditPlaylist from "../EditPlaylist/EditPlaylist";
 import { deletePlaylistThunk, getUserPlaylistsThunk, removeSongFromPlaylist } from "../../redux/playlist";
 import Songs from './Songs'
 import { getCurrSong } from "../../redux/currSong";
-import AudioPlayerComp from "../AudioPlayerComp/AudioPlayerComp";
+// import AudioPlayerComp from "../AudioPlayerComp/AudioPlayerComp";
 
 function Playlist({ playlist, onDelete }) {
     const sessionUser = useSelector(state => state.session.user);
