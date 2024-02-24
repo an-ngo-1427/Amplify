@@ -6,7 +6,7 @@ import { addSongToAlbum } from "../../redux/album"
 function Songs({album}) {
     const dispatch = useDispatch()
     const allSongs = useSelector(state => Object.values(state.songs))
-    const songsNoAlbum = allSongs.filter(song => song.album_id === 0)
+    const songsNoAlbum = allSongs.filter(song => song.album_id === 0 || song.album_id == null)
 
     useEffect(() => {
         dispatch(getSongsThunk())
