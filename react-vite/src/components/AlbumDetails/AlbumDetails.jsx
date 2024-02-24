@@ -45,7 +45,7 @@ function AlbumDetails() {
             </div>
             <div className="album-details-songs">
                 {album?.songs?.map((song) => (
-                    <AlbumSongTile key={song.id} song={song} album={album} />
+                    <AlbumSongTile key={song.id} song={song} album={album} type='Album' />
                 ))}
             </div>
         </div>

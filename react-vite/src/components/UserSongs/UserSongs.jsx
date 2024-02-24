@@ -4,6 +4,7 @@ import { useNavigate, NavLink } from "react-router-dom"
 import { getUserSongsThunk } from "../../redux/song"
 import AlbumSongTile from "../AlbumSongTile/AlbumSongTile"
 import AmplifyLogo from "../../image/amplifylogo.jpeg";
+import './UserSongs.css'
 
 function UserSongs() {
     const navigate = useNavigate()
@@ -21,15 +22,15 @@ function UserSongs() {
 
 
     return (
-        <>
+        <div className="user-songs-container">
             <div className="amplify-navigation-bar">
                 <NavLink to='/'>
                     <img className="amplify-logo" src={AmplifyLogo} />
                 </NavLink>
             </div>
             <h1>Your Songs</h1>
-            {Object.values(userSongs).map(song => <AlbumSongTile key={song.id} song={song} />)}
-        </>
+            {Object.values(userSongs).map(song => <AlbumSongTile key={song.id} song={song} type='Songs' />)}
+        </div>
     )
 }
 
