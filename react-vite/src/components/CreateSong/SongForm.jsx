@@ -9,22 +9,27 @@ function SongForm({ song }) {
     // console.log('song -----',song)
     const [audio, setAudio] = useState()
     const [title, setTitle] = useState()
-    const [album, setAlbum] = useState(0)
+    const [album, setAlbum] = useState("")
     const [image_url, setImageUrl] = useState("")
     const [errorObj, setErrorObj] = useState({})
     const [formErr, setFormError] = useState(false)
-    const user = useSelector(state => state.session.user)
-    const userAlbums = useSelector(state => state.newAlbum)
+    const user = useSelector(state=>state.session.user)
+    const userAlbums = useSelector(state=>state.userAlbums.Albums)
 
     // console.log('user album',userAlbums)
 
-    useEffect(() => {
-        if (!Object.keys(userAlbums).length) {
+    useEffect(()=>{
+        if(!userAlbums){
             dispatch(getUserAlbumsThunk(user.id))
         }
         if (song) {
             setTitle(song.title)
-            setAlbum(song.album_id)
+
+            if(!song.album_id){
+                setAlbum("")
+            }else{
+                setAlbum(song.album_id)
+            }
             setImageUrl(song.image_url)
         }
     }, [userAlbums])
@@ -93,8 +98,8 @@ function SongForm({ song }) {
                         value={album}
                         onChange={(e) => { setAlbum(e.target.value) }}
                     >
-                        <option value={""} >Select an album</option>
-                        {Object.keys(userAlbums).map(album => <option key={album.id} value={album.id}>{album.title}</option>)}
+                        <option value ={""} >Select an album</option>
+                        {userAlbums && userAlbums.map(album=><option key = {album.id} value = {album.id}>{album.title}</option>)}
                     </select>
 
                 </div>

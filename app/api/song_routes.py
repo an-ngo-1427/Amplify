@@ -44,18 +44,19 @@ def createSong():
     if(not user):
         return {"message":"Unauthorized"}
 
-    if form.data['album'] is True:
-        album = Album.query.filter(Album.id == form.data['album'])
-        if not album:
-            return {'errors':"could not find the album"},404
+    # if form.data['album'] is True:
+    #     album = Album.query.filter(Album.id == form.data['album'])
+    #     if not album:
+    #         return {'errors':"could not find the album"},404
 
     albumId = form.data['album']
 
     print('create------',albumId)
 
-    if(albumId):
+    if(len(albumId)):
         albumId = int(albumId)
-
+    else:
+        albumId = None
     newSong = Song(
         title =  form.data['title'],
         user_id = user_id,
@@ -92,10 +93,10 @@ def editSong(songId):
     albumId = form.data['album']
 
     print('------eidt',albumId)
-    if(albumId):
+    if(len(albumId)):
         albumId = int(albumId)
     else:
-        albumId = 0
+        albumId = None
 
     song.title = form.data['title']
     song.song_url = upload['url']

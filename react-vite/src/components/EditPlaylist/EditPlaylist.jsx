@@ -29,23 +29,23 @@ function EditPlaylist({ playlist }) {
 
     return (
         <div className="edit-playlist-container">
-            <h2>Edit details</h2>
+            <h2 className='edit-playlist-header'>Edit details</h2>
             <div className='edit-playlist-errors'>{errors.title && `${errors.title}`}</div>
             <form onSubmit={handleSubmit}>
-                <fieldset>
-                    <legend>Name</legend>
-                    <input placeholder="Add a name" value={title} onChange={e => setTitle(e.target.value)} />
+                <fieldset className="spotify-fieldset">
+                    <legend className="spotify-legend">Name</legend>
+                    <input className="spotify-input" placeholder="Add a name" value={title} onChange={e => setTitle(e.target.value)} />
                 </fieldset>
-                <fieldset>
-                    <legend>Description</legend>
-                    <textarea placeholder="Add an optional description" value={description} onChange={e => setDescription(e.target.value)} />
+                <fieldset className="spotify-fieldset">
+                    <legend className="spotify-legend">Description</legend>
+                    <textarea className="spotify-textarea" placeholder="Add an optional description" value={description} onChange={e => setDescription(e.target.value)} />
                 </fieldset>
-                <button type='submit'>Save</button>
+                <button type='submit' className='spotify-save-btn'>Save</button>
             </form>
-            <p>By proceeding, you are agreeing to give Amplify access to the image you chose to upload.</p>
-            <p>Please make sure you have the right to upload the image.</p>
+            <p className="spotify-edit-disclaimer">By proceeding, you are agreeing to give Amplify access to the image you chose to upload.</p>
+            <p className="spotify-edit-disclaimer">Please make sure you have the right to upload the image.</p>
         </div>
-    )
+    );
 }
 
 export default EditPlaylist
