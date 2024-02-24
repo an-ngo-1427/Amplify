@@ -3,157 +3,157 @@ from sqlalchemy.sql import text
 
 def seed_songs():
     song1 = Song(
-        title = 'all-american bitch', user_id = 1, song_url = 'song.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
+        title = 'Get Going', user_id = 1, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Alex-Productions+-+Fresh++Rap+Racing+beat+_+Get+Going.mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song2 = Song(
-        title = 'bad idea right?', user_id = 1, song_url = 'song2.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
+        title = 'A moment', user_id = 1, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Blue+Dot+Sessions+-+A+moment.mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song3 = Song(
-        title = 'vampire', user_id = 1, song_url = 'song3.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
+        title = 'Emergent', user_id = 1, song_url = "https://amplify-music.s3.us-west-2.amazonaws.com/Blue+Dot+Sessions+-+Emergent.mp3", image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song4 = Song(
-        title = 'lacy', user_id = 1, song_url = 'song4.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
+        title = 'Dream GEnie', user_id = 1, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Blue+Dot+Sessions+-+Liquor+Files+-+Dream+Genie.mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song5 = Song(
-        title = 'ballad of a homeschooled girl', user_id = 1, song_url = 'song5.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
+        title = 'Pastel', user_id = 1, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Blue+Dot+Sessions+-+Liquor+Files+-+Pastel.mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song6 = Song(
-        title = 'making the bed', user_id = 1, song_url = 'song6.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
+        title = 'Spills 1', user_id = 1, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Blue+Dot+Sessions+-+Spills+(1).mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song7 = Song(
-        title = 'logical', user_id = 1, song_url = 'song7.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
+        title = 'Once a moment', user_id = 1, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Blue+Dot+Sessions+-+Stingray+-+Once+a+moment.mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song8 = Song(
-        title = 'get him back!', user_id = 1, song_url = 'song8.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
+        title = 'Trailing Comma', user_id = 1, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Blue+Dot+Sessions+-+Story+Four+-+Trailing+Comma.mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song9 = Song(
-        title = 'love is embarrassing', user_id = 1, song_url = 'song9.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
+        title = 'The Nocturne Interlude', user_id = 1, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Blue+Dot+Sessions+-+The+Nocturne+-+Interlude.mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song10 = Song(
-        title = 'the grudge', user_id = 1, song_url = 'song10.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
+        title = 'The Statis', user_id = 1, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Blue+Dot+Sessions+-+The+Stasis.mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song11 = Song(
-        title = "pretty isn't pretty", user_id = 1, song_url = 'song11.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
+        title = "Uncertainty", user_id = 1, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Blue+Dot+Sessions+-+Uncertainty.mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/0/03/Olivia_Rodrigo_-_Guts.png', album_id = 1
     )
     song12 = Song(
-        title = 'Intro', user_id = 2, song_url = 'song12.com', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
+        title = 'Indian Country', user_id = 2, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Bureaucratique+-+Indian+Country.mp3', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
     )
     song13 = Song(
-        title = 'Redeye', user_id = 2, song_url = 'song13.com', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
+        title = 'Au Loli Bois', user_id = 2, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Ergo+Phizmiz+-+Au+Joli+Bois.mp3', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
     )
     song14 = Song(
-        title = 'Boy Hachi', user_id = 2, song_url = 'song14.com', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
+        title = 'Leave Off Hymen', user_id = 2, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Ergo+Phizmiz+-+Leave+Off+Hymen.mp3', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
     )
     song15 = Song(
-        title = 'Let Go', user_id = 2, song_url = 'song15.com', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
+        title = 'Earning Happiness', user_id = 2, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/John+Bartmann+-+Earning+Happiness.mp3', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
     )
     song16 = Song(
-        title = 'Sly', user_id = 2, song_url = 'song16.com', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
+        title = 'Happy Clappy', user_id = 2, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/John+Bartmann+-+Happy+Clappy.mp3', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
     )
     song17 = Song(
-        title = 'Wonder', user_id = 2, song_url = 'song17.com', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
+        title = 'Tupac Lives', user_id = 2, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/John+Bartmann+-+Tupac+Lives.mp3', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
     )
     song18 = Song(
-        title = 'GPS', user_id = 2, song_url = 'song18.com', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
+        title = 'Intermission', user_id = 2, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/johnny_ripper+-+intermission.mp3', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
     )
     song19 = Song(
-        title = 'Sinner', user_id = 2, song_url = 'song19.com', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
+        title = 'Free Funky Clavinet', user_id = 2, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Lobo+Loco+-+Free+Funky+Clavinet+(F+011).mp3', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
     )
     song20 = Song(
-        title = 'Everywhere', user_id = 2, song_url = 'song20.com', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
+        title = 'Papageio Beach', user_id = 2, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Lobo+Loco+-+Papageio+Beach+(ID+1917).mp3', image_url = 'https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id = 2
     )
     song21 = Song(
-        title='Room 332', user_id=2, song_url='song21.com', image_url='https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id=2
+        title='Matt LeGroulx', user_id=2, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Matt+LeGroulx+-+9.mp3', image_url='https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id=2
     )
     song22 = Song(
-        title='Everytime', user_id=2, song_url='song22.com', image_url='https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id=2
+        title='Hiver Fou', user_id=2, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Portron+Portron+Lopez+-+Hiver+Fou.mp3', image_url='https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2F798a789395d38559cd1636a3db5f2612.1000x1000x1.png', album_id=2
     )
     song23 = Song(
-        title='Survival', user_id=3, song_url='song23.com', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
+        title='Joufflu', user_id=3, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Portron+Portron+Lopez+-+Joufflu.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
     )
     song24 = Song(
-        title='Nonstop', user_id=3, song_url='song24.com', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
+        title='La Tradition', user_id=3, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Portron+Portron+Lopez+-+La+Tradition.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
     )
     song25 = Song(
-        title='Elevate', user_id=3, song_url='song25.com', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
+        title='O Zepher', user_id=3, song_url='shttps://amplify-music.s3.us-west-2.amazonaws.com/Portron+Portron+Lopez+-+O%CC%82+Ze%CC%81phyr.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
     )
     song26 = Song(
-        title='Emotionless', user_id=3, song_url='song26.com', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
+        title='AOW 7', user_id=3, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Randy+Randall+-+AOW+7.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
     )
     song27 = Song(
-        title="God's Plan", user_id=3, song_url='song27.com', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
+        title="V", user_id=3, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Raul+Diaz+Palomar+-+V.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
     )
     song28 = Song(
-        title="I'm Upset", user_id=3, song_url='song28.com', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
+        title="VII", user_id=3, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Raul+Diaz+Palomar+-+VII.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
     )
     song29 = Song(
-        title='8 Out Of 10', user_id=3, song_url='song29.com', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
+        title='VIII', user_id=3, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Raul+Diaz+Palomar+-+VIII.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
     )
     song30 = Song(
-        title='Mob Ties', user_id=3, song_url='song30.com', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
+        title='New Town Break', user_id=3, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Rob+Rob+Rob+-+Newtown+Break.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
     )
     song31 = Song(
-        title="Can't Take A Joke", user_id=3, song_url='song31.com', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
+        title="Small Song 1", user_id=3, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Squire+Tuck+-+Small+Song+(1).mp3', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
     )
     song32 = Song(
-        title="Sandra's Rose", user_id=3, song_url='song32.com', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
+        title="Small Song", user_id=3, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Squire+Tuck+-+Small+Song.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
     )
     song33 = Song(
-        title='Talk Up', user_id=3, song_url='song33.com', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
+        title='Rockulele', user_id=3, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Squire+Tuck+-+Squire+Tuck+-+Rockulele.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
     )
     song34 = Song(
-        title='Is There More', user_id=3, song_url='song34.com', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
+        title='Truth, Lies and Indignation', user_id=3, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Squire+Tuck+-+Squire+Tuck+-+Truth%2C+Lies+%26+Indignation.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg', album_id=3
     )
     song35 = Song(
-        title='Welcome To New York', user_id=4, song_url='song35.com', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
+        title='Until the Bitter End', user_id=4, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Squire+Tuck+-+Squire+Tuck+-+Until+The+Bitter+End.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
     )
     song36 = Song(
-        title='Blank Space', user_id=4, song_url='song36.com', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
+        title='Spotlight on Your Soul', user_id=4, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Squire+Tuck+-+SquireTuck+-+Spotlight+on+Your+Soul.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
     )
     song37 = Song(
-        title='Style', user_id=4, song_url='song37.com', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
+        title='Bolas de te verde', user_id=4, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/VIC+BANG+-+Bolas+de+te%CC%81+verde.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
     )
     song38 = Song(
-        title='Out Of The Woods', user_id=4, song_url='song38.com', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
+        title='Ente Campestre', user_id=4, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/VIC+BANG+-+Ente+campestre.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
     )
     song39 = Song(
-        title='All You Had To Do Was Stay', user_id=4, song_url='song39.com', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
+        title='Ecsupy la dentadura', user_id=4, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/VIC+BANG+-+Escupi%CC%81+la+dentadura.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
     )
     song40 = Song(
-        title='Shake It Off', user_id=4, song_url='song40.com', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
+        title='todo sin resolver', user_id=4, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/VIC+BANG+-+Todo+sin+resolver.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
     )
     song41 = Song(
-        title='I Wish You', user_id=4, song_url='song41.com', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
+        title='I Wish You', user_id=4, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Rob+Rob+Rob+-+Newtown+Break.mp3', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
     )
     song42 = Song(
-        title='Bad Blood', user_id=4, song_url='song42.com', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
+        title='Bad Blood', user_id=4, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Squire+Tuck+-+Small+Song+(1).mp3', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
     )
     song43 = Song(
-        title='Wildest Dream', user_id=4, song_url='song43.com', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
+        title='Wildest Dream', user_id=4, song_url='https://amplify-music.s3.us-west-2.amazonaws.com/Squire+Tuck+-+Small+Song+(1).mp3', image_url='https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id=4
     )
     song44 = Song(
-        title = 'How You Get The Girl', user_id = 4, song_url = 'song44.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id = 4
+        title = 'How You Get The Girl', user_id = 4, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Squire+Tuck+-+Small+Song+(1).mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id = 4
     )
     song45 = Song(
-        title = 'This Love', user_id = 4, song_url = 'song45.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id = 4
+        title = 'This Love', user_id = 4, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Squire+Tuck+-+Small+Song+(1).mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id = 4
     )
     song46 = Song(
-        title = 'I Know Places', user_id = 4, song_url = 'song46.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id = 4
+        title = 'I Know Places', user_id = 4, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Blue+Dot+Sessions+-+A+moment.mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png?20231015132135', album_id = 4
     )
     song47 = Song(
-        title = 'Shopper', user_id = 5, song_url = 'song47.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/a/ae/IU_-_The_Winning.png', album_id = 5
+        title = 'Shopper', user_id = 5, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Blue+Dot+Sessions+-+A+moment.mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/a/ae/IU_-_The_Winning.png', album_id = 5
     )
     song48 = Song(
-        title = 'Holssi', user_id = 5, song_url = 'song48.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/a/ae/IU_-_The_Winning.png', album_id = 5
+        title = 'Holssi', user_id = 5, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Blue+Dot+Sessions+-+A+moment.mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/a/ae/IU_-_The_Winning.png', album_id = 5
     )
     song49 = Song(
-        title = 'Shh..', user_id = 5, song_url = 'song49.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/a/ae/IU_-_The_Winning.png', album_id = 5
+        title = 'Shh..', user_id = 5, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Blue+Dot+Sessions+-+A+moment.mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/a/ae/IU_-_The_Winning.png', album_id = 5
     )
     song50 = Song(
-        title = 'Love wins all', user_id = 5, song_url = 'song50.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/a/ae/IU_-_The_Winning.png', album_id = 5
+        title = 'Love wins all', user_id = 5, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Blue+Dot+Sessions+-+A+moment.mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/a/ae/IU_-_The_Winning.png', album_id = 5
     )
     song51 = Song(
-        title = 'I stan U', user_id = 5, song_url = 'song51.com', image_url = 'https://upload.wikimedia.org/wikipedia/en/a/ae/IU_-_The_Winning.png', album_id = 5
+        title = 'I stan U', user_id = 5, song_url = 'https://amplify-music.s3.us-west-2.amazonaws.com/Blue+Dot+Sessions+-+A+moment.mp3', image_url = 'https://upload.wikimedia.org/wikipedia/en/a/ae/IU_-_The_Winning.png', album_id = 5
     )
 
 
