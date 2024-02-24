@@ -20,10 +20,10 @@ const AlbumSongTile = ({ song, album, type }) => {
         await dispatch(removeSongFromAlbum(song.id, album.id));
     };
 
-    const deleteSong = async (e) => {
-        e.stopPropagation()
-        await dispatch(deleteSongThunk(song.id))
-    }
+    // const deleteSong = async (e) => {
+    //     e.stopPropagation()
+    //     await dispatch(deleteSongThunk(song.id))
+    // }
 
     return (
         <div className="album-song-tile">
