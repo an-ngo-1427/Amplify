@@ -9,7 +9,7 @@ function SongForm({ song }) {
     // console.log('song -----',song)
     const [audio, setAudio] = useState()
     const [title, setTitle] = useState()
-    const [album, setAlbum] = useState()
+    const [album, setAlbum] = useState("")
     const [image_url, setImageUrl] = useState("")
     const [errorObj, setErrorObj] = useState({})
     const [formErr, setFormError] = useState(false)
@@ -24,7 +24,12 @@ function SongForm({ song }) {
         }
         if (song) {
             setTitle(song.title)
-            setAlbum(song.album_id)
+
+            if(!song.album_id){
+                setAlbum("")
+            }else{
+                setAlbum(song.album_id)
+            }
             setImageUrl(song.image_url)
         }
     }, [userAlbums])
