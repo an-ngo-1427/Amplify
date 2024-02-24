@@ -12,8 +12,10 @@ function AlbumDetails() {
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
     const { albumId } = useParams();
-    const album = useSelector(state => state.newAlbum[albumId]);
-    const songs = useSelector(state => state.newAlbum[albumId]?.songs)
+    // const album = useSelector(state => state.newAlbum[albumId]);
+    // const songs = useSelector(state => state.newAlbum[albumId]?.songs)
+    const albumdata = useSelector(state => state.currAlbum);
+    const album = albumdata[albumId]
 
     useEffect(() => {
         dispatch(loadOneAlbumThunk(albumId));
@@ -42,7 +44,7 @@ function AlbumDetails() {
                 )}
             </div>
             <div className="album-details-songs">
-                {songs?.map((song) => (
+                {album?.songs?.map((song) => (
                     <AlbumSongTile key={song.id} song={song} album={album} />
                 ))}
             </div>

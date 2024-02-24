@@ -147,12 +147,14 @@ function createAlbumReducer(state = initialState, action) {
             state[action.albumId].songs.push(action.song)
             return state
         }
-        case REMOVE_FROM_ALBUM: {
-            console.log(state)
-            const songsArray = state[action.albumId].songs.filter(song => song.id !== action.songId)
-            state[action.albumId].songs = songsArray
-            return state
-        }
+        // case REMOVE_FROM_ALBUM: {
+        //     const songsArray = state[action.albumId].songs.filter(song => song.id !== action.songId)
+        //     state[action.albumId].songs = songsArray
+        //     console.log(state)
+        //     const newObj = {}
+        //     newObj = {...state}
+        //     return newObj
+        // }
         default:
             return state
     }
@@ -175,6 +177,14 @@ export function getOneAlbumReducer(state = initialState,action){
             const newObj = {}
             newObj[action.Album.id] = action.Album;
             return newObj;
+        }
+        case REMOVE_FROM_ALBUM: {
+            const songsArray = state[action.albumId].songs.filter(song => song.id !== action.songId)
+            state[action.albumId].songs = songsArray
+            console.log(state)
+            let newObj = {}
+            newObj = {...state}
+            return newObj
         }
     }
     return state
