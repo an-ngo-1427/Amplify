@@ -3,6 +3,7 @@ import OpenModalButton from "../OpenModalButton";
 import EditPlaylist from "../EditPlaylist/EditPlaylist";
 import { deletePlaylistThunk, getUserPlaylistsThunk, removeSongFromPlaylist } from "../../redux/playlist";
 import Songs from './Songs'
+import { getCurrSong } from "../../redux/currSong";
 
 function Playlist({ playlist, onDelete }) {
     const sessionUser = useSelector(state => state.session.user);
@@ -15,6 +16,10 @@ function Playlist({ playlist, onDelete }) {
         onDelete();
     }
 
+    const handlePlaySong = (song)=>{
+        // e.preventDefault();
+        dispatch(getCurrSong(song))
+    }
     const removePlaylistSong = async (songId) => {
         await dispatch(removeSongFromPlaylist(songId, playlist.id));
         await dispatch(getUserPlaylistsThunk());
@@ -42,7 +47,7 @@ function Playlist({ playlist, onDelete }) {
                                     </div>
                                 </div>
                                 <div className="playlist-song-right">
-                                    <i className="fa-regular fa-circle-play"/>
+                                    <i onClick={()=>{handlePlaySong(song)}}className="fa-regular fa-circle-play"/>
                                     <button onClick={() => removePlaylistSong(song.id)}>Remove</button>
                                 </div>
                             </div>
