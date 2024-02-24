@@ -31,18 +31,20 @@ function AlbumDetails() {
                 </NavLink>
             </div>
             <div className="album-details-header">
-                <img src={album?.image_url} alt={`Album titled ${album?.title}`} className="album-details-art" />
-                <div className="album-title-container">
-                    <p className="album-prefix">Album</p>
-                    <h1 className="album-details-title">{album?.title}</h1>
-                </div>
-                {sessionUser?.id === album?.user_id && (
-                    <OpenModalButton
-                        buttonText='Add to album'
-                        modalComponent={<Songs album={album} />}
-                    />
-                )}
-            </div>
+    <div className="album-info-container">
+        <img src={album?.image_url} alt={`Album titled ${album?.title}`} className="album-details-art" />
+        <div className="album-title-container">
+            <p className="album-prefix">Album</p>
+            <h1 className="album-details-title">{album?.title}</h1>
+        </div>
+    </div>
+    {sessionUser?.id === album?.user_id && (
+        <OpenModalButton
+            buttonText='Add to album'
+            modalComponent={<Songs album={album} />}
+        />
+    )}
+</div>
             <div className="album-details-songs">
                 {album?.songs?.map((song) => (
                     <AlbumSongTile key={song.id} song={song} album={album} type='Album' />
