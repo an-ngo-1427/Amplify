@@ -45,13 +45,8 @@ function HomePage() {
 
     const newPlaylist = async (e) => {
         e.preventDefault();
-        window.alert('Log in to create and share playlists.')
+        window.alert('Log in or Sign up to create and share playlists.')
     };
-
-    const newSong = async (e) => {
-        e.preventDefault()
-        window.alert('Log in to create and share songs.')
-    }
 
     return (
         <>
@@ -74,18 +69,12 @@ function HomePage() {
                             {sessionUser ? (
                                 <Library playlists={playlists} onPlaylistClick={handlePlaylistClick} />
                             ) : (
-                                <>
-                                    <div>Your Library</div>
-                                    <div>
-                                        <div>
-                                            <button onClick={newPlaylist}>New Playlist</button>
-
-                                        </div>
-                                        <div>
-                                            <button onClick={newSong}>New Song</button>
-                                        </div>
+                                <div className='library-container'>
+                                    <div className='library-labels'>
+                                        <div className="library-icon-text-container"><span className="library-icon"><i className="fa-solid fa-folder" /></span><span>Your Library</span></div>
+                                        <button onClick={newPlaylist} className="library-new-icon"><i className="fa-solid fa-plus"></i></button>
                                     </div>
-                                </>
+                                </div>
                             )}
                         </div>
                     </div>
