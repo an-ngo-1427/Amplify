@@ -1,0 +1,117 @@
+.playlist-details-container {
+    padding-bottom: 200px;
+  }
+  
+  .playlist-info-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .playlist-details-art {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+  }
+  
+  .playlist-title-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .playlist-prefix, .playlist-owner {
+    color: #b3b3b3;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .playlist-details-title, .playlist-details-description {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .playlist-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .playlist-buttons button, .edit-button-playlist {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .edit-button-playlist {
+    background-color: #ffffff;
+    color: black;
+  }
+  
+  .delete-button-playlist {
+    background-color: #ff4d4d;
+    color: white;
+  }
+  
+  .playlist-song-tile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #181818;
+    color: #fff;
+    transition: background-color 0.2s ease;
+  }
+  
+  .playlist-song-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+  
+  .song-info-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .song-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .playlist-play-button, .playlist-remove-button {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    display: inline-block;
+  }
+  
+  .playlist-play-button {
+    background-color: #1DB954;
+  }
+  
+  .playlist-remove-button {
+    background-color: #e22134;
+  }
+  
+  .playlist-song-tile:hover {
+    background-color: #282828;
+  }
+  
+  .playlist-song-tile:hover .playlist-play-button,
+  .playlist-song-tile:hover .playlist-remove-button {
+    display: inline-block;
+  }
+  

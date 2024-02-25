@@ -13,8 +13,9 @@
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    width: 80%;
+    width: 80.9%;
     margin: auto;
+    margin-bottom: 20px;
 }
 
 .album-details-art {
