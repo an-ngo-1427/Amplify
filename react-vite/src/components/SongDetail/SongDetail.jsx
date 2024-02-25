@@ -73,6 +73,7 @@ function SongDetail() {
           <img className="amplify-logo" src={AmplifyLogo} alt="Amplify" />
         </NavLink>
       </div>
+      {currSong.album_id && <NavLink className = 'album-link' to={`/albums/${currSong.album_id}`}>Go to Album</NavLink>}
       <div className="song-details-header">
         <div className="song-info-container">
           <img
