@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { getSongsThunk } from "../../redux/song"
 import { addSongToAlbum } from "../../redux/album"
 import './AddSongs.css'
-
+import { useModal } from "../../context/Modal"
 function Songs({album}) {
     const dispatch = useDispatch()
+    const {closeModal} = useModal()
     const allSongs = useSelector(state => Object.values(state.songs))
     const songsNoAlbum = allSongs.filter(song => song.album_id === 0 || song.album_id == null)
 
@@ -14,7 +15,8 @@ function Songs({album}) {
     }, [dispatch])
 
     const addToAlbum = async (song) => {
-        await dispatch(addSongToAlbum(song, album.id))
+        dispatch(addSongToAlbum(song, album.id))
+        .then(()=>{closeModal()})
     }
 
     return (
