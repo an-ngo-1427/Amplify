@@ -30,7 +30,7 @@ def createSong():
     # if form.validate_on_submit:
 
     audioFile = form.data['audio']
-    print (audioFile.filename)
+    # print (audioFile.filename)
     audioFile.filename = get_unique_filename(audioFile.filename)
     upload = upload_file_to_s3(audioFile)
 
@@ -51,7 +51,7 @@ def createSong():
 
     albumId = form.data['album']
 
-    print('create------',albumId)
+    # print('create------',albumId)
 
     if(len(albumId)):
         albumId = int(albumId)
@@ -92,7 +92,7 @@ def editSong(songId):
     upload = upload_file_to_s3(audioFile)
     albumId = form.data['album']
 
-    print('------eidt',albumId)
+    # print('------eidt',albumId)
     if(len(albumId)):
         albumId = int(albumId)
     else:
@@ -120,7 +120,7 @@ def deleteSong(songId):
         return {'errors':'Forbidden'},401
 
     aws_res = remove_file_from_s3(song.song_url)
-    print(aws_res)
+    # print(aws_res)
     if 'errors' in aws_res:
         return aws_res
 
