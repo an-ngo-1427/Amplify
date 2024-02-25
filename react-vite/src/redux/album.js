@@ -193,7 +193,7 @@ export function getOneAlbumReducer(state = initialState,action){
         case REMOVE_FROM_ALBUM: {
             const songsArray = state[action.albumId].songs.filter(song => song.id !== action.songId)
             state[action.albumId].songs = songsArray
-            console.log(state)
+            // console.log(state)
             let newObj = {}
             newObj = {...state}
             return newObj

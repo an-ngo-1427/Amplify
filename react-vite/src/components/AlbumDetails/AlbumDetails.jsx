@@ -22,7 +22,7 @@ function AlbumDetails() {
     dispatch(loadOneAlbumThunk(albumId));
   }, [dispatch, albumId]);
 
-  console.log("THIS IS THE ALBUM DETAILS", album);
+
   const handleDelete = async () => {
     await deleteAlbum(albumId).then((result) => {
       if (result.errors) {

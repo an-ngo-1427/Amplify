@@ -11,7 +11,7 @@ function UserAlbums() {
   const user = useSelector((state) => state.session.user);
   const userAlbums = useSelector((state) => state.userAlbums);
 
-  console.log("THIS IS THE USER ALBUMS", userAlbums);
+  // console.log("THIS IS THE USER ALBUMS", userAlbums);
 
   if (!user) {
     navigate("/login");

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { getSongThunk } from "../../redux/songDetail";
-import { getCurrSong } from "../../redux/currSong";
+// import { getCurrSong } from "../../redux/currSong";
 import { deleteSongThunk } from "../../redux/song";
 import AmplifyLogo from "../../image/amplifylogo.jpeg";
 import "./SongDetail.css";
@@ -18,16 +18,16 @@ function SongDetail() {
   const isCurrSong = Object.keys(currSong).length;
   let dateString = currSong?.created_at;
   dateString = dateString?.substring(5, dateString.length - 13);
-  console.log(dateString);
+  // console.log(dateString);
 
-  console.log("rendering:", liked);
+  // console.log("rendering:", liked);
   useEffect(() => {
     dispatch(getSongThunk(songId));
   }, [dispatch, isCurrSong, liked]);
 
-  function handlePlay() {
-    dispatch(getCurrSong(currSong));
-  }
+  // function handlePlay() {
+  //   dispatch(getCurrSong(currSong));
+  // }
 
   async function handleLike(e) {
     e.preventDefault();
