@@ -22,18 +22,22 @@ function UserAlbums() {
 
     return (
         <>
-        <div className="amplify-navigation-bar">
+            <div className="amplify-navigation-bar">
                 <NavLink to='/'>
                     <img className="amplify-logo" src={AmplifyLogo} />
                 </NavLink>
-        </div>
-        <h1>Your Albums</h1>
-        {userAlbums?.Albums?.map(album => (
-            <NavLink key={album.id} to={`/albums/${album.id}`} className='album-title-details'>
-                <img src={album.image_url} />
-                {album.title}
-            </NavLink>
-        ))}
+            </div>
+            <h1>Your Albums</h1>
+            {userAlbums?.Albums?.map(album => (
+                <NavLink key={album.id} to={`/albums/${album.id}`} className='album-title-details'>
+                    <img src={album.image_url} />
+                    {album.title}
+                </NavLink>
+            ))}
+            <div>
+                <NavLink to='/albums/new'>Create New Album</NavLink>
+
+            </div>
         </>
     )
 }
