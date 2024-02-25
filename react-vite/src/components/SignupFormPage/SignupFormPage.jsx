@@ -52,21 +52,24 @@ function SignupFormPage() {
     }
 
     if (password !== confirmPassword) {
-      newErrors.confirmPassword = "Confirm Password field must be the same as the Password field.";
+      newErrors.confirmPassword =
+        "Confirm Password field must be the same as the Password field.";
     }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
-      setErrors({}); 
+      setErrors({});
 
-      const serverResponse = await dispatch(thunkSignup({
-        email,
-        firstName,
-        lastName,
-        username,
-        password,
-      }));
+      const serverResponse = await dispatch(
+        thunkSignup({
+          first_name: firstName, 
+          last_name: lastName, 
+          username: username, 
+          email: email, 
+          password: password,
+        })
+      );
 
       if (serverResponse && serverResponse.errors) {
         setErrors(serverResponse.errors);
@@ -80,7 +83,7 @@ function SignupFormPage() {
     <div className="page-background">
       <div id="amplify-signup-wrapper">
         <div className="amplify-navigation-bar">
-          <NavLink to='/'>
+          <NavLink to="/">
             <img className="amplify-logo" src={AmplifyLogo} />
           </NavLink>
         </div>
@@ -88,7 +91,9 @@ function SignupFormPage() {
           <div className="amplify-signup-container">
             <div id="amplify-signup-box">
               <h1 id="amplify-signup-header">Sign Up</h1>
-              {errors.server && <p className="amplify-error-message">{errors.server}</p>}
+              {errors.server && (
+                <p className="amplify-error-message">{errors.server}</p>
+              )}
               <form className="amplify-signup-form" onSubmit={handleSubmit}>
                 <label className="amplify-signup-labels">
                   <p className="signup-form-labels">Email Address</p>
@@ -99,8 +104,10 @@ function SignupFormPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    />
-                    {errors.email && <p className="amplify-error-message">{errors.email}</p>}
+                  />
+                  {errors.email && (
+                    <p className="amplify-error-message">{errors.email}</p>
+                  )}
                 </label>
                 <label className="amplify-signup-labels">
                   <p className="signup-form-labels">First Name</p>
@@ -113,7 +120,9 @@ function SignupFormPage() {
                     required
                   />
                 </label>
-                {errors.firstName && <p className="amplify-error-message">{errors.firstName}</p>} 
+                {errors.firstName && (
+                  <p className="amplify-error-message">{errors.firstName}</p>
+                )}
                 <label className="amplify-signup-labels">
                   <p className="signup-form-labels">Last Name</p>
                   <input
@@ -125,7 +134,9 @@ function SignupFormPage() {
                     required
                   />
                 </label>
-                {errors.lastName && <p className="amplify-error-message">{errors.lastName}</p>} 
+                {errors.lastName && (
+                  <p className="amplify-error-message">{errors.lastName}</p>
+                )}
                 <label className="amplify-signup-labels">
                   <p className="signup-form-labels">Username</p>
                   <input
@@ -137,7 +148,9 @@ function SignupFormPage() {
                     required
                   />
                 </label>
-                {errors.username && <p className="amplify-error-message">{errors.username}</p>}
+                {errors.username && (
+                  <p className="amplify-error-message">{errors.username}</p>
+                )}
                 <label className="amplify-signup-labels">
                   <p className="signup-form-labels">Password</p>
                   <input
@@ -149,7 +162,9 @@ function SignupFormPage() {
                     required
                   />
                 </label>
-                {errors.password && <p className="amplify-error-message">{errors.password}</p>}
+                {errors.password && (
+                  <p className="amplify-error-message">{errors.password}</p>
+                )}
                 <label className="amplify-signup-labels">
                   <p className="signup-form-labels">Confirm Password</p>
                   <input
@@ -161,15 +176,23 @@ function SignupFormPage() {
                     required
                   />
                 </label>
-                {errors.confirmPassword && <p className="amplify-error-message">{errors.confirmPassword}</p>}
+                {errors.confirmPassword && (
+                  <p className="amplify-error-message">
+                    {errors.confirmPassword}
+                  </p>
+                )}
                 <div className="amplify-signup-action-button">
-                  <button id="amplify-signup-submit" type="submit">Sign Up</button>
+                  <button id="amplify-signup-submit" type="submit">
+                    Sign Up
+                  </button>
                 </div>
               </form>
               <hr className="horizontal-line"></hr>
               <div className="amplify-login-link-container">
                 <p>Already have an account?</p>
-                <NavLink to="/login" className="amplify-login-link">Log in here.</NavLink>
+                <NavLink to="/login" className="amplify-login-link">
+                  Log in here.
+                </NavLink>
               </div>
             </div>
           </div>

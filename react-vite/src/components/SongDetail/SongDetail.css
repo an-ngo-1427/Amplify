@@ -1,40 +1,95 @@
-.song-image-child{
-    width:60%;
+.song-detail-container {
+    padding-bottom: 200px;
+    width: 80%;
+    margin: auto;
 }
 
-.song-detail-page{
-    width:85%;
-    margin:auto;
+.amplify-navigation-bar {
+    margin-bottom: 20px; 
 }
 
-.song-header-child1{
+.song-details-header {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-.song-info-details{
+.song-info-container {
     display: flex;
-    gap:15px;
+    align-items: center;
+    gap: 20px;
 }
 
-.fa-circle-play{
+.song-details-art {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+}
+
+.song-title-container {
     display: flex;
-    font-size: 50px;
-    padding-top:20px;
-
+    flex-direction: column;
 }
 
-.fa-circle-play::before{
+.song-prefix {
+    color: #b3b3b3;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.song-details-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.song-info-details {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.song-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.song-buttons .delete-song-detail {
+    background-color: #ff4d4d; 
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-.edit-song,.delete-song{
-    font-size: large;
-    background-color: black;
-    color:white;
-    margin: 15px 0px 15px 20px;
+.edit-song{
+    background-color: white;
+    color: black;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.song-buttons{
-    display: flex;
-    gap:10px;
+.manage-songs-btn {
+    display: inline-block; 
+    background-color: #1db954;
+    color: white; 
+    padding: 10px 15px;
+    font-size: 16px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    text-decoration: none; 
+    margin: 20px 0; 
+    transition: background-color 0.3s ease; 
+}
+
+.manage-songs-btn:hover {
+    background-color: #0056b3; 
 }

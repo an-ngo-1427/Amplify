@@ -5,7 +5,6 @@ import { getUserSongsThunk } from "../../redux/song"
 import AlbumSongTile from "../AlbumSongTile/AlbumSongTile"
 import AmplifyLogo from "../../image/amplifylogo.jpeg";
 import './UserSongs.css'
-
 function UserSongs() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
