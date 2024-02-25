@@ -95,10 +95,10 @@ function SongDetail() {
         </div>
         <div className="song-buttons">
           {currSong.user_id !== user?.id && liked && (
-            <button onClick={(e) => handleUnlike(e)}>Unlike</button>
+            <button className = 'album-play-button'onClick={(e) => handleUnlike(e)}>Unlike</button>
           )}
           {currSong.user_id !== user?.id && !liked && (
-            <button onClick={(e) => handleLike(e)}>Like</button>
+            <button className = 'album-play-button' onClick={(e) => handleLike(e)}>Like</button>
           )}
           {user?.id === currSong.user_id && (
             <button className="edit-song" onClick={handleEdit}>
