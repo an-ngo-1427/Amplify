@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { thunkCreateAlbum } from "../../redux/album"
 
 function AlbumForm() {
@@ -36,6 +36,7 @@ function AlbumForm() {
     }, [title])
 
     return (
+        <>
         <form onSubmit={handleSubmit}>
             <div>
                 <input
@@ -55,6 +56,9 @@ function AlbumForm() {
             </div>
             <button type='submit'>Create Album</button>
         </form>
+
+        <NavLink to='/albums/manage'>{`< Manage Albums`}</NavLink>
+        </>
     )
 }
 
