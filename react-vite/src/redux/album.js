@@ -46,6 +46,8 @@ export const removeSong = (songId, albumId) => ({
     albumId
 })
 
+
+
 // export const uploadAlbumImage = (img) => (
 //     {
 //         type: UPLOAD_ALBUM_IMAGE,
@@ -121,6 +123,13 @@ export const removeSongFromAlbum = (songId, albumId) => async (dispatch) => {
     }
 }
 
+export const deleteAlbum = async (albumId)=>{
+    const response = await fetch(`/api/albums/${albumId}/delete`,{
+        method:'DELETE'
+    })
+    const data = await response.json()
+    return data
+}
 // export const thunkUploadImage = (img) => async (dispatch) => {
 //     const response = await fetch ('/api/albums/')
 // }
