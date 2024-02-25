@@ -13,7 +13,7 @@ function SongDetail() {
 
   const currSong = useSelector((state) => state.currSong);
   const user = useSelector((state) => state.session.user);
-  const [liked, setLiked] = useState(currSong?.user_likes?.includes(user.id));
+  const [liked, setLiked] = useState(currSong?.user_likes?.includes(user?.id));
 
   const isCurrSong = Object.keys(currSong).length;
   let dateString = currSong?.created_at;
@@ -84,25 +84,27 @@ function SongDetail() {
             <p className="song-prefix">Song</p>
             <h1 className="song-details-title">{currSong.title}</h1>
             <div className="song-info-details">
-  <span className="song-detail">By: {currSong.artist.first_name}</span>
-  <span className="song-detail">Created On: {dateString}</span>
-  <span className="song-detail">Likes: {currSong.likes}</span>
+              <span className="song-detail">
+                By: {currSong.artist.first_name}
+              </span>
+              <span className="song-detail">Created On: {dateString}</span>
+              <span className="song-detail">Likes: {currSong.likes}</span>
             </div>
           </div>
         </div>
         <div className="song-buttons">
-          {currSong.user_id !== user.id && liked && (
+          {currSong.user_id !== user?.id && liked && (
             <button onClick={(e) => handleUnlike(e)}>Unlike</button>
           )}
-          {currSong.user_id !== user.id && !liked && (
+          {currSong.user_id !== user?.id && !liked && (
             <button onClick={(e) => handleLike(e)}>Like</button>
           )}
-          {user.id === currSong.user_id && (
+          {user?.id === currSong.user_id && (
             <button className="edit-song" onClick={handleEdit}>
               Edit
             </button>
           )}
-          {user.id === currSong.user_id && (
+          {user?.id === currSong.user_id && (
             <button className="delete-song-detail" onClick={handleDelete}>
               Delete
             </button>
@@ -116,7 +118,6 @@ function SongDetail() {
       </div>
     </div>
   );
-  ƒ;
 }
 
 export default SongDetail;
