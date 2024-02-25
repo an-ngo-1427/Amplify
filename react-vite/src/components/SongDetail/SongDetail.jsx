@@ -84,11 +84,9 @@ function SongDetail() {
             <p className="song-prefix">Song</p>
             <h1 className="song-details-title">{currSong.title}</h1>
             <div className="song-info-details">
-              <span className="song-detail">
-                By: {currSong.artist.first_name}
-              </span>
-              <span className="song-detail">Created On: {dateString}</span>
-              <span className="song-detail">Likes: {currSong.likes}</span>
+  <span className="song-detail">By: {currSong.artist.first_name}</span>
+  <span className="song-detail">Created On: {dateString}</span>
+  <span className="song-detail">Likes: {currSong.likes}</span>
             </div>
           </div>
         </div>
