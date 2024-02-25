@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink, useNavigate } from "react-router-dom"
 import { thunkCreateAlbum } from "../../redux/album"
+import './AlbumForm.css'
 
 function AlbumForm() {
     const navigate = useNavigate()
@@ -37,29 +38,32 @@ function AlbumForm() {
 
     return (
         <>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <input
-                    placeholder="Album Title"
-                    onChange={(e) => { setTitle(e.target.value) }}
-                    name='title'
-                    type='text'
-                />
-                {formErr && <div style = {{'color':'red'}}>{errObj.title}</div>}
-            </div>
-            <div>
-                <input
-                    placeholder="Album image url"
-                    onChange={(e) => { setImageurl(e.target.value) }}
-                    name='image_url'
-                />
-            </div>
-            <button type='submit'>Create Album</button>
-        </form>
-
-        <NavLink to='/albums/manage'>{`< Manage Albums`}</NavLink>
+        <div className="album-form-container">
+            <form onSubmit={handleSubmit} className="album-form">
+                <div>
+                    <input
+                        placeholder="Album Title"
+                        onChange={(e) => setTitle(e.target.value)}
+                        name="title"
+                        type="text"
+                        className="album-form-input"
+                    />
+                    {formErr && errObj.title && <div className="album-form-error">{errObj.title}</div>}
+                </div>
+                <div>
+                    <input
+                        placeholder="Album Image URL"
+                        onChange={(e) => setImageurl(e.target.value)}
+                        name="image_url"
+                        className="album-form-input"
+                    />
+                </div>
+                <button type="submit" className="album-form-button">Create Album</button>
+            </form>
+        </div>
+        {/* <NavLink to="/albums/manage" className="back-to-albums-link">{'Manage Albums'}</NavLink> */}
         </>
-    )
+    );
 }
 
 
