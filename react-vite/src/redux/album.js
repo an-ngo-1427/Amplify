@@ -152,10 +152,13 @@ function createAlbumReducer(state = initialState, action) {
         //     newObj[action.Album.id] = action.Album;
         //     return newObj;
         // }
-        case ADD_TO_ALBUM: {
-            state[action.albumId].songs.push(action.song)
-            return state
-        }
+        // case ADD_TO_ALBUM: {
+        //     state[action.albumId].songs.push(action.song)
+        //     // let newObj = {}
+        //     // newObj = {...state}
+        //     // return newObj;
+        //     return state
+        // }
         // case REMOVE_FROM_ALBUM: {
         //     const songsArray = state[action.albumId].songs.filter(song => song.id !== action.songId)
         //     state[action.albumId].songs = songsArray
@@ -194,6 +197,13 @@ export function getOneAlbumReducer(state = initialState,action){
             let newObj = {}
             newObj = {...state}
             return newObj
+        }
+        case ADD_TO_ALBUM: {
+            state[action.albumId].songs.push(action.song)
+            let newObj = {}
+            newObj = {...state}
+            return newObj;
+            // return state
         }
     }
     return state
