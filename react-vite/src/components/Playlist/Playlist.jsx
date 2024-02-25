@@ -52,6 +52,10 @@ function Playlist({ playlist, onDelete }) {
       </div>
       <div className="playlist-buttons">
         <OpenModalButton
+          buttonText="Add Song"
+          modalComponent={<Songs playlist={playlist} />}
+        />
+        <OpenModalButton
           buttonText="Edit Playlist"
           modalComponent={<EditPlaylist playlist={playlist} />}
           className="edit-button-playlist"
