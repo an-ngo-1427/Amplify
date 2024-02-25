@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { thunkLogout } from "../../redux/session";
 import './HomePage.css';
 
-function ProfileButton({ user }) {
+function ProfileButton() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
@@ -45,6 +45,12 @@ function ProfileButton({ user }) {
         navigate("/songs/new");
     };
 
+    const manageAlbums = (e) => {
+        e.preventDefault();
+        closeMenu();
+        navigate('/albums/manage')
+    }
+
     const manageSongs = (e) => {
         e.preventDefault();
         closeMenu();
@@ -59,19 +65,20 @@ function ProfileButton({ user }) {
                 <i className="fa-regular fa-circle-user"></i>
             </button>
             <ul className={ulClassName} ref={ulRef}>
-                    <div id="profile-login-drop-down">
-                        <li>Hello, {user.first_name}</li>
-                        <li>{user.email}</li>
-                        <li>
-                            <button className='new-song-button' onClick={newSong}>New Song</button>
-                        </li>
-                        <li>
-                            <button className='manage-songs-button' onClick={manageSongs}>Manage Songs</button>
-                        </li>
-                        <li className='logout-button-list-space'>
-                            <button className='logout-button' onClick={logout}>Log Out</button>
-                        </li>
-                    </div>
+                <div id="profile-login-drop-down">
+                    <li className="new-song-label" onClick={newSong}>
+                        <span className="dropdown-label-names">New Song</span>
+                    </li>
+                    <li className="manage-albums-label" onClick={manageAlbums}>
+                        <span className="dropdown-label-names">Manage Albums</span>
+                    </li>
+                    <li className="manage-songs-label" onClick={manageSongs}>
+                        <span className="dropdown-label-names">Manage Songs</span>
+                    </li>
+                    <li className='logout-label' onClick={logout}>
+                        <span className="dropdown-label-names">Logout</span>
+                    </li>
+                </div>
             </ul>
         </>
     );

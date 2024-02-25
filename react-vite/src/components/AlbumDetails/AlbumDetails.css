@@ -2,10 +2,20 @@
     padding-bottom: 200px;
 }
 
-.album-details-header {
+.album-info-container {
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.album-details-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 80.9%;
+    margin: auto;
+    margin-bottom: 20px;
 }
 
 .album-details-art {
@@ -31,3 +41,24 @@
     font-weight: bold;
     margin: 0;
 }
+
+.album-details-header button {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 15px;
+}
+
+.album-details-header .delete-button-album {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.song-info-details{
+    color: #666;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  

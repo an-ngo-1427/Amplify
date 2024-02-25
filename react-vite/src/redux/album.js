@@ -46,6 +46,8 @@ export const removeSong = (songId, albumId) => ({
     albumId
 })
 
+
+
 // export const uploadAlbumImage = (img) => (
 //     {
 //         type: UPLOAD_ALBUM_IMAGE,
@@ -121,6 +123,13 @@ export const removeSongFromAlbum = (songId, albumId) => async (dispatch) => {
     }
 }
 
+export const deleteAlbum = async (albumId)=>{
+    const response = await fetch(`/api/albums/${albumId}/delete`,{
+        method:'DELETE'
+    })
+    const data = await response.json()
+    return data
+}
 // export const thunkUploadImage = (img) => async (dispatch) => {
 //     const response = await fetch ('/api/albums/')
 // }
@@ -143,16 +152,21 @@ function createAlbumReducer(state = initialState, action) {
         //     newObj[action.Album.id] = action.Album;
         //     return newObj;
         // }
-        case ADD_TO_ALBUM: {
-            state[action.albumId].songs.push(action.song)
-            return state
-        }
-        case REMOVE_FROM_ALBUM: {
-            console.log(state)
-            const songsArray = state[action.albumId].songs.filter(song => song.id !== action.songId)
-            state[action.albumId].songs = songsArray
-            return state
-        }
+        // case ADD_TO_ALBUM: {
+        //     state[action.albumId].songs.push(action.song)
+        //     // let newObj = {}
+        //     // newObj = {...state}
+        //     // return newObj;
+        //     return state
+        // }
+        // case REMOVE_FROM_ALBUM: {
+        //     const songsArray = state[action.albumId].songs.filter(song => song.id !== action.songId)
+        //     state[action.albumId].songs = songsArray
+        //     console.log(state)
+        //     const newObj = {}
+        //     newObj = {...state}
+        //     return newObj
+        // }
         default:
             return state
     }
@@ -175,6 +189,21 @@ export function getOneAlbumReducer(state = initialState,action){
             const newObj = {}
             newObj[action.Album.id] = action.Album;
             return newObj;
+        }
+        case REMOVE_FROM_ALBUM: {
+            const songsArray = state[action.albumId].songs.filter(song => song.id !== action.songId)
+            state[action.albumId].songs = songsArray
+            // console.log(state)
+            let newObj = {}
+            newObj = {...state}
+            return newObj
+        }
+        case ADD_TO_ALBUM: {
+            state[action.albumId].songs.push(action.song)
+            let newObj = {}
+            newObj = {...state}
+            return newObj;
+            // return state
         }
     }
     return state

@@ -1,0 +1,91 @@
+.song-detail-container {
+    padding-bottom: 200px;
+    width: 80%;
+    margin: auto;
+}
+
+.amplify-navigation-bar {
+    margin-bottom: 20px; 
+}
+
+.song-details-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.song-info-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.song-details-art {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+}
+
+.song-title-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.song-prefix {
+    color: #b3b3b3;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.song-details-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.song-info-details {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.song-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.song-buttons .delete-song-detail {
+    background-color: #ff4d4d; 
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-song{
+    background-color: white;
+    color: black;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.manage-songs-btn {
+    display: inline-block; 
+    background-color: #1db954;
+    color: white; 
+    padding: 10px 15px;
+    font-size: 16px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    text-decoration: none; 
+    margin: 20px 0; 
+}
+

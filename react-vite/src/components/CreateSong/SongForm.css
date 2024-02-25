@@ -1,0 +1,90 @@
+.song-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #fff;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
+
+.song-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    background-color: #181818;
+    border-radius: 8px;
+    padding: 25px;
+}
+
+.song-form-input{
+    background-color: #282828;
+    border: 1px solid #404040;
+    border-radius: 4px;
+    padding: 10px 15px;
+    color: #fff;
+    outline: none;
+    width: 95%;
+}
+
+.song-form-select {
+    background-color: #282828;
+    border: 1px solid #404040;
+    border-radius: 4px;
+    padding: 10px 15px;
+    color: #fff;
+    outline: none;
+    width: 99%;
+}
+
+
+.song-form-input::placeholder,
+.song-form-select::placeholder {
+    color: #b3b3b3;
+}
+
+.song-form-input:focus,
+.song-form-select:focus {
+    border-color: #1db954;
+}
+
+.song-form-button {
+    background-color: #1db954;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: center;
+}
+
+.song-form-button:hover {
+    background-color: #1ed760;
+}
+
+.song-form-error {
+    color: #e22134;
+    font-size: 14px;
+}
+
+.back-to-song-link {
+    display: block;
+    margin-top: 20px;
+    color: #1db954;
+    text-align: center;
+    text-decoration: none;
+}
+
+.amplify-navigation-bar {
+    margin-bottom: 20px;
+}
+
+.amplify-logo {
+    width: 100px;
+    height: auto;
+}

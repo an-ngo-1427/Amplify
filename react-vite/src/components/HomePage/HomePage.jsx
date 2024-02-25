@@ -45,14 +45,13 @@ function HomePage() {
 
     const newPlaylist = async (e) => {
         e.preventDefault();
-        window.alert('Log in to create and share playlists.')
+        window.alert('Log in or Sign up to create and share playlists.')
     };
 
-    const newSong = async (e) => {
-        e.preventDefault()
-        window.alert('Log in to create and share songs.')
+    const handleSearch  = (e)=>{
+        e.preventDefault();
+        window.alert('feature comming soon')
     }
-
     return (
         <>
             <div className="main-homepage">
@@ -66,7 +65,10 @@ function HomePage() {
                                     </NavLink>
                                 </li>
                                 <li className="list-label">
-                                    <span className="link-label"><span className="search-icon"><i className="fa-solid fa-magnifying-glass" /> </span>Search</span>
+                                    <div className = 'search' onClick={handleSearch}>
+                                        <span className="link-label"><span className="search-icon"><i className="fa-solid fa-magnifying-glass" /> </span>Search</span>
+
+                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -74,18 +76,12 @@ function HomePage() {
                             {sessionUser ? (
                                 <Library playlists={playlists} onPlaylistClick={handlePlaylistClick} />
                             ) : (
-                                <>
-                                    <div>Your Library</div>
-                                    <div>
-                                        <div>
-                                            <button onClick={newPlaylist}>New Playlist</button>
-
-                                        </div>
-                                        <div>
-                                            <button onClick={newSong}>New Song</button>
-                                        </div>
+                                <div className='library-container'>
+                                    <div className='library-labels'>
+                                        <div className="library-icon-text-container"><span className="library-icon"><i className="fa-solid fa-folder" /></span><span>Your Library</span></div>
+                                        <button onClick={newPlaylist} className="library-new-icon"><i className="fa-solid fa-plus"></i></button>
                                     </div>
-                                </>
+                                </div>
                             )}
                         </div>
                     </div>
@@ -106,11 +102,13 @@ function HomePage() {
                         )}
                     </div>
                     {selectedPlaylist && sessionUser ? (
-                        <div className='playlist-details'>
-                            <Playlist playlist={selectedPlaylist} onDelete={handlePlaylistDelete} />
+                        <div className='main-page-details'>
+                            <div className='playlist-details'>
+                                <Playlist playlist={selectedPlaylist} onDelete={handlePlaylistDelete} />
+                            </div>
                         </div>
                     ) : (
-                        <div>
+                        <div className='main-page-details'>
                             <div className='album-details'>
                                 <AllAlbums />
                             </div>

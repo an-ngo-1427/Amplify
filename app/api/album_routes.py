@@ -36,9 +36,9 @@ def new_album():
 @login_required
 def add_songs(id):
     data = request.json
-    print('DATA >>>>>', data)
+    # print('DATA >>>>>', data)
     for d in data["songId"]:
-        print("THIS IS OUR D:", d)
+        # print("THIS IS OUR D:", d)
         song = Song.query.get(d)
         song.album_id = id
     db.session.commit()

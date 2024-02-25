@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
 import { createPlaylistThunk } from '../../redux/playlist';
+import playlistIcon from '../../image/playlist.png';
+import './Library.css';
 
 function Library({ playlists, onPlaylistClick }) {
     const dispatch = useDispatch();
@@ -14,19 +16,22 @@ function Library({ playlists, onPlaylistClick }) {
     };
 
     return (
-        <>
-            <div>Your Library</div>
-            <button onClick={newPlaylist}>New Playlist</button>
-            <ul>
+        <div className="library-container">
+            <div className="library-labels">
+                <div className="library-icon-text-container"><span className="library-icon"><i className="fa-solid fa-folder" /></span><span>Your Library</span></div>
+                <button onClick={newPlaylist} className="library-new-icon"><i className="fa-solid fa-plus"></i></button>
+            </div>
+            <ul className='playlist-holder'>
                 {playlists.map((playlist) => (
-                    <li key={playlist.id}>
-                        <button onClick={() => onPlaylistClick(playlist)}>
+                    <li className='playlist-tile' key={playlist.id}>
+                        <img className='playlist-image' src={playlistIcon}></img>
+                        <button className='playlist-name' onClick={() => onPlaylistClick(playlist)}>
                             {playlist.title}
                         </button>
                     </li>
                 ))}
             </ul>
-        </>
+        </div>
     );
 }
 

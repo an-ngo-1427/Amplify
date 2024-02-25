@@ -1,0 +1,53 @@
+.playlist-song-modal-container {
+    background-color: #282828; 
+    color: #FFFFFF; 
+    padding: 20px; 
+    width: 100%;
+}
+
+.playlist-song-modal-title {
+    color: #1DB954; 
+    margin-bottom: 20px; 
+}
+
+.playlist-song-list {
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+}
+
+.playlist-song-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; 
+    padding: 10px; 
+    border-radius: 4px; 
+    background-color: #333333;
+}
+
+.playlist-song-info {
+    display: flex;
+    align-items: center;
+}
+
+.playlist-song-image {
+    width: 50px; 
+    height: 50px; 
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.playlist-song-title, .playlist-album-title {
+    color: #FFFFFF;
+    margin-right: 10px;
+}
+
+.playlist-song-add-btn {
+    background-color: #1DB954; 
+    color: #FFFFFF; 
+    border: none; 
+    padding: 8px 16px; 
+    border-radius: 20px; 
+    cursor: pointer; 
+}

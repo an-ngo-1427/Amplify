@@ -2,9 +2,11 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getSongsThunk } from "../../redux/song"
 import { addSongToAlbum } from "../../redux/album"
-
+import './AddSongs.css'
+import { useModal } from "../../context/Modal"
 function Songs({album}) {
     const dispatch = useDispatch()
+    const {closeModal} = useModal()
     const allSongs = useSelector(state => Object.values(state.songs))
     const songsNoAlbum = allSongs.filter(song => song.album_id === 0 || song.album_id == null)
 
@@ -13,19 +15,22 @@ function Songs({album}) {
     }, [dispatch])
 
     const addToAlbum = async (song) => {
-        await dispatch(addSongToAlbum(song, album.id))
+        dispatch(addSongToAlbum(song, album.id))
+        .then(()=>{closeModal()})
     }
 
     return (
-        <div className="add-song-container">
-            <h2>Add songs to your album</h2>
+        <div className="album-song-modal-container">
+        <h2 className="album-song-modal-title">Add Songs to Your Album</h2>
+        <ul className="album-song-list">
             {songsNoAlbum.map(song => (
-                <div key={song.id}>
-                    <li>{song.title}</li>
-                    <button onClick={() => addToAlbum(song)}>Add to album</button>
-                </div>
+                <li key={song.id} className="album-song-item">
+                    <span className="album-song-title">{song.title}</span>
+                    <button onClick={() => addToAlbum(song)} className="album-song-add-btn">Add to Album</button>
+                </li>
             ))}
-        </div>
+        </ul>
+    </div>
     )
 }
 
