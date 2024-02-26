@@ -10,6 +10,7 @@ import Songs from "./Songs";
 import { getCurrSong } from "../../redux/currSong";
 // import AudioPlayerComp from "../AudioPlayerComp/AudioPlayerComp";
 import "./PlaylistDetail.css";
+import playlistImg from '../../../../images/playlist.png'
 
 function Playlist({ playlist, onDelete }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -37,7 +38,7 @@ function Playlist({ playlist, onDelete }) {
     <div className="playlist-details-container">
       <div className="playlist-info-container">
         <img
-          src={playlist?.image_url}
+          src={playlist?.image_url.length ? playlist?.image_url : playlistImg}
           alt={`Playlist titled ${playlist?.title}`}
           className="playlist-details-art"
         />
