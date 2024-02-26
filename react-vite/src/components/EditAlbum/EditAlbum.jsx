@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { updateAlbumThunk } from "../../redux/album"
+import { loadOneAlbumThunk, updateAlbumThunk } from "../../redux/album"
 import { useModal } from '../../context/Modal'
+import './EditAlbum.css'
 
 function EditAlbum({album}) {
     const dispatch = useDispatch()
     const { closeModal } = useModal()
 
     const [title, setTitle] = useState(album?.title)
-    const [imageUrl, setImageurl] = useState(album?.image_url)
     const [errObj, setErrobj] = useState({})
     const [formErr, setFormErr] = useState(false)
 
@@ -23,36 +23,29 @@ function EditAlbum({album}) {
         e.preventDefault()
         if (Object.keys(errObj).length) setFormErr(true)
         else {
-            album = {...album, title, imageUrl}
+            album = {...album, title}
 
             dispatch(updateAlbumThunk(album))
-            closeModal()
+            .then(() => dispatch(loadOneAlbumThunk(album.id)))
+            .then(() => closeModal())
         }
     }
 
     return (
-        <div className="album-form-container">
-            <form onSubmit={handleSubmit} className="album-form">
+        <div className="edit-album-form-container">
+            <form onSubmit={handleSubmit} className="edit-album-form">
                 <div>
+                    <label>Album Title</label>
                     <input
                         placeholder="Album Title"
                         onChange={(e) => setTitle(e.target.value)}
                         value={title}
                         type="text"
-                        className="album-form-input"
+                        className="edit-album-form-input"
                     />
-                    {formErr && errObj.title && <div className="album-form-error">{errObj.title}</div>}
+                    {formErr && errObj.title && <div className="edit-album-form-error">{errObj.title}</div>}
                 </div>
-                <div>
-                    <input
-                        placeholder="Album Image URL"
-                        onChange={(e) => setImageurl(e.target.value)}
-                        value={imageUrl}
-                        name="image_url"
-                        className="album-form-input"
-                    />
-                </div>
-                <button type="submit" className="album-form-button">Save Changes</button>
+                <button type="submit" className="edit-album-form-button">Save Changes</button>
             </form>
         </div>
     )

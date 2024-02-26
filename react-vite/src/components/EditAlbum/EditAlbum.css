@@ -1,0 +1,73 @@
+.edit-album-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #fff;
+    width: 100%;
+    height: 100px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.edit-album-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    background-color: #181818;
+    border-radius: 8px;
+    padding: 25px;
+}
+
+.edit-album-form-input {
+    background-color: #282828;
+    border: 1px solid #404040;
+    border-radius: 4px;
+    padding: 10px 15px;
+    color: #fff;
+    outline: none;
+    width: 90%;
+}
+
+.edit-album-form-input::placeholder {
+    color: #b3b3b3;
+}
+
+.edit-album-form-input:focus {
+    border-color: #1db954;
+}
+
+.edit-album-form-button {
+    background-color: #1db954;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: center;
+}
+
+.edit-album-form-button:hover {
+    background-color: #1ed760;
+}
+
+.edit-album-form-error {
+    color: #e22134;
+    font-size: 14px;
+}
+
+.back-to-albums-link {
+    display: block;
+    margin-top: 20px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.back-to-albums-link:hover{
+    color: #1db954;
+}
