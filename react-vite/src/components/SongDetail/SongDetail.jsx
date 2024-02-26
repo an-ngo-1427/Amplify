@@ -73,6 +73,7 @@ function SongDetail() {
           <img className="amplify-logo" src={AmplifyLogo} alt="Amplify" />
         </NavLink>
       </div>
+      {currSong.album_id && <NavLink className = 'album-link' to={`/albums/${currSong.album_id}`}>Go to Album</NavLink>}
       <div className="song-details-header">
         <div className="song-info-container">
           <img
@@ -94,10 +95,10 @@ function SongDetail() {
         </div>
         <div className="song-buttons">
           {currSong.user_id !== user?.id && liked && (
-            <button onClick={(e) => handleUnlike(e)}>Unlike</button>
+            <button className = 'album-play-button'onClick={(e) => handleUnlike(e)}>Unlike</button>
           )}
           {currSong.user_id !== user?.id && !liked && (
-            <button onClick={(e) => handleLike(e)}>Like</button>
+            <button className = 'album-play-button' onClick={(e) => handleLike(e)}>Like</button>
           )}
           {user?.id === currSong.user_id && (
             <button className="edit-song" onClick={handleEdit}>

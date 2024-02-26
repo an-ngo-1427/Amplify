@@ -64,6 +64,8 @@ ul {
 .main-header {
     display: flex;
     position: absolute;
+    top: 1rem;
+    right: 2rem;
     align-items: center;
     height: 64px;
     width: 75%;

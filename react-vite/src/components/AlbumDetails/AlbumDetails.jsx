@@ -7,6 +7,7 @@ import "./AlbumDetails.css";
 import Songs from "./Songs";
 import OpenModalButton from "../OpenModalButton";
 import AmplifyLogo from "../../image/amplifylogo.jpeg";
+import EditAlbum from "../EditAlbum";
 
 function AlbumDetails() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -56,6 +57,10 @@ function AlbumDetails() {
             <OpenModalButton
               buttonText="Add to album"
               modalComponent={<Songs album={album} />}
+            />
+            <OpenModalButton
+              buttonText='Edit Album'
+              modalComponent={<EditAlbum album={album} />}
             />
             <button onClick={handleDelete} className="delete-button-album">
               Delete Album

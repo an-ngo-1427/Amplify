@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { thunkCreateAlbum } from "../../redux/album"
 import './AlbumForm.css'
+import AmplifyLogo from "../../image/amplifylogo.jpeg";
 
 function AlbumForm() {
     const navigate = useNavigate()
@@ -25,7 +26,7 @@ function AlbumForm() {
             formData.append('image_url', imageUrl)
 
             dispatch(thunkCreateAlbum(formData))
-                .then(result=>{navigate(`/albums/${result.id}`)})
+                .then(result => { navigate(`/albums/${result.id}`) })
         }
     }
 
@@ -38,30 +39,36 @@ function AlbumForm() {
 
     return (
         <>
-        <div className="album-form-container">
-            <form onSubmit={handleSubmit} className="album-form">
-                <div>
-                    <input
-                        placeholder="Album Title"
-                        onChange={(e) => setTitle(e.target.value)}
-                        name="title"
-                        type="text"
-                        className="album-form-input"
-                    />
-                    {formErr && errObj.title && <div className="album-form-error">{errObj.title}</div>}
-                </div>
-                <div>
-                    <input
-                        placeholder="Album Image URL"
-                        onChange={(e) => setImageurl(e.target.value)}
-                        name="image_url"
-                        className="album-form-input"
-                    />
-                </div>
-                <button type="submit" className="album-form-button">Create Album</button>
-            </form>
-        </div>
-        {/* <NavLink to="/albums/manage" className="back-to-albums-link">{'Manage Albums'}</NavLink> */}
+            <div className="amplify-navigation-bar">
+                <NavLink to="/">
+                    <img className="amplify-logo" src={AmplifyLogo} />
+                </NavLink>
+            </div>
+            <NavLink className='album-link' to='/albums/manage'>Manage your Album</NavLink>
+            <div className="album-form-container">
+                <form onSubmit={handleSubmit} className="album-form">
+                    <div>
+                        <input
+                            placeholder="Album Title"
+                            onChange={(e) => setTitle(e.target.value)}
+                            name="title"
+                            type="text"
+                            className="album-form-input"
+                        />
+                        {formErr && errObj.title && <div className="album-form-error">{errObj.title}</div>}
+                    </div>
+                    <div>
+                        <input
+                            placeholder="Album Image URL"
+                            onChange={(e) => setImageurl(e.target.value)}
+                            name="image_url"
+                            className="album-form-input"
+                        />
+                    </div>
+                    <button type="submit" className="album-form-button">Create Album</button>
+                </form>
+            </div>
+            {/* <NavLink to="/albums/manage" className="back-to-albums-link">{'Manage Albums'}</NavLink> */}
         </>
     );
 }
