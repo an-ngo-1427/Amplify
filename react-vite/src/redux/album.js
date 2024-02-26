@@ -4,6 +4,7 @@ export const LOAD_ONE_ALBUM = '/albums/LOAD_ONE_ALBUM'
 export const GET_USER_ALBUMS = 'albums/GET_USER_ALBUMS'
 export const ADD_TO_ALBUM = 'albums/ADD_TO_ALBUM'
 export const REMOVE_FROM_ALBUM = 'albums/REMOVE_FROM_ALBUM'
+export const UPDATE_ALBUM = 'albums/UPDATE_ALBUM'
 
 // ACTION CREATOR
 
@@ -44,6 +45,11 @@ export const removeSong = (songId, albumId) => ({
     type: REMOVE_FROM_ALBUM,
     songId,
     albumId
+})
+
+export const editAlbum = (album) => ({
+    type: UPDATE_ALBUM,
+    album
 })
 
 
@@ -133,6 +139,26 @@ export const deleteAlbum = async (albumId)=>{
 // export const thunkUploadImage = (img) => async (dispatch) => {
 //     const response = await fetch ('/api/albums/')
 // }
+
+export const updateAlbumThunk = (album) => async (dispatch) => {
+    const response = await fetch(`/api/albums/${album.id}/edit`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(album)
+      })
+
+      if(response.ok) {
+        const album = await response.json()
+        dispatch(editAlbum(album))
+        return album
+      }
+      else {
+        const error = await response.json()
+        return error
+      }
+}
 
 const initialState = {}
 function createAlbumReducer(state = initialState, action) {
