@@ -5,14 +5,14 @@
 }
 
 .amplify-navigation-bar {
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 
 .song-details-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+    /* justify-content: space-between; */
+    gap: 128px;
 }
 
 .song-info-container {
@@ -57,7 +57,7 @@
 }
 
 .song-buttons .delete-song-detail {
-    background-color: #ff4d4d; 
+    background-color: #ff4d4d;
     color: white;
     padding: 10px 15px;
     font-size: 16px;
@@ -77,15 +77,20 @@
 }
 
 .manage-songs-btn {
-    display: inline-block; 
+    display: inline-block;
     background-color: #1db954;
-    color: white; 
+    color: white;
     padding: 10px 15px;
-    font-size: 16px; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    text-decoration: none; 
-    margin: 20px 0; 
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 20px 0;
 }
 
+
+.album-link{
+    color:white;
+    text-decoration: none;
+}
