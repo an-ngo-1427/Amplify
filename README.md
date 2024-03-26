@@ -1,6 +1,6 @@
 # Amplify
 
-Amplify is a digital platform for music, inspired by [Spotify](https://open.spotify.com/?).
+[Amplify](https://amplify-group.onrender.com/) is a digital platform for music, inspired by [Spotify](https://open.spotify.com/?).
 
 ## Installation guide
 
