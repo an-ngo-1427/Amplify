@@ -75,143 +75,413 @@
 ![](./images//amplify-db-schema.png)
 
 ## API Documentation
+
+## USER AUTHENTICATION/AUTHORIZATION
+
+### All endpoints that require authentication
+
+All endpoints that require a current user to be logged in.
+
+* Request: endpoints that require authentication
+* Error Response: Require authentication
+  * Status Code: 401
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Authentication required"
+    }
+    ```
+
+### All endpoints that require proper authorization
+
+All endpoints that require authentication and the current user does not have the
+correct role(s) or permission(s).
+
+* Request: endpoints that require proper authorization
+* Error Response: Require proper authorization
+  * Status Code: 403
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Forbidden"
+    }
+    ```
+
+### Get the Current User
+
+Returns the information about the current user that is logged in.
+
+* Require Authentication: false
+* Request
+  * Method: GET
+  * URL: /api/session
+  * Body: none
+
+* Successful Response when there is a logged in user
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "user": {
+        "id": 1,
+        "firstName": "John",
+        "lastName": "Smith",
+        "email": "john.smith@gmail.com",
+        "username": "JohnSmith"
+      }
+    }
+    ```
+
+* Successful Response when there is no logged in user
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "user": null
+    }
+    ```
+
+### Log In a User
+
+Logs in a current user with valid credentials and returns the current user's
+information.
+
+* Require Authentication: false
+* Request
+  * Method: POST
+  * URL: /api/session
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "credential": "john.smith@gmail.com",
+      "password": "secret password"
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "user": {
+        "id": 1,
+        "firstName": "John",
+        "lastName": "Smith",
+        "email": "john.smith@gmail.com",
+        "username": "JohnSmith"
+      }
+    }
+    ```
+
+* Error Response: Invalid credentials
+  * Status Code: 401
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Invalid credentials"
+    }
+    ```
+
+* Error response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "credential": "Email or username is required",
+        "password": "Password is required"
+      }
+    }
+    ```
+
+### Sign Up a User
+
+Creates a new user, logs them in as the current user, and returns the current
+user's information.
+
+* Require Authentication: false
+* Request
+  * Method: POST
+  * URL: /api/users
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "firstName": "John",
+      "lastName": "Smith",
+      "email": "john.smith@gmail.com",
+      "username": "JohnSmith",
+      "password": "secret password"
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "user": {
+        "id": 1,
+        "firstName": "John",
+        "lastName": "Smith",
+        "email": "john.smith@gmail.com",
+        "username": "JohnSmith"
+      }
+    }
+    ```
+
+* Error response: User already exists with the specified email
+  * Status Code: 500
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "User already exists",
+      "errors": {
+        "email": "User with that email already exists"
+      }
+    }
+    ```
+
+* Error response: User already exists with the specified username
+  * Status Code: 500
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "User already exists",
+      "errors": {
+        "username": "User with that username already exists"
+      }
+    }
+    ```
+
+* Error response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "email": "Invalid email",
+        "username": "Username is required",
+        "firstName": "First Name is required",
+        "lastName": "Last Name is required"
+      }
+    }
+    ```
+
 ## SONGS
-- ### GET /songs
+- ### GET /api/songs
     _Users should be able to view all Songs._
     - required auth: False
     - Unauthorized and authorized users should be able to view all songs sorted by likes
         - **Request**
             - Method: GET
-            - URL: /songs
+            - URL: /api/songs
             - Body: none
         - **Successful Response**
             ```json
-                {
-                    "Songs":[
-                        {
-                            "id": *,
-                            "title":*,
-                            "user_id":*,
-                            "album_id":*,
-                            "created_at":*,
-                            "duration":*,
-                            "artists":--------,
-                            "audio":-------,
-                            "likes":------,
-                            "image":------,
-                        }
-                    ]
-                }
+            {
+                "songs":[
+                    {
+                        "id": 1,
+                        "title": "Song Title",
+                        "user_id": 1,
+                        "song_url": "songurl.com",
+                        "image_url": "imageurl.com",
+                        "likes": 0,
+                        "user_likes": [],
+                        "created_at": "2021-11-19 20:39:36",
+                        "updated_at": "2021-11-19 20:39:36",
+                        "artist": {
+                            "id": 1,
+                            "username": "DemoUser",
+                            "email": "demo@user.io",
+                            "first_name": "Demo",
+                            "last_name": "User"
+                        },
+                        "album_id": 1,
+                    }
+                ]
+            }
             ```
 
-- ### POST /songs
+- ### POST /api/songs
     _Users should be able to upload songs._
     - Required Auth: True
     - Only logined user can add a song
         - **Request**
             - Method: POST
-            - URL: /songs
+            - URL: /api/songs
             - Body:
                 ```json
-                    {
-                        "title": required,
-                        "audio":------
-                    }
+                {
+                    "title": "Song Title",
+                    "audio": "song.mp3"
+                }
                 ```
         - **Successful Response** (code 201)
             ```json
-                {
-                    "id": *,
-                    "title":*,
-                    "user_id":*,
-                    "album_id":*,
-                    "created_at":*,
-                    "duration":*,
-                    "audio":-------,
-                    "likes":------,
-                    "image":------
-                }
+            {
+                "id": 1,
+                "title": "Song Title",
+                "user_id": 1,
+                "song_url": "songurl.com",
+                "image_url": "imageurl.com",
+                "likes": 0,
+                "user_likes": [],
+                "created_at": "2021-11-19 20:39:36",
+                "updated_at": "2021-11-19 20:39:36",
+                "artist": {
+                    "id": 1,
+                    "username": "DemoUser",
+                    "email": "demo@user.io",
+                    "first_name": "Demo",
+                    "last_name": "User"
+                },
+                "album_id": 1,
+            }
             ```
         - **Error Response** (code 401)
             ```json
-                {
-                    "title":required,
-                    "audio":required
+            {
+                "message": "Bad Request",
+                "errors": {
+                    "title": "Title is required",
+                    "audio": "Audio is required"
                 }
+            }
             ```
-- ### PUT /songs/:songId
+- ### PUT /api/songs/:songId
     _Users should be able to update their uploaded songs._
     - Required Auth:True
     - **Request**
         - Method: POST
-        - URL: /songs/:songId
+        - URL: /api/songs/:songId
         - Body:
             ```json
-                {
-                    "title":*,
-                    "audio":-------,
-                    "image":------,
-                }
+            {
+                "title": "Song Title",
+                "audio": "song.mp3",
+                "image": "image.jpg",
+            }
             ```
     - **Successful Response** (code 200)
         ```json
-            {
-                 "id": *,
-                    "title":*,
-                    "user_id":*,
-                    "album_id":*,
-                    "created_at":*,
-                    "updated_at":*,
-                    "duration":*,
-                    "audio":-------,
-                    "likes":-----,
-                    "image":------,
-            }
+        {
+            "id": 1,
+            "title": "Song Title",
+            "user_id": 1,
+            "song_url": "songurl.com",
+            "image_url": "imageurl.com",
+            "likes": 0,
+            "user_likes": [],
+            "created_at": "2021-11-19 20:39:36",
+            "updated_at": "2021-11-19 20:39:36",
+            "artist": {
+                "id": 1,
+                "username": "DemoUser",
+                "email": "demo@user.io",
+                "first_name": "Demo",
+                "last_name": "User"
+            },
+            "album_id": 1,
+        }
         ```
     - **Error Response**
         - User not authorized (code 403)
             ```json
-                {
-                    "message": "Forbidden"
-                }
+            {
+                "message": "Forbidden"
+            }
             ```
         - Song couldnt be found (code 404)
             ```json
-                {
-                    "Error": "Song could not be found"
-                }
+            {
+                "Error": "Song could not be found"
+            }
             ```
         - Missing info (code 401)
             ```json
-                {
-                    "title": "Title Required",
-                    "status": ------
+            {
+                "message": "Bad Request",
+                "errors": {
+                    "title": "Title is required"
                 }
+            }
             ```
-- ### GET /songs/:songId
+- ### GET /api/songs/:songId
     _User is able to get details of a song by specified ID_
     - Required Auth: False
     - **Request**
         - Method: GET
-        - URL: /songs/:songId
+        - URL: /api/songs/:songId
         - Body:none
     - **Successful Response**
         ```json
-            {
-                "id":*,
-                "title":*,
-                "user_id":*,
-                "album_id":*,
-                "song_url":*,
-                "image_url":*,
-                "likes":*
-            }
+        {
+            "id": 1,
+            "title": "Song Title",
+            "user_id": 1,
+            "song_url": "songurl.com",
+            "image_url": "imageurl.com",
+            "likes": 0,
+            "user_likes": [],
+            "created_at": "2021-11-19 20:39:36",
+            "updated_at": "2021-11-19 20:39:36",
+            "artist": {
+                "id": 1,
+                "username": "DemoUser",
+                "email": "demo@user.io",
+                "first_name": "Demo",
+                "last_name": "User"
+            },
+            "album_id": 1,
+        }
         ```
     - **Error Response**
         ```json
-            {
-                "message":"song not found"
-            }
+        {
+            "message":"Song not found"
+        }
         ```
 - ### DELETE /songs/:songId
     _Users should be able to delete their uploaded songs._
@@ -222,190 +492,266 @@
         - Body: none
     - **Successful Response**
         ```json
-            {
-                "message": "Successfully deleted song"
-            }
+        {
+            "message": "Successfully deleted song"
+        }
         ```
     - **Error Response**
         - Song could not be found
         ```json
-            {
-                "errors": "Song could not be found"
-            }
+        {
+            "errors": "Song could not be found"
+        }
         ```
         - Unauthorized user
         ```json
-            {
-                "message": "Forbidden"
-            }
+        {
+            "message": "Forbidden"
+        }
         ```
 
 ## ALBUMS
-- ### GET /albums
+- ### GET /api/albums
     _Users should be able to view all albums created by users._
     - Required Auth: True
     - **Request**
         - Method: GET
-        - URL: /albums
+        - URL: /api/albums
         - Body: none
     - **Successful Response**
         ```json
-            {
-                "albums":[
-                    {
-                        "title":*,
-                        "user_id":*,
-                        "release_date":*,
-                        "created_at":*,
-                        "image":*,
-                    }
-                ]
-            }
+        {
+            "albums":[
+                {
+                    "id": 1,
+                    "user_id": 1,
+                    "title": "Album Title",
+                    "image_url": "imageurl.com",
+                    "created_at": "Sun, 25 Feb 2024 20:33:49 GMT",
+                    "updated_at": "Sun, 25 Feb 2024 20:33:49 GMT",
+                    "songs": [
+                        {
+                            "id": 1,
+                            "title": "Song Title",
+                            "user_id": 1,
+                            "song_url": "songurl.com",
+                            "image_url": "imageurl.com",
+                            "likes": 0,
+                            "user_likes": [],
+                            "created_at": "2021-11-19 20:39:36",
+                            "updated_at": "2021-11-19 20:39:36",
+                            "artist": {
+                                "id": 1,
+                                "username": "DemoUser",
+                                "email": "demo@user.io",
+                                "first_name": "Demo",
+                                "last_name": "User"
+                            },
+                            "album_id": 1,
+                        }
+                    ],
+                    "artist": {
+                        "id": 1,
+                        "username": "DemoUser",
+                        "email": "demo@user.io",
+                        "first_name": "Demo",
+                        "last_name": "User"
+                    },
+                    "album_id": 1
+                }
+            ]
+        }
         ```
-- ### GET /albums/:albumId
+- ### GET /api/albums/:albumId
     _Users should be able to get album details_
     - Required Auth: False
     - **Response**
         - Method: GET
-        - URL: /albums/:albumId
+        - URL: /api/albums/:albumId
         - Body: none
     - **Succressful Response**
         ```json
-            {
-                "id":*,
-                "title":*,
-                "user_id":*,
-                "release_date":*,
-                "created_at":*,
-                "duration":------,
-                "likes":------,
-                "image":-----,
-                "Songs":[
-                    {
-
-                    }
-                ]
-            }
+        {
+            "id": 1,
+            "user_id": 1,
+            "title": "Album Title",
+            "image_url": "imageurl.com",
+            "created_at": "Sun, 25 Feb 2024 20:33:49 GMT",
+            "updated_at": "Sun, 25 Feb 2024 20:33:49 GMT",
+            "songs": [
+                {
+                    "id": 1,
+                    "title": "Song Title",
+                    "user_id": 1,
+                    "song_url": "songurl.com",
+                    "image_url": "imageurl.com",
+                    "likes": 0,
+                    "user_likes": [],
+                    "created_at": "2021-11-19 20:39:36",
+                    "updated_at": "2021-11-19 20:39:36",
+                    "artist": {
+                        "id": 1,
+                        "username": "DemoUser",
+                        "email": "demo@user.io",
+                        "first_name": "Demo",
+                        "last_name": "User"
+                    },
+                    "album_id": 1,
+                }
+            ],
+            "artist": {
+                "id": 1,
+                "username": "DemoUser",
+                "email": "demo@user.io",
+                "first_name": "Demo",
+                "last_name": "User"
+            },
+            "album_id": 1
+        }
         ```
-- ### POST /albums/:albumId/songs
+- ### POST /api/albums/:albumId/songs
     _Users should be able to add songs to an album they created._
     - Required Auth: True
     - **Request**
         - Method: POST
-        - URL: /albums/:albumId/songs
+        - URL: /api/albums/:albumId/songs
         - Body:
             ```json
-                {
-                    "title":*,
-                    "audio":-------,
-                    "image":------
-                }
+            {
+                "song_id": 1
+            }
             ```
     - **Successful Response**
         ```json
-            {
-                "id": *,
-                "title":*,
-                "user_id":*,
-                "album_id":*,
-                "created_at":*,
-                "duration":*,
-                "audio":-------,
-                "likes":------,
-                "image":------
-            }
+        {
+            "id": 1,
+            "user_id": 1,
+            "title": "Album Title",
+            "image_url": "imageurl.com",
+            "created_at": "Sun, 25 Feb 2024 20:33:49 GMT",
+            "updated_at": "Sun, 25 Feb 2024 20:33:49 GMT",
+            "songs": [
+                {
+                    "id": 1,
+                    "title": "Song Title",
+                    "user_id": 1,
+                    "song_url": "songurl.com",
+                    "image_url": "imageurl.com",
+                    "likes": 0,
+                    "user_likes": [],
+                    "created_at": "2021-11-19 20:39:36",
+                    "updated_at": "2021-11-19 20:39:36",
+                    "artist": {
+                        "id": 1,
+                        "username": "DemoUser",
+                        "email": "demo@user.io",
+                        "first_name": "Demo",
+                        "last_name": "User"
+                    },
+                    "album_id": 1,
+                }
+            ],
+            "artist": {
+                "id": 1,
+                "username": "DemoUser",
+                "email": "demo@user.io",
+                "first_name": "Demo",
+                "last_name": "User"
+            },
+            "album_id": 1
+        }
         ```
-- ### DELETE /albums/:albumId/songs/:songId
+- ### DELETE /api/albums/:albumId/songs/:songId
     _Users should be able to remove songs from their albums._
     - Required Auth: True
     - **Request**
         - Method: DELETE
-        - URL: /albums/:albumId/songs/:songId
+        - URL: /api/albums/:albumId/songs/:songId
         - Body: none
     - **Successful Resposne**
         ```json
-            {
-                "message": "Successfully Deleted song"
-            }
+        {
+            "message": "Successfully Deleted song"
+        }
         ```
     - **Err Response**
         - User not authorized
          ```json
-            {
-                "message": "Forbidden"
-            }
+        {
+            "message": "Forbidden"
+        }
         ```
         - Song not found
         ```json
-            {
-                "errors": "Song could not be found"
-            }
+        {
+            "errors": "Song could not be found"
+        }
         ```
-- ### DELETE /albums/:albumId
+- ### DELETE /api/albums/:albumId
     _Users should be able to delete their albums._
     - Required Auth: True
     - **Request**
         - Method: DELETE
-        - URL: /albums/:albumId
+        - URL: /api/albums/:albumId
         - Body: none
     - **Successful Response**
         ```json
-            {
-                "message": "Successfully Deleted Album"
-            }
+        {
+            "message": "Successfully Deleted Album"
+        }
         ```
     - **Err Response**
         - User not authorized
         ```json
-            {
-                "message":"Forbidden"
-            }
+        {
+            "message":"Forbidden"
+        }
         ```
         - Album not found
         ```json
-            {
-                "error":"Album cound not be found"
-            }
+        {
+            "error":"Album cound not be found"
+        }
         ```
 ## LIKES
 
-- ### GET /songs/:songId/likes
+- ### GET /api/songs/:songId/likes
     _Users should be able to view the likes on a song._
     - Required Auth: False
     - **Request**
         - Method: GET
-        - URL: /songs/:songId/likes
+        - URL: /api/songs/:songId/likes
         - Body: none
     - **Successful Response**
         ```json
-            {
+        {
 
-            }
+        }
         ```
-- ### POST /songs/:songId/likes
+- ### POST /api/songs/:songId/likes
     _Users should be able to like a song._
     - Required Auth: True
     - **Request**
         - Method: POST
-        - URL: /songs/:songId/likes
+        - URL: /api/songs/:songId/likes
     - **Successful Response**
         ```json
-            {
-                "message":"successfully liked song"
-            }
+        {
+            "message":"successfully liked song"
+        }
         ```
-- ### DELETE /songs/:songId/likes/:likeId
+- ### DELETE /api/songs/:songId/likes/:likeId
     _Users should be able to unlike a song._
     - Required Auth: True
     - **Request**
         - Method: DELETE
-        - URL: /songs/:songId/likes/:likeId
+        - URL: /api/songs/:songId/likes/:likeId
         - Body: none
     - **Successful Response**
         ```json
-            {
-                "message":"Successfully unliked song"
-            }
+        {
+            "message":"Successfully unliked song"
+        }
         ```
 
 ## Playlists
@@ -419,15 +765,40 @@
         - body:none
     - **Successfull Response**
         ```json
+    {
+        "playlists":[
             {
-                "playlists":[
+                "id": 1,
+                "user_id": 1,
+                "title": "Playlist Title",
+                "description": "Playlist Description",
+                "image_url": "playlistimageurl.com",
+                "created_at": "",
+                "updated_at": "",
+                "songs": [
                     {
-                        "id":*,
-                        "name":*,
-                        "image":-----
+                        "id": 1,
+                        "title": "Song Title",
+                        "user_id": 1,
+                        "song_url": "songurl.com",
+                        "image_url": "imageurl.com",
+                        "likes": 0,
+                        "user_likes": [],
+                        "created_at": "2021-11-19 20:39:36",
+                        "updated_at": "2021-11-19 20:39:36",
+                        "artist": {
+                            "id": 1,
+                            "username": "DemoUser",
+                            "email": "demo@user.io",
+                            "first_name": "Demo",
+                            "last_name": "User"
+                        },
+                        "album_id": 1,
                     }
-                ]
+                ],
             }
+        ]
+    }
         ```
 - ### GET /playlists/:playlistId
     _User should be able to view details of their playlist by ID_
@@ -438,25 +809,42 @@
         - Body: none
     - **Successfull Response**
         ```json
-            {
-                "songs":[
-                    {
-                        "id":*,
-                        "title":*,
-                        "used_id":*,
-                        "album_id":*,
-                        "image_url":*,
-                        "created_at":*
-                    }
-                ]
-
-            }
+        {
+            "id": 1,
+            "user_id": 1,
+            "title": "Playlist Title",
+            "description": "Playlist Description",
+            "image_url": "playlistimageurl.com",
+            "created_at": "Sun, 25 Feb 2024 20:33:49 GMT",
+            "updated_at": "Sun, 25 Feb 2024 20:33:49 GMT",
+            "songs": [
+                {
+                    "id": 1,
+                    "title": "Song Title",
+                    "user_id": 1,
+                    "song_url": "songurl.com",
+                    "image_url": "imageurl.com",
+                    "likes": 0,
+                    "user_likes": [],
+                    "created_at": "2021-11-19 20:39:36",
+                    "updated_at": "2021-11-19 20:39:36",
+                    "artist": {
+                        "id": 1,
+                        "username": "DemoUser",
+                        "email": "demo@user.io",
+                        "first_name": "Demo",
+                        "last_name": "User"
+                    },
+                    "album_id": 1,
+                }
+            ],
+        }
         ```
     - **Error Response**
         ```json
-            {
-                "errors":"playlist could not be found"
-            }
+        {
+            "errors":"Playlist could not be found"
+        }
         ```
 - ### POST /playlists/:playlistId/songs/:songId
     _Users should be able to add a song to one of their playlists._
@@ -466,27 +854,27 @@
         - URL: /playlists/:playlistId/songs/:songId
         - Body:
             ```json
-                {
-                    "playlist_id":*,
-                    "song_id":*
-                }
+            {
+                "playlist_id":*,
+                "song_id":*
+            }
             ```
     - **Successfull Response**
         ```json
-            {
-                "message":"Successfully added song to playlist"
-            }
+        {
+            "message":"Successfully added song to playlist"
+        }
         ```
     - **Error Response**
         ```json
-            {
-                "errors":"Playlist could not be found"
-            }
+        {
+            "errors":"Playlist could not be found"
+        }
         ```
         ```json
-            {
-                "errors":"Song could not be found"
-            }
+        {
+            "errors":"Song could not be found"
+        }
         ```
 - ### DELETE /playlists/:playlistId/songs/:songId
     _Users should be able to remove a song from a playlist._
@@ -497,12 +885,12 @@
         - Body: none
     - **Successfull Response**
         ```json
-            {
-                "message":"Successfully deleted song from playlist"
-            }
+        {
+            "message":"Successfully deleted song from playlist"
+        }
         ```
         ```json
-            {
-                "errors":"Song could not be found in playList"
-            }
+        {
+            "errors":"Song could not be found in playList"
+        }
         ```
