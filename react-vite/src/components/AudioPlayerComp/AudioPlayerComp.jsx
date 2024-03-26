@@ -1,26 +1,37 @@
 
 import AudioPlayer from 'react-h5-audio-player'
 import 'react-h5-audio-player/lib/styles.css';
+import { useState } from 'react';
 
+function AudioPlayerComp({songs}){
 
-function AudioPlayerComp({song}){
-    console.log('this is the song',song)
-    // const setHeader = ()=>{
-    //     if(Object.values(song).length){
-    //         console.log('entered')
-    //         return `${song.title} - ${song.artist?.first_name} ${song.artist?.last_name}`
-    //     }else{
-    //         return ""
-    //     }
-    // }
+    const [currTrack,setTrackIndex] = useState(0)
+    console.log('this is song',songs[currTrack],'this is curr',currTrack)
+    const handleEndOfTrack = ()=>{
+        if(currTrack < songs.length - 1){
+            setTrackIndex(currTrack => currTrack + 1)
+        }else{
+            setTrackIndex(0)
+        }
+    }
 
+    const handleNext = ()=>{
+        if(currTrack < songs.length - 1){
+            setTrackIndex(currTrack => currTrack + 1)
+        }else{
+            setTrackIndex(0)
+        }
+    }
     return(
         <div>
             {/* <h3>{song && song.title}</h3> */}
             <AudioPlayer
-                header={Object.values(song).length? `${song.title} - ${song.artist?.first_name} ${song.artist?.last_name}`:'' }
-                src={song.song_url}
+                header={songs.length? `${songs[currTrack]?.title} - ${songs[currTrack]?.artist?.first_name} ${songs[currTrack]?.artist?.last_name}`:'' }
+                src={songs[currTrack]?.song_url}
                 onPlay={e => console.log(e)}
+                onEnded={handleEndOfTrack}
+                onClickNext={handleNext}
+                showSkipControls
             />
         </div>
     )

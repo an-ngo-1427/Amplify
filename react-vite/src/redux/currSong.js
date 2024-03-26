@@ -23,10 +23,14 @@ const initialState = {}
 function currSongReducer (state=initialState,action){
     switch(action.type){
         case GET_CURR_SONG:{
-            return action.song
+            let newObj = {}
+            newObj[action.song.id] = action.song
+            return newObj;
         }
         case GET_PLAYLIST:{
-            return action.playlist
+            let newObj={}
+            action.songs.forEach((song)=>newObj[song.id] = song)
+            return newObj
         }
     }
 

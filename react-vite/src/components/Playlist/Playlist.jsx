@@ -7,7 +7,7 @@ import {
   removeSongFromPlaylist,
 } from "../../redux/playlist";
 import Songs from "./Songs";
-import { getCurrSong } from "../../redux/currSong";
+import { getCurrSong, getPlaylist } from "../../redux/currSong";
 // import AudioPlayerComp from "../AudioPlayerComp/AudioPlayerComp";
 import "./PlaylistDetail.css";
 import playlistImg from '../../../../images/playlist.png'
@@ -32,8 +32,10 @@ function Playlist({ playlist, onDelete }) {
     await dispatch(getUserPlaylistsThunk());
   };
 
-  // const playPlaylist = ()=>{
-  // }
+  const handlePlaylist = () =>{
+    dispatch(getPlaylist(songs))
+  }
+
   return (
     <div className="playlist-details-container">
       <div className="playlist-info-container">
@@ -49,6 +51,7 @@ function Playlist({ playlist, onDelete }) {
             {playlist?.description}
           </h2>
           <h3 className="playlist-owner">{sessionUser.username}</h3>
+          <button className = 'playlist-play-button' onClick={handlePlaylist}>Play</button>
         </div>
       </div>
       <div className="playlist-buttons">

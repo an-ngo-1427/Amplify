@@ -4,10 +4,11 @@ import "./MusicPlayer.css";
 
 
 function MusicPlayer() {
-  const audioSong = useSelector(state=>state.audioSong)
+  let audioSong = useSelector(state=>state.audioSong)
+  let audioArr = Object.values(audioSong)
 
   return(
-    <AudioPlayerComp song={audioSong}/>
+    <AudioPlayerComp songs={audioArr}/>
   )
 }
 
