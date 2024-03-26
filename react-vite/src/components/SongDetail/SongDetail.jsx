@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { getSongThunk } from "../../redux/songDetail";
@@ -13,7 +13,7 @@ function SongDetail() {
 
   const currSong = useSelector((state) => state.currSong);
   const user = useSelector((state) => state.session.user);
-  const [liked, setLiked] = useState(currSong?.user_likes?.includes(user?.id));
+  const liked = currSong?.user_likes?.includes(user?.id)
 
   const isCurrSong = Object.keys(currSong).length;
   let dateString = currSong?.created_at;
@@ -38,8 +38,9 @@ function SongDetail() {
     }
     await fetch(`/api/songs/${songId}/likes`, {
       method: "POST",
-    });
-    setLiked(true);
+    })
+
+    dispatch(getSongThunk(songId))
   }
 
   async function handleUnlike(e) {
@@ -51,9 +52,11 @@ function SongDetail() {
 
     await fetch(`/api/songs/${songId}/likes`, {
       method: "DELETE",
-    });
-    setLiked(false);
-    // setLiked(false)
+    })
+
+    dispatch(getSongThunk(songId))
+
+
   }
 
   function handleEdit(e) {
@@ -94,10 +97,10 @@ function SongDetail() {
           </div>
         </div>
         <div className="song-buttons">
-          {currSong.user_id !== user?.id && liked && (
+          {currSong.artist.id != user.id && liked && (
             <button className = 'album-play-button'onClick={(e) => handleUnlike(e)}>Unlike</button>
           )}
-          {currSong.user_id !== user?.id && !liked && (
+          {currSong.artist.id != user.id && !liked && (
             <button className = 'album-play-button' onClick={(e) => handleLike(e)}>Like</button>
           )}
           {user?.id === currSong.user_id && (

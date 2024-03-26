@@ -8,6 +8,16 @@ export const getCurrSong = (song)=>{
     }
 }
 
+const GET_PLAYLIST = '/songs/GET_PLAYLIST'
+
+export const getPlaylist = (songs)=>{
+    return{
+        type:GET_PLAYLIST,
+        songs
+    }
+}
+
+
 const initialState = {}
 
 function currSongReducer (state=initialState,action){
@@ -15,7 +25,11 @@ function currSongReducer (state=initialState,action){
         case GET_CURR_SONG:{
             return action.song
         }
+        case GET_PLAYLIST:{
+            return action.playlist
+        }
     }
+
     return state
 }
 
