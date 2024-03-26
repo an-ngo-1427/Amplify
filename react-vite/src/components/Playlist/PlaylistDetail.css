@@ -45,7 +45,11 @@
     font-size: 16px;
     border: none;
     border-radius: 5px;
+  }
+
+  .playlist-buttons button:hover, .edit-button-playlist:hover {
     cursor: pointer;
+    transform: scale(1.05); 
   }
 
   .edit-button-playlist {
@@ -103,8 +107,16 @@
     background-color: #1DB954;
   }
 
+  .playlist-play-button:hover {
+    transform: scale(1.05); 
+  }
+
   .playlist-remove-button {
     background-color: #e22134;
+  }
+
+  .playlist-remove-button:hover {
+    transform: scale(1.05); 
   }
 
   .playlist-song-tile:hover {

@@ -17,6 +17,10 @@
     border: none;
 }
 
+.library-new-icon:hover {
+    color: white;
+}
+
 .library-container {
     padding: 12px 12px;
 }
@@ -31,6 +35,11 @@
     display: flex;
     align-items: center;
     padding: 5px;
+}
+
+.playlist-tile:hover {
+    background-color: #353535;
+    cursor: pointer;
 }
 
 .playlist-name {

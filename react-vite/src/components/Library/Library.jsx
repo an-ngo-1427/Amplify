@@ -23,9 +23,9 @@ function Library({ playlists, onPlaylistClick }) {
             </div>
             <ul className='playlist-holder'>
                 {playlists.map((playlist) => (
-                    <li className='playlist-tile' key={playlist.id}>
+                    <li className='playlist-tile' key={playlist.id} onClick={() => onPlaylistClick(playlist)}>
                         <img className='playlist-image' src={playlistIcon}></img>
-                        <button className='playlist-name' onClick={() => onPlaylistClick(playlist)}>
+                        <button className='playlist-name'>
                             {playlist.title}
                         </button>
                     </li>

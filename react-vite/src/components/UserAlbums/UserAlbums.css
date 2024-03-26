@@ -49,3 +49,7 @@
     margin: 20px auto;
     width: 200px; 
 }
+
+.create-new-album-link:hover {
+    transform: scale(1.025);
+}
