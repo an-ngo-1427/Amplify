@@ -765,40 +765,40 @@ user's information.
         - body:none
     - **Successfull Response**
         ```json
-    {
-        "playlists":[
-            {
-                "id": 1,
-                "user_id": 1,
-                "title": "Playlist Title",
-                "description": "Playlist Description",
-                "image_url": "playlistimageurl.com",
-                "created_at": "",
-                "updated_at": "",
-                "songs": [
-                    {
-                        "id": 1,
-                        "title": "Song Title",
-                        "user_id": 1,
-                        "song_url": "songurl.com",
-                        "image_url": "imageurl.com",
-                        "likes": 0,
-                        "user_likes": [],
-                        "created_at": "2021-11-19 20:39:36",
-                        "updated_at": "2021-11-19 20:39:36",
-                        "artist": {
+        {
+            "playlists":[
+                {
+                    "id": 1,
+                    "user_id": 1,
+                    "title": "Playlist Title",
+                    "description": "Playlist Description",
+                    "image_url": "playlistimageurl.com",
+                    "created_at": "",
+                    "updated_at": "",
+                    "songs": [
+                        {
                             "id": 1,
-                            "username": "DemoUser",
-                            "email": "demo@user.io",
-                            "first_name": "Demo",
-                            "last_name": "User"
-                        },
-                        "album_id": 1,
-                    }
-                ],
-            }
-        ]
-    }
+                            "title": "Song Title",
+                            "user_id": 1,
+                            "song_url": "songurl.com",
+                            "image_url": "imageurl.com",
+                            "likes": 0,
+                            "user_likes": [],
+                            "created_at": "2021-11-19 20:39:36",
+                            "updated_at": "2021-11-19 20:39:36",
+                            "artist": {
+                                "id": 1,
+                                "username": "DemoUser",
+                                "email": "demo@user.io",
+                                "first_name": "Demo",
+                                "last_name": "User"
+                            },
+                            "album_id": 1,
+                        }
+                    ],
+                }
+            ]
+        }
         ```
 - ### GET /playlists/:playlistId
     _User should be able to view details of their playlist by ID_
@@ -855,8 +855,8 @@ user's information.
         - Body:
             ```json
             {
-                "playlist_id":*,
-                "song_id":*
+                "playlist_id": 1,
+                "song_id": 1
             }
             ```
     - **Successfull Response**
