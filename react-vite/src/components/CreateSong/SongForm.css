@@ -64,7 +64,7 @@
 }
 
 .song-form-button:hover {
-    background-color: #1ed760;
+    transform: scale(1.05);
 }
 
 .song-form-error {
