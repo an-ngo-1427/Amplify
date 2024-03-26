@@ -45,7 +45,11 @@
     font-size: 16px;
     border: none;
     border-radius: 5px;
+  }
+
+  .playlist-buttons button:hover, .edit-button-playlist:hover {
     cursor: pointer;
+    transform: scale(1.05); 
   }
 
   .edit-button-playlist {
@@ -103,8 +107,16 @@
     background-color: #1DB954;
   }
 
+  .playlist-play-button:hover {
+    transform: scale(1.05); 
+  }
+
   .playlist-remove-button {
     background-color: #e22134;
+  }
+
+  .playlist-remove-button:hover {
+    transform: scale(1.05); 
   }
 
   .playlist-song-tile:hover {
@@ -114,4 +126,39 @@
   .playlist-song-tile:hover .playlist-play-button,
   .playlist-song-tile:hover .playlist-remove-button {
     display: inline-block;
+  }
+  @media screen and (max-width: 768px) {
+    .playlist-details-art {
+      width: 150px;
+      height: 150px;
+      margin-left: 0;
+      margin-bottom: 1rem;
+    }
+  
+    .playlist-details-title, .playlist-details-description {
+      font-size: 20px;
+    }
+  
+    .playlist-buttons button, .edit-button-playlist {
+      font-size: 14px;
+    }
+  
+    .playlist-song-tile {
+      gap: 10px;
+      padding: 8px;
+    }
+  
+    .playlist-song-image {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .song-actions {
+      gap: 8px;
+    }
+  
+    .playlist-play-button, .playlist-remove-button {
+      padding: 4px 10px;
+      font-size: 12px;
+    }
   }

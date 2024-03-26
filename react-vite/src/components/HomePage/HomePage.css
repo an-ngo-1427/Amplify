@@ -67,7 +67,7 @@ ul {
     top: 1rem;
     right: 2rem;
     align-items: center;
-    height: 64px;
+    height: 4rem;
     width: 75%;
     justify-content: flex-end;
 }
@@ -92,6 +92,10 @@ button:hover {
     padding: 20px 40px;
 }
 
+.login-button:hover {
+    transform: scale(1.05); 
+}
+
 .signup-button {
     box-sizing: border-box;
     font-size: 1rem;
@@ -107,6 +111,10 @@ button:hover {
     padding-inline: 6px;
     padding: 20px 40px;
     color: #a7a7a7;
+}
+
+.signup-button:hover {
+    color: white;
 }
 
 .hidden {
@@ -188,9 +196,10 @@ button:hover {
 }
 
 .main-page-details {
-    padding-top: 30px;
+    padding-top: 4.5rem;
 }
 
 .search:hover{
     cursor: pointer;
 }
+
