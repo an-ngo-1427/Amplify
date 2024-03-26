@@ -60,3 +60,22 @@
     margin-top: 30px; 
     text-align: center;
 }
+
+@media screen and (max-width: 768px) {
+    .edit-playlist-container {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .left-sidebar {
+        display: none;
+    }
+    .main-view{
+        padding-left: 0;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .edit-playlist-container {
+        width: 95%;
+    }
+}
