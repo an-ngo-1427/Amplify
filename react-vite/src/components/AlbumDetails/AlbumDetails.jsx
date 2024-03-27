@@ -8,7 +8,7 @@ import Songs from "./Songs";
 import OpenModalButton from "../OpenModalButton";
 import AmplifyLogo from "../../image/amplifylogo.jpeg";
 import EditAlbum from "../EditAlbum";
-
+import { getPlaylist } from "../../redux/currSong";
 function AlbumDetails() {
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function AlbumDetails() {
   // const songs = useSelector(state => state.newAlbum[albumId]?.songs)
   const albumdata = useSelector((state) => state.currAlbum);
   const album = albumdata[albumId];
-
+  const songs = album?.songs
   useEffect(() => {
     dispatch(loadOneAlbumThunk(albumId));
   }, [dispatch, albumId]);
@@ -33,6 +33,10 @@ function AlbumDetails() {
       }
     });
   };
+
+  const handlePlaylist = () =>{
+    dispatch(getPlaylist(songs))
+  }
   return (
     <div className="album-details-container">
       <div className="amplify-navigation-bar">
@@ -50,6 +54,7 @@ function AlbumDetails() {
           <div className="album-title-container">
             <p className="album-prefix">Album</p>
             <h1 className="album-details-title">{album?.title}</h1>
+            <button className = 'playlist-play-button' onClick={handlePlaylist}>Play</button>
           </div>
         </div>
         {sessionUser?.id === album?.user_id && (

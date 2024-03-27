@@ -28,23 +28,25 @@ function UserAlbums() {
           <img className="amplify-logo" src={AmplifyLogo} alt="Amplify Logo" />
         </NavLink>
       </div>
-      <h1>Your Albums</h1>
-      <div className="user-albums-container">
-        {userAlbums?.Albums?.map((album) => (
-          <NavLink
-            key={album.id}
-            to={`/albums/${album.id}`}
-            className="album-title-details"
-          >
-            <img src={album.image_url} alt={album.title} />
-            <span>{album.title}</span>
+      <div className="user-albums-page">
+        <h1>Your Albums</h1>
+        <div className="user-albums-container">
+          {userAlbums?.Albums?.map((album) => (
+            <NavLink
+              key={album.id}
+              to={`/albums/${album.id}`}
+              className="album-title-details"
+            >
+              <img src={album.image_url} alt={album.title} />
+              <span>{album.title}</span>
+            </NavLink>
+          ))}
+        </div>
+        <div>
+          <NavLink to="/albums/new" className="create-new-album-link">
+            Create New Album
           </NavLink>
-        ))}
-      </div>
-      <div>
-        <NavLink to="/albums/new" className="create-new-album-link">
-          Create New Album
-        </NavLink>
+        </div>
       </div>
     </>
   );

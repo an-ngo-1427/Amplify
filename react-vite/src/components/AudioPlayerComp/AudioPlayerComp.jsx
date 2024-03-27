@@ -6,7 +6,7 @@ import { useState } from 'react';
 function AudioPlayerComp({songs}){
 
     const [currTrack,setTrackIndex] = useState(0)
-    console.log('this is song',songs[currTrack],'this is curr',currTrack)
+
     const handleEndOfTrack = ()=>{
         if(currTrack < songs.length - 1){
             setTrackIndex(currTrack => currTrack + 1)

@@ -53,3 +53,7 @@
 .create-new-album-link:hover {
     transform: scale(1.025);
 }
+
+.user-albums-page {
+    padding: 0 2rem;
+}
