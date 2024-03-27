@@ -151,6 +151,16 @@ def likeSong(songId):
 
     if int(session['_user_id']) == int(song.user_id):
         return {'error':"Forbidden"},401
+
+    # like = db.session.execute(likes.select()
+    #                           .where(likes.c.user_id == user_id)
+    #                           .where(likes.c.song_id == songId)
+    #                           )
+    # print('--------this is like',like)
+    # if like:
+    #     return {'message':'user already liked the song'},401
+
+
     db.session.execute(likes.insert(),
                     params={"song_id": song.id,
                              "user_id": user.id})
@@ -165,17 +175,20 @@ def unlikeSong(songId):
     user_id = int(session['_user_id'])
 
     song = Song.query.get(songId)
-    user = User.query.get(user_id)
+
 
     if not song:
         return {'message':'Song could not be found'},404
 
     if session['_user_id'] == song.user_id:
         return {'error':"Forbidden"},401
-    db.session.execute(likes.delete(),
-                    params={"song_id": song.id,
-                             "user_id": user.id})
-    # db.session.add(song)
+
+
+    db.session.execute(likes.delete()
+                        .where(likes.c.song_id ==  songId)
+                        .where(likes.c.user_id == user_id)
+                       )
+
     db.session.commit()
     return {'message':"Successfully unliked song"},200
 

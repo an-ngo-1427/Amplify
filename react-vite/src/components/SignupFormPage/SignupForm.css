@@ -99,6 +99,7 @@
 
 #amplify-signup-submit:hover {
     background-color: #1ed760; 
+    transform: scale(1.05); 
 }
 
 .amplify-error-message {

@@ -53,4 +53,5 @@
 .album-song-tile:hover .album-play-button,
 .album-song-tile:hover .album-remove-button {
     display: inline-block;
+    transform: scale(1.05); 
 }

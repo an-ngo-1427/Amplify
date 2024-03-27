@@ -8,14 +8,32 @@ export const getCurrSong = (song)=>{
     }
 }
 
+const GET_PLAYLIST = '/songs/GET_PLAYLIST'
+
+export const getPlaylist = (songs)=>{
+    return{
+        type:GET_PLAYLIST,
+        songs
+    }
+}
+
+
 const initialState = {}
 
 function currSongReducer (state=initialState,action){
     switch(action.type){
         case GET_CURR_SONG:{
-            return action.song
+            let newObj = {}
+            newObj[action.song.id] = action.song
+            return newObj;
+        }
+        case GET_PLAYLIST:{
+            let newObj={}
+            action.songs.forEach((song)=>newObj[song.id] = song)
+            return newObj
         }
     }
+
     return state
 }
 

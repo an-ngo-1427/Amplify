@@ -60,3 +60,37 @@ button:disabled,
         padding: 15px;
         cursor: not-allowed;
     }
+    @media screen and (max-width: 768px) {
+        .playlist-song-modal-container {
+            padding: 10px;
+        }
+    
+        .playlist-song-item {
+            padding: 8px;
+        }
+    
+        .playlist-song-image {
+            width: 40px;
+            height: 40px;
+        }
+    
+        .playlist-song-add-btn {
+            padding: 6px 12px;
+        }
+        .left-sidebar{
+            display: none;
+            overflow: hidden;
+        }
+    }
+    
+    @media screen and (max-width: 576px) {
+        .playlist-song-image {
+            width: 30px;
+            height: 30px;
+        }
+    
+        .playlist-song-add-btn {
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+    }
