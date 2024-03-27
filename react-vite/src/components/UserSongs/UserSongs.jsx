@@ -27,12 +27,14 @@ function UserSongs() {
           <img className="amplify-logo" src={AmplifyLogo} />
         </NavLink>
       </div>
-      <h1>Your Songs</h1>
-      {Object.values(userSongs).map((song) => (
-        <NavLink to={`/songs/${song.id}`} key={song.id}>
-          <AlbumSongTile key={song.id} song={song} type="Songs" />
-        </NavLink>
-      ))}
+      <div className="user-songs-page">
+        <h1>Your Songs</h1>
+        {Object.values(userSongs).map((song) => (
+          <NavLink to={`/songs/${song.id}`} key={song.id}>
+            <AlbumSongTile key={song.id} song={song} type="Songs" />
+          </NavLink>
+        ))}
+      </div>
     </div>
   );
 }

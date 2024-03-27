@@ -4,18 +4,18 @@
     gap: 24px;
     padding: 40px;
     justify-content: flex-start;
-    background-color: #121212; 
+    background-color: #121212;
 }
 
 .album-title-details {
     display: flex;
     flex-direction: column;
     width: 180px;
-    background-color: #181818; 
+    background-color: #181818;
     color: #fff;
     border-radius: 8px;
     overflow: hidden;
-    text-decoration: none; 
+    text-decoration: none;
 }
 
 
@@ -23,7 +23,7 @@
     width: 100%;
     height: auto;
     aspect-ratio: 1;
-    object-fit: cover; 
+    object-fit: cover;
 }
 
 .album-title-details span {
@@ -32,12 +32,12 @@
     font-size: 1rem;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
 }
 
 .create-new-album-link {
     display: block;
-    background-color: #1db954; 
+    background-color: #1db954;
     color: white;
     padding: 10px 15px;
     font-size: 16px;
@@ -47,9 +47,13 @@
     text-decoration: none;
     text-align: center;
     margin: 20px auto;
-    width: 200px; 
+    width: 200px;
 }
 
 .create-new-album-link:hover {
     transform: scale(1.025);
+}
+
+.user-albums-page {
+    padding: 0 2rem;
 }

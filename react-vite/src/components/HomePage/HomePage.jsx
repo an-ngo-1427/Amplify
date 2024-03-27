@@ -9,6 +9,8 @@ import { getUserPlaylistsThunk } from '../../redux/playlist';
 import ProfileButton from './ProfileButton';
 import AllAlbums from '../AllAlbums/AllAlbums';
 // import MusicPlayer from '../MusicPlayer/MusicPlayer';
+import OpenModalButton from '../OpenModalButton';
+import LoginModal from './LoginModal';
 
 function HomePage() {
     const navigate = useNavigate();
@@ -45,7 +47,9 @@ function HomePage() {
 
     const newPlaylist = async (e) => {
         e.preventDefault();
-        window.alert('Log in or Sign up to create and share playlists.')
+        // window.alert('Log in or Sign up to create and share playlists.')
+
+
     };
 
     const handleSearch  = (e)=>{
@@ -79,7 +83,7 @@ function HomePage() {
                                 <div className='library-container'>
                                     <div className='library-labels'>
                                         <div className="library-icon-text-container"><span className="library-icon"><i className="fa-solid fa-folder" /></span><span>Your Library</span></div>
-                                        <button onClick={newPlaylist} className="library-new-icon"><i className="fa-solid fa-plus"></i></button>
+                                        <OpenModalButton onClick={newPlaylist} className="library-new-icon" modalComponent={<LoginModal />} buttonText={<i className='fa-solid fa-plus'></i>}></OpenModalButton>
                                     </div>
                                 </div>
                             )}
@@ -94,7 +98,7 @@ function HomePage() {
                                     Sign up
                                 </button>
                                 <button onClick={login} className="login-button">
-                                    Login in
+                                    Log in
                                 </button>
                             </div>
                         ) : (
