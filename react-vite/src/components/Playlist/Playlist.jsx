@@ -51,7 +51,9 @@ function Playlist({ playlist, onDelete }) {
             {playlist?.description}
           </h2>
           <h3 className="playlist-owner">{sessionUser.username}</h3>
+          <div>
           <button className = 'playlist-play-button' onClick={handlePlaylist}>Play</button>
+          </div>
         </div>
       </div>
       <div className="playlist-buttons">
